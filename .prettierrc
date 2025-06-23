@@ -1,0 +1,21 @@
+singleQuote: true
+proseWrap: never
+printWidth: 96
+overrides:
+  - files:
+      - '*.md'
+    options:
+      proseWrap: preserve
+      singleQuote: false
+  - files:
+      - 'config/**/*.yml'
+      - '*.yml'
+      - '*.yaml'
+    options:
+      proseWrap: preserve
+      singleQuote: false
+  - files:
+      - 'app/assets/stylesheets/**/*.scss'
+    options:
+      proseWrap: preserve
+      singleQuote: false

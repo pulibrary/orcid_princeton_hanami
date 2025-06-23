@@ -9,19 +9,16 @@ module OrcidPrinceton
     #
     # setting :my_flag, default: false, constructor: Types::Params::Bool
 
-    lando_info = `lando info --format json`
-    if lando_info
+    unless ENV['DATABASE_URL']
       database_service = JSON.parse(`lando info --format json`, symbolize_names: true).select do |service|
         service[:service] == 'database'
       end.first
       connection = database_service[:external_connection]
       credentials = database_service[:creds]
       database_url = "#{database_service[:type]}://" \
-                     "#{credentials[:user]}@#{connection[:host]}:#{connection[:port]}/" \
-                     "#{Hanami.env}_db"
+                    "#{credentials[:user]}@#{connection[:host]}:#{connection[:port]}/" \
+                    "#{Hanami.env}_db"
       ENV['DATABASE_URL'] = database_url
-    else
-      database_url = ENV['DATABASE_URL']
     end
 
     setting :database_url, default: database_url, constructor: Types::String
