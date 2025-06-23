@@ -92,10 +92,10 @@ jobs:
       - run:
           name: Wait for PostgreSQL
           command: dockerize -wait tcp://localhost:5432 -timeout 1m
-      - run:  DATABASE_URL=postgres://orcid_princeton_user@localhost:5432/orcid_db bundle exec hanami db create HANAMI_ENV=test
+      - run: DATABASE_URL=postgres://orcid_princeton_user@localhost:5432/orcid_db bundle exec hanami db create HANAMI_ENV=test
       - run:
           name: Run Rspec
-          command:  DATABASE_URL=postgres://orcid_princeton_user@localhost:5432/orcid_db COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN bundle exec rspec --format progress
+          command: DATABASE_URL=postgres://orcid_princeton_user@localhost:5432/orcid_db COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN bundle exec rspec --format progress
       - persist_to_workspace:
           root: *root
           paths:
