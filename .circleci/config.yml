@@ -1,0 +1,119 @@
+version: 2.1
+commands:
+  install_dependencies:
+    steps:
+      - run: gem install bundler -v '2.3.22'
+      - run: cp Gemfile.lock Gemfile.lock.bak
+      - restore_cache:
+          key: &gem_key orcid_princeton-hanami-cimg-{{ checksum "Gemfile.lock.bak" }}
+      - run: bundle config set path './vendor/bundle'
+      - run: bundle install --jobs=4 --retry=3
+      - save_cache:
+          key: *gem_key
+          paths:
+            - ./vendor/bundle
+      - restore_cache:
+          name: Restore Yarn Package Cache
+          key: &yarn_key orcid_princeton-hanami-yarn-cimg-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install NPM Dependencies via Yarn
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          name: Save Yarn Package Cache
+          key: *yarn_key
+          paths:
+            - ~/.cache/yarn
+orbs:
+  coveralls: coveralls/coveralls@2.2.5
+  browser-tools: circleci/browser-tools@1.5.2
+jobs:
+  build:
+    working_directory: ~/orcid_princeton
+    docker:
+      - &ruby_docker
+        image: cimg/ruby:3.4.2-browsers
+        environment:
+          RAILS_ENV: test
+    steps:
+      - checkout
+      - run: sudo apt update && sudo apt install postgresql-client libmsgpack-dev
+      - install_dependencies
+      - persist_to_workspace:
+          root: &root "~/orcid_princeton"
+          paths:
+            - "*"
+
+  rubocop:
+    working_directory: *root
+    docker:
+      - *ruby_docker
+    steps:
+      - attach_workspace:
+          at: *root
+      - run:
+          name: Run rubocop
+          command: bundle exec rubocop
+
+  eslint:
+    # We don't actually need any of the ruby environment to lint JS... but use what we have for now.
+    working_directory: ~/orcid_princeton
+    docker:
+      - image: cimg/ruby:3.4.2-browsers
+        environment:
+          RAILS_ENV: test
+    steps:
+      - attach_workspace:
+          at: "~/orcid_princeton"
+      - install_dependencies
+      - run:
+          name: Run prettier
+          command: yarn run prettier --check .
+
+      # - run:
+      #     name: Run eslint
+      #     # Quote directory globs so not they are expanded by shell,
+      #     # and every file will be checked, regardless of extension.
+      #     command: yarn run eslint 'app/javascript/**'
+
+  test:
+    working_directory: *root
+    docker:
+      - *ruby_docker
+      - image: postgres:17-alpine
+        environment:
+          POSTGRES_USER: orcid_princeton_user
+          POSTGRES_DB: test_db
+          POSTGRES_HOST_AUTH_METHOD: trust
+          DATABASE_URL: "postgres://orcid_princeton_user:localhost:5432/orcid_db"
+    steps:
+      - attach_workspace:
+          at: *root
+      - browser-tools/install-firefox
+      - run:
+          name: Wait for PostgreSQL
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+      - run:  DATABASE_URL=postgres://orcid_princeton_user@localhost:5432/orcid_db bundle exec hanami db create HANAMI_ENV=test
+      - run:
+          name: Run Rspec
+          command:  DATABASE_URL=postgres://orcid_princeton_user@localhost:5432/orcid_db COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN bundle exec rspec --format progress
+      - persist_to_workspace:
+          root: *root
+          paths:
+            - "coverage"
+      - store_artifacts:
+          path: /home/circleci/orcid_princeton/tmp/capybara
+
+workflows:
+  version: 2
+  build_accept_deploy:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+      - rubocop:
+          requires:
+            - build
+      - eslint:
+          requires:
+            - build
