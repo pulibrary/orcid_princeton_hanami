@@ -14,7 +14,7 @@ gem "dry-types", "~> 1.7"
 gem "dry-operation"
 gem "puma"
 gem "rake"
-gem "sqlite3"
+gem "pg"
 
 group :development do
   gem "hanami-webconsole", "~> 2.2"
@@ -22,6 +22,7 @@ end
 
 group :development, :test do
   gem "dotenv"
+  gem "byebug"
 end
 
 group :cli, :development do

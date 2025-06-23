@@ -1,0 +1,5 @@
+name: orcid-princeton
+services:
+  database:
+    type: postgres:14
+    portforward: true
