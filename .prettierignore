@@ -1,0 +1,5 @@
+*.md
+.prettierrc
+renovate.json
+.yarn/
+vendor/
