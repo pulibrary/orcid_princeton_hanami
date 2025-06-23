@@ -3,6 +3,7 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "hanami-assets": "^2.2.1"
+    "hanami-assets": "^2.2.1",
+    "prettier": "^3.6.0"
   }
 }
