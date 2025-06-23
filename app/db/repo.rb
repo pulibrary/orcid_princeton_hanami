@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "hanami/db/repo"
+require 'hanami/db/repo'
 
 module OrcidPrinceton
   module DB

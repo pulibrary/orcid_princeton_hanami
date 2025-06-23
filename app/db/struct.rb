@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "hanami/db/struct"
+require 'hanami/db/struct'
 
 module OrcidPrinceton
   module DB

@@ -3,6 +3,7 @@
 
 module OrcidPrinceton
   module Views
+    # Base Hanami view helpers for the ORCID application
     module Helpers
       # Add your view helpers here
     end

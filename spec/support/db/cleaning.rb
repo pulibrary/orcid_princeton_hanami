@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "database_cleaner/sequel"
+require 'database_cleaner/sequel'
 
 # Clean the databases between tests tagged as `:db`
 RSpec.configure do |config|
@@ -9,19 +9,19 @@ RSpec.configure do |config|
   # Used in the before/after hooks below to ensure each database is cleaned between examples.
   #
   # Modify this proc (or any code below) if you only need specific databases cleaned.
-  all_databases = -> {
+  all_databases = lambda {
     slices = [Hanami.app] + Hanami.app.slices.with_nested
 
-    slices.each_with_object([]) { |slice, dbs|
-      next unless slice.key?("db.rom")
+    slices.each_with_object([]) do |slice, dbs|
+      next unless slice.key?('db.rom')
 
-      dbs.concat slice["db.rom"].gateways.values.map(&:connection)
-    }.uniq
+      dbs.concat slice['db.rom'].gateways.values.map(&:connection)
+    end.uniq
   }
 
   config.before :suite do
     all_databases.call.each do |db|
-      DatabaseCleaner[:sequel, db: db].clean_with :truncation, except: ["schema_migrations"]
+      DatabaseCleaner[:sequel, db: db].clean_with :truncation, except: ['schema_migrations']
     end
   end
 
