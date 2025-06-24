@@ -5,12 +5,13 @@ module OrcidPrinceton
     # ruby object for all the information we need to generate a row of the peoplesoft report
     #  Remember that dry structs do not allow for mutation so there are no setters only getters
     class PeopleSoftRow < OrcidPrinceton::DB::Struct
-      attribute :university_id, Types::String
-      attribute :row_type, Types::String.default('ORC')
-      attribute :netid, Types::String
-      attribute :full_name, Types::String
       attribute :effective_from, Types::String
       attribute :effective_until, Types::String
+      attribute :full_name, Types::String
+      attribute :netid, Types::String
+      attribute :orcid, Types::String
+      attribute :row_type, Types::String.default('ORC')
+      attribute :university_id, Types::String
 
       class << self
         def new_from_user(user)

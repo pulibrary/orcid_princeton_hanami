@@ -4,8 +4,8 @@ require 'spec_helper'
 
 RSpec.describe OrcidPrinceton::Structs::PeopleSoftRow do
   subject(:row) do
-    described_class.new(university_id: 'id', netid: 'abc123', full_name: 'Jane Doe', effective_from: 'date',
-                        effective_until: 'date2')
+    described_class.new(university_id: 'id', netid: 'abc123', full_name: 'Jane Doe',
+                        orcid: 'orcid', effective_from: 'date', effective_until: 'date2')
   end
 
   describe '#university_id' do
@@ -28,7 +28,7 @@ RSpec.describe OrcidPrinceton::Structs::PeopleSoftRow do
     context 'the row_type is set' do
       subject(:row) do
         described_class.new(row_type: 'other', university_id: 'id', netid: 'abc123', full_name: 'Jane Doe',
-                            effective_from: '', effective_until: '')
+                            orcid: 'orcid', effective_from: '', effective_until: '')
       end
       it 'is set to the value' do
         expect(row.row_type).to eq('other')
