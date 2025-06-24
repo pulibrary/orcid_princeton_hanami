@@ -10,6 +10,7 @@ gem 'hanami-router', '~> 2.2'
 gem 'hanami-validations', '~> 2.2'
 gem 'hanami-view', '~> 2.2'
 
+gem 'csv'
 gem 'dry-operation'
 gem 'dry-types', '~> 1.7'
 gem 'pg'
