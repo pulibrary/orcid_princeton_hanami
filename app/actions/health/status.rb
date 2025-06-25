@@ -5,8 +5,15 @@ module OrcidPrinceton
     module Health
       # handles the /health route
       class Status < OrcidPrinceton::Action
-        format :html
-        def handle(request, response); end
+        include Deps['views.health.status']
+
+        format :html, :json
+
+        def handle(request, response)
+          if response.format == :json
+            response.body = status.json_status.to_json
+          end
+        end
       end
     end
   end

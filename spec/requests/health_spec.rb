@@ -11,7 +11,7 @@ RSpec.describe 'health', type: :request do
   end
 
   it 'is json' do
-    get '/health.json'
+    get '/health', '', { 'HTTP_ACCEPT' => 'application/json' }
 
     expect(last_response).to be_successful
     expect(last_response.content_type).to eq('application/json; charset=utf-8')

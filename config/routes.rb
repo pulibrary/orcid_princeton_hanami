@@ -4,6 +4,5 @@ module OrcidPrinceton
   # Add your routes here. See https://guides.hanamirb.org/routing/overview/ for details.
   class Routes < Hanami::Routes
     get '/health', to: 'health.status'
-    get '/health.json', to: 'health.json'
   end
 end
