@@ -1,0 +1,9 @@
+<h1>Health Status</h1>
+<h2>Status: <%= current_status[:status] %>
+<dl class="health-list">
+  <% current_status[:results].each do |result| %>
+    <dt><%= result[:name]%></dt>
+    <dd><%= result[:status]%> <%= result[:message] %><dd>
+  <%end %>
+ 
+</dl>
