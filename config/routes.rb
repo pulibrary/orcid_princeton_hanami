@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
 module OrcidPrinceton
+  # Add your routes here. See https://guides.hanamirb.org/routing/overview/ for details.
   class Routes < Hanami::Routes
-    # Add your routes here. See https://guides.hanamirb.org/routing/overview/ for details.
+    get '/health', to: 'health.status'
+    get '/health.json', to: 'health.json'
   end
 end

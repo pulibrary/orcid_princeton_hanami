@@ -7,7 +7,7 @@ module OrcidPrinceton
     # write a report for peoplesoft in the expected location
     #  This is run daily via cron
     class PeopleSoftReport < OrcidPrinceton::Operation
-      def call(filename, rows)
+      def call(filename, rows = nil)
         rows = step load_rows(rows)
 
         step create_report(filename, rows)

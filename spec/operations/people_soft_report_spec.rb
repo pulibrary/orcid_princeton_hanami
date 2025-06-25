@@ -20,7 +20,8 @@ RSpec.describe OrcidPrinceton::Operations::PeopleSoftReport, type: :model do
   it 'includes only valid users' do
     pending 'User class exists'
     report = described_class.new
-    report.call(file_name, valid_data)
+    result = report.call(file_name)
+    expect(result).to be_a Dry::Monads::Result::Success
     expect(report.data.count).to be 2
     expect(report.data.index { |row| row.netid == user_invalid.uid }).to be nil
   end
