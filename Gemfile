@@ -26,6 +26,7 @@ group :development, :test do
   gem 'byebug'
   gem 'coveralls_reborn', require: false
   gem 'dotenv'
+  gem 'ffaker'
   gem 'rubocop'
 end
 
