@@ -9,9 +9,19 @@ module OrcidPrinceton
 
         format :html, :json
 
-        def handle(request, response)
+        before :set_format_for_json_extension
+
+        def handle(_request, response)
           if response.format == :json
             response.body = status.json_status.to_json
+          end
+        end
+
+        private
+
+        def set_format_for_json_extension(request, response)
+          if request.path.end_with?('.json')
+            response.format = :json
           end
         end
       end
