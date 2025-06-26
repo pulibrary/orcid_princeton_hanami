@@ -42,7 +42,7 @@ group :test do
   gem 'database_cleaner-sequel'
 
   # Web integration
-  gem "axe-core-rspec"
+  gem 'axe-core-rspec'
   gem 'capybara'
   gem 'rack-test'
   gem 'rom-factory'

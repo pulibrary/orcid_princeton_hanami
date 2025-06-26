@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "axe-rspec"
+require 'axe-rspec'
 require 'pathname'
 require 'coveralls'
 Coveralls.wear!
