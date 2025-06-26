@@ -1,3 +1,5 @@
 inherit_from: .rubocop_todo.yml
-Style/GuardClaude:
-  Enabled: flase
+Style/GuardClause:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
