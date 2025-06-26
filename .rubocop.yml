@@ -1,1 +1,5 @@
 inherit_from: .rubocop_todo.yml
+Style/GuardClause:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
