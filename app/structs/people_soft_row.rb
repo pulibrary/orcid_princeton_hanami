@@ -4,7 +4,7 @@ module OrcidPrinceton
   module Structs
     # ruby object for all the information we need to generate a row of the peoplesoft report
     #  Remember that dry structs do not allow for mutation so there are no setters only getters
-    class PeopleSoftRow < OrcidPrinceton::DB::Struct
+    class PeopleSoftRow < Dry::Struct
       attribute :effective_from, Types::String
       attribute :effective_until, Types::String
       attribute :full_name, Types::String
@@ -15,13 +15,15 @@ module OrcidPrinceton
 
       class << self
         def new_from_user(user)
-          # TODO: we need the user model for this code
-          # PeopleSoftRow.new( university_id: user.university_id,
-          #                    netid: user.uid,
-          #                    full_name: user.display_name,
-          #                    orcid: user.orcid,
-          #                    effective_from: user.valid_token.created_at.strftime("%m/%d/%Y")
-          #                    effective_until: user.valid_token.expiration.strftime("%m/%d/%Y")
+          PeopleSoftRow.new(university_id: user.university_id,
+                            netid: user.uid,
+                            full_name: user.display_name,
+                            orcid: user.orcid,
+                            # TODO: need a token to text expiration OrcidPrinceton::Structs::Token
+                            #  effective_from: user.valid_token.created_at.strftime("%m/%d/%Y")
+                            #  effective_until: user.valid_token.expiration.strftime("%m/%d/%Y"))
+                            effective_from: 'date',
+                            effective_until: 'date')
         end
       end
     end

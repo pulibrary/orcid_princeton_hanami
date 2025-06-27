@@ -1,12 +1,16 @@
 # frozen_string_literal: true
 
+require 'ffaker'
+
 Factory.define(:user) do |f|
   f.sequence(:uid) { "uid#{srand}" }
   f.provider { 'cas' }
   f.given_name { FFaker::Name.first_name }
   f.family_name { FFaker::Name.last_name }
-  f.display_name { "#{given_name} #{family_name}" }
-  f.roles { [] }
+  f.display_name { |given_name, family_name| "#{given_name} #{family_name}" }
+  f.university_id { '999999999' }
+  f.timestamps
+  # f.roles { [] }
 end
 
 Factory.define(user_with_orcid: :user) do |f|
@@ -37,18 +41,18 @@ Factory.define(user_with_orcid: :user) do |f|
   end
 end
 
-Factory.define(admin: :user) do |f|
-  f.association(:admin_role, count: 1)
-end
+# # Factory.define(admin: :user) do |f|
+# #   f.association(:admin_role, count: 1)
+# # end
 
-Factory.define(user_with_orcid_and_token: :user_with_orcid) do |f|
-  f.association(:token, count: 1)
-end
+# # Factory.define(user_with_orcid_and_token: :user_with_orcid) do |f|
+# #   f.association(:token, count: 1)
+# # end
 
-Factory.define(user_with_expired_token: :user) do |f|
-  f.association(:expired_token, count: 1)
-end
+# # Factory.define(user_with_expired_token: :user) do |f|
+# #   f.association(:expired_token, count: 1)
+# # end
 
-Factory.define(user_with_university_id: :user_with_expired_token) do |f|
-  f.sequence(:university_id) { '999999999' }
-end
+# Factory.define(user_with_university_id: :user_with_expired_token) do |f|
+#   f.sequence(:university_id) { '999999999' }
+# end

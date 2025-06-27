@@ -9,5 +9,5 @@ RSpec.configure do |_config|
   end
   # rubocop:enable Lint/ConstantDefinitionInBlock
 
-  Dir["#{File.dirname(__FILE__)}/support/factories/*.rb"].each { |file| require file }
+  SPEC_ROOT.glob('factories/**/*.rb').each { |file| require file }
 end
