@@ -8,6 +8,12 @@
     <%= stylesheet_tag "app" %>
   </head>
   <body>
+  <% if current_user %>
+    <%= current_user.display_name %>
+  <% else %>
+    <%= link_to "Login", routes.path(:user_login) %>
+  <% end %>
+
     <%= yield %>
     <%= javascript_tag "app" %>
   </body>

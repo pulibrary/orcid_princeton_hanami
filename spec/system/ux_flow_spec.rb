@@ -9,7 +9,7 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
     let(:orcid_identifier) { Factory.structs[:user_with_orcid].orcid }
     it 'walks the user through the process of entering an ORCID and creating a token' do
       pending 'We have a user model'
-      login_as user
+      login_as user.uid
 
       # The user is redirected to the user edit screen after logging in.
       # The user has no orcid identifier or token yet.
@@ -53,7 +53,7 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
     let(:user) { Factory[:user_with_expired_token] }
     it 'lets them know their token is expired' do
       pending 'We have a user model'
-      login_as user
+      login_as user.uid
       visit "/users/#{user.id}"
       expect(page).to have_content 'Your ORCID token has expired'
       expect(page).not_to have_content 'There is no ORCID iD associated with your NetID'
@@ -64,7 +64,7 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
     let(:user) { Factory[:user_with_orcid_and_token] }
     it 'displays the token with an expiration date' do
       pending 'We have a user model'
-      login_as user
+      login_as user.uid
       visit "/users/#{user.id}"
       expect(page).to have_content 'is connected to your NetID'
       expect(page).to have_content 'grants Princeton access to read and update your ORCID record'
@@ -95,7 +95,7 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
 
     it 'walks the user through the process of entering an ORCID and creating a token' do
       pending 'We have a user model'
-      login_as(user)
+      login_as(user.uid)
       visit '/'
       click_on 'Profile'
 
@@ -104,7 +104,7 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
 
     it 'allows ORCID Report download menu option' do
       pending 'We have a user model'
-      login_as user
+      login_as user.uid
       visit '/'
       page.find(:css, '.lux-submenu-toggle').click
       expect(page).to have_link 'ORCID Report'
@@ -116,7 +116,7 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
 
     it 'does not allow the ORCID Report download menu option' do
       pending 'We have a user model'
-      login_as user
+      login_as user.uid
       visit '/'
       page.find(:css, '.lux-submenu-toggle').click
       expect(page).not_to have_link 'ORCID Report'
