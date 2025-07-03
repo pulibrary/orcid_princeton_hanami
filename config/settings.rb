@@ -25,6 +25,8 @@ module OrcidPrinceton
 
     setting :database_url, default: database_url, constructor: Types::String
     setting :session_secret, constructor: Types::String
+    setting :cas_url, constructor: Types::String
+    setting :cas_host, constructor: Types::String
     setting :banner, default: '', constructor: Types::String
   end
 end

@@ -21,13 +21,13 @@ RSpec.describe 'user show screen', type: :system, js: true do
     end
 
     it "shows the user's account information" do
-      login_as user
+      login_as user.uid
       visit "/users/#{user.id}"
       expect(page).to have_content("https://orcid.org/#{user.orcid}")
     end
 
     it 'it allows a user to revoke linking to ORCiD' do
-      login_as user
+      login_as user.uid
       visit "/users/#{user.id}"
       # user has linked their account to ORCiD
       expect(page).to have_content("https://orcid.org/#{user.orcid}")
@@ -37,7 +37,7 @@ RSpec.describe 'user show screen', type: :system, js: true do
     end
 
     it 'shows the faq sections' do
-      login_as user
+      login_as user.uid
       visit "/users/#{user.id}"
       # user has linked their account to ORCiD
       expect(page).to have_content("https://orcid.org/#{user.orcid}")

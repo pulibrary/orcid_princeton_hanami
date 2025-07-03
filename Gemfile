@@ -14,9 +14,11 @@ gem 'csv'
 gem 'dry-operation'
 gem 'dry-types', '~> 1.7'
 gem 'net-http'
+gem 'omniauth-cas'
 gem 'pg'
 gem 'puma'
 gem 'rake'
+gem 'warden'
 
 group :development do
   gem 'hanami-webconsole', '~> 2.2'
