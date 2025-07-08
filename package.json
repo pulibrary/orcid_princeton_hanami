@@ -3,7 +3,11 @@
   "private": true,
   "type": "module",
   "dependencies": {
+    "esbuild-plugin-vue3": "^0.4.2",
     "hanami-assets": "^2.2.1",
-    "prettier": "^3.6.0"
+    "lux-design-system": "^6.8.2",
+    "prettier": "^3.6.0",
+    "vue": "^3.5.17",
+    "vue3-runtime-template": "^1.0.2"
   }
 }

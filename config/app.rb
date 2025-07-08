@@ -18,6 +18,9 @@ module OrcidPrinceton
       provider :cas, host: Hanami.app.settings.cas_host, url: Hanami.app.settings.cas_url
     end
 
+    # need to allow eval for LUX to do it's magic
+    config.actions.content_security_policy[:script_src] += " 'unsafe-eval'"
+
     environment(:test) do
     end
 

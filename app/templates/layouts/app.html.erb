@@ -8,13 +8,33 @@
     <%= stylesheet_tag "app" %>
   </head>
   <body>
-  <% if current_user %>
-    <%= current_user.display_name %>
-  <% else %>
-    <%= link_to "Login", routes.path(:user_login) %>
-  <% end %>
+    <div id="lux">
+      <div>
+        <% if current_user %>
 
-    <%= yield %>
+          <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
+            <lux-menu-bar type="main-menu" :menu-items="[
+              {name: 'Home', component: 'Home', href: '/health'},
+                {name: '<%= current_user.display_name %>', component: 'Account', href: '/account/', children: [
+                  {name: 'Profile', component: 'Feedback', href: '/user/current_user'},
+                  {name: 'Logout', component: 'Logout', href: '/logout '}
+                ]}
+              ]"
+            ></lux-menu-bar>
+          </lux-library-header>
+        <% else %>
+          <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
+            <lux-menu-bar type="main-menu" :menu-items="[ {name: 'Login', component: 'Login', href: '<%= routes.path(:user_login) %>'}]"></lux-menu-bar>
+          </lux-library-header>
+        <% end %>
+      </div>
+    
+      <%= yield %>
+      <div>
+        <lux-library-footer></lux-library-footer>
+      </div>
+    </div>
+
     <%= javascript_tag "app" %>
   </body>
 </html>
