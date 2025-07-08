@@ -10,15 +10,14 @@ module OrcidPrinceton
     # Provide `Success` and `Failure` for pattern matching on operation results
     include Dry::Monads[:result]
 
-    before :authenticated?
+    include Deps['repos.user_repo']
+
     before :current_user
 
-    def authenticated?(_request, response)
-      response.session[:authenticated] = (response.env['warden']&.authenticated? || false)
-    end
-
     def current_user(request, response)
-      response.session[:current_user] = request.env['warden']&.user
+      if request.env['warden']
+        response[:current_user] = user_repo.find_by_uid(request.env['warden'].user)
+      end
     end
   end
 end
