@@ -22,14 +22,14 @@ module OrcidPrinceton
 
         def handle_error(response)
           response.flash[:notice] = 'You are not authorized'
-          response.redirect_to routes.path(:health) # TODO: this should really be the home page
+          response.redirect_to routes.path(:root)
         end
 
         def handle_user(user, request, response)
           response.env['warden'].set_user user.uid
           requested_path = request.session[:login_redirect_url]
           response.flash[:notice] = 'You were successfully authenticated'
-          response.redirect_to requested_path || routes.path(:health) # TODO: this should really be the home page
+          response.redirect_to requested_path || routes.path(:root)
         end
       end
     end
