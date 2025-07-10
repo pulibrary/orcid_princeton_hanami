@@ -20,6 +20,8 @@ module OrcidPrinceton
 
     # need to allow eval for LUX to do it's magic
     config.actions.content_security_policy[:script_src] += " 'unsafe-eval'"
+    config.actions.content_security_policy[:script_src] += " 'unsafe-inline'"
+    config.actions.content_security_policy[:script_src] += ' https://cdn.jsdelivr.net'
 
     environment(:test) do
     end
@@ -29,6 +31,7 @@ module OrcidPrinceton
     end
 
     environment(:staging) do
+      config.base_url = 'https://orcid-staging.princeton.edu'
     end
 
     environment(:production) do

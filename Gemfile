@@ -10,17 +10,25 @@ gem 'hanami-router', '~> 2.2'
 gem 'hanami-validations', '~> 2.2'
 gem 'hanami-view', '~> 2.2'
 
+gem 'bcrypt_pbkdf'
 gem 'csv'
+gem 'dry-monads', '~> 1.9'
 gem 'dry-operation'
 gem 'dry-types', '~> 1.7'
+gem 'ed25519'
 gem 'net-http'
 gem 'omniauth-cas'
 gem 'pg'
 gem 'puma'
 gem 'rake'
+gem 'tilt', '~> 2.0'
 gem 'warden'
+gem 'whenever'
 
 group :development do
+  gem 'capistrano', '~> 3.17', require: false
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano-passenger', require: false
   gem 'hanami-webconsole', '~> 2.2'
 end
 
