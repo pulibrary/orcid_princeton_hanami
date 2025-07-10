@@ -13,11 +13,16 @@ module OrcidPrinceton
     include Deps['repos.user_repo']
 
     before :current_user
+    before :code_version
 
     def current_user(request, response)
       if request.env['warden']
         response[:current_user] = user_repo.find_by_uid(request.env['warden'].user)
       end
+    end
+
+    def code_version(_request, response)
+      response[:code_version] = OrcidPrinceton::Service::VersionFooter.info
     end
   end
 end
