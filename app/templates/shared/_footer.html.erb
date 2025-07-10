@@ -1,0 +1,40 @@
+<footer>
+  <div id="sponsors-section">
+    <h2 id="sponsors-title">Project Sponsors</h2>
+
+    <div id="sponsors-display">
+      <div class="sponsors-component" id="pul-logo">
+        <img src="<%= asset_url('pul_sponsor_logo.png') %>" alt="Princeton University Library logo" />
+      </div>
+
+      <div class="sponsors-component" id="orpa-logo">
+        <img src="<%= asset_url('orpa_sponsor_logo.png') %>" alt="Princeton University Office of the Dean for Research and Project Administration logo" />
+      </div>
+
+      <div class="sponsors-component" id="prds-logo">
+        <img src="<%= asset_url('prds_sponsor_logo.png') %>" alt="Princeton Research Data Service logo" />
+      </div>
+
+      <div class="sponsors-component" id="orcid-logo">
+        <img src="<%= asset_url('orcid_sponsor_logo.png') %>" alt="ORCID: Connecting research and researchers logo" />
+      </div>
+    </div>
+  </div>
+
+  <div class="lux">
+    <lux-library-footer></lux-library-footer>
+  </div>
+
+  <div class="p-2 text-left bg-light">
+    <div class="deployment-version" >
+      <text-style variation="strong">
+        Version:
+        <%= stale_version %>
+        <span title="<%= code_version[:sha] %>">
+          <%= code_version_name.html_safe %>
+          last updated: <%= code_version[:version] %>
+        </span>
+      </text-style>
+    </div>
+  </div>
+</footer>
