@@ -25,7 +25,7 @@ RSpec.describe OrcidPrinceton::Actions::Session::Create do
   it 'creates a new user and redirects' do
     response = subject.call(env)
     expect(response).to be_redirect
-    expect(response.location).to eq Hanami.app.router.path(:health)
+    expect(response.location).to eq Hanami.app.router.path(:root)
     expect(response.flash.next[:notice]).to eq('You were successfully authenticated')
     user = user_repo.last
     expect(user.uid).to eq('test123')
@@ -37,7 +37,7 @@ RSpec.describe OrcidPrinceton::Actions::Session::Create do
     it 'redirects with an error' do
       response = subject.call(env)
       expect(response).to be_redirect
-      expect(response.location).to eq Hanami.app.router.path(:health)
+      expect(response.location).to eq Hanami.app.router.path(:root)
       expect(response.flash.next[:notice]).to eq('You are not authorized')
     end
   end

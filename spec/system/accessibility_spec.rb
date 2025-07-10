@@ -5,7 +5,6 @@ require 'spec_helper'
 RSpec.describe 'accessibility', type: :system, js: true do
   context 'homepage' do
     it 'complies with WCAG 2.0 AA and Section 508' do
-      pending 'We have a home page'
       visit '/'
       expect(page).to be_axe_clean
         .according_to(:wcag2a, :wcag2aa, :wcag21a, :wcag21aa, :section508)

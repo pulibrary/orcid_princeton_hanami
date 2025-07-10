@@ -16,3 +16,446 @@ dt {
 dd {
   grid-column-start: 2;
 }
+
+a {
+  color: rgb(12, 7, 150);
+}
+
+.deployment-version a {
+  color: black;
+}
+
+#banner a {
+  color: #f58025;
+}
+
+.orcid-alert {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+  font-size: 20px;
+}
+
+.alert-warning {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.site-image {
+  background-image: url('../images/info-section-banner-v3.jpg');
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  width: 100%;
+}
+
+.page-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  margin: 1rem auto;
+  max-width: 1440px;
+}
+
+#landingpage-faq {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.faq-section {
+  background-color: #f3f3f3;
+  padding: 2rem 5vw;
+  margin-top: 1rem;
+}
+
+.accordion-body {
+  border-left: 2px solid #e77500;
+  margin: 1rem 0 1rem 2rem;
+}
+
+.accordion-body p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+.accordion-button {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1rem;
+}
+
+.accordion {
+  --bs-accordion-btn-bg: #f3f3f3;
+  --bs-accordion-active-bg: #f3f3f3;
+  --bs-accordion-btn-focus-box-shadow: #f3f3f3;
+  --bs-accordion-bg: #f3f3f3;
+  --bs-accordion-border-width: 1px;
+  --bs-accordion-border-color: #ccc;
+  --bs-accordion-btn-focus-box-shadow: none;
+  --bs-accordion-btn-icon-width: 25px;
+
+  --bs-accordion-btn-icon: asset_url('../images/plus-icon.png');
+  --bs-accordion-btn-active-icon: url('../images/minus-icon.png');
+}
+
+.line-userpage {
+  background-color: #e77500;
+  width: 80%;
+  height: 3px;
+  margin: 2vh 0;
+}
+
+.user-page-content {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#login-section {
+  padding: 2rem 2rem 2rem 3rem;
+  height: 370px;
+  min-width: 475px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#info-box {
+  background-color: #000;
+  border: solid 1px #595959;
+  width: 710px;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  max-width: 710px;
+}
+
+#text-box {
+  width: 60%;
+  margin: 4rem 1.8rem 3rem 2rem;
+}
+
+#text-box p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2rem;
+}
+
+#text-box-user {
+  width: 100%;
+  margin: 4rem 0 4rem 2rem;
+  color: white;
+  a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.4rem;
+    color: white;
+    font-weight: bold;
+  }
+  p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.2rem;
+  }
+}
+
+#info-box-user {
+  background-color: #000;
+  border: solid 1px #595959;
+  width: 550px;
+  color: #fff;
+  align-items: center;
+  max-width: 550px;
+}
+
+#login-button {
+  box-shadow: 10px 10px #e57401;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 1.3rem;
+  background-color: #fff;
+  border: none;
+  padding: 0.7rem 2.4rem;
+  height: 3.5rem;
+  margin-right: 2rem;
+}
+
+#login-button-black {
+  box-shadow: 10px 10px #e57401;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 1.3rem;
+  color: #fff;
+  background-color: #000;
+  border: none;
+  padding: 0.7rem 2.4rem;
+  height: 3.5rem;
+  margin: 3rem 2rem;
+}
+
+#text-box,
+#login-button {
+  display: inline-block;
+}
+
+#sign-in-page {
+  max-width: 1440px;
+  min-width: 710px;
+  margin: 1rem auto 0 auto;
+}
+
+.line {
+  background-color: #e77500;
+  width: 100%;
+  height: 3px;
+  margin: 2vh 0;
+}
+
+h1 {
+  margin: 2rem 3rem;
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.info-component {
+  margin: 5vh 5vw 5vh 5vw;
+}
+
+.info-component p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+}
+
+#info-section {
+  display: flex;
+  flex-direction: row;
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#help-section {
+  padding: 2.5rem 0 2rem 0;
+  background-color: #000000;
+  max-width: 1440px;
+  margin: 5vh auto 5vh auto;
+}
+
+#help-text {
+  padding-top: 0.9rem;
+  width: 45vw;
+  min-width: 220px;
+  color: #ffffff;
+}
+
+#help-text p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1rem;
+}
+
+#help-text a {
+  color: #ffffff;
+}
+
+.help-contents {
+  margin-left: 10vw;
+}
+
+#help-title {
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+.project-title,
+.info-title,
+#sponsors-title,
+#faq-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  font-size: 1.8rem;
+}
+
+#help-section-user {
+  padding: 2.5rem 0 2rem 0;
+  background-color: #000;
+  max-width: 1440px;
+  margin: 1rem auto 0 auto;
+
+  a {
+    color: #fff;
+  }
+
+  #help-text p {
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+  }
+
+  h2 {
+    color: white;
+  }
+}
+
+.sponsors-component {
+  margin: 5vh 5vw 5vh 5vw;
+}
+
+.sponsors-component img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+}
+
+#sponsors-display {
+  display: grid;
+  grid-template-columns: 45% 45%;
+  flex-direction: row;
+}
+
+#sponsors-section {
+  max-width: 1440px;
+  min-width: 710px;
+  margin: 1rem auto 0 auto;
+}
+
+.navbar-princeton-logo {
+  margin-left: 1em;
+  text-decoration: none;
+}
+
+.navbar-princeton-logo img {
+  height: 3em;
+}
+
+.navbar-logo {
+  margin-left: 1em;
+}
+
+.user-info {
+  float: right;
+  margin-right: 1em;
+}
+
+button.log-in-orcid {
+  padding: 0.5em;
+  background-color: white;
+  color: black;
+  border-color: black;
+  margin: 1em;
+  border-radius: 0.5em;
+}
+
+/* Add this to align vertically */
+button > img,
+button > span {
+  vertical-align: middle;
+}
+
+#banner {
+  text-align: center;
+  background-color: #000000;
+  padding: 20px 0px 10px 0px;
+  border-bottom: #f58025 solid 2px;
+  color: #f58025;
+
+  h1 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  p {
+    font-size: 18px;
+  }
+}
+
+.full_orcid_display img {
+  width: 2em;
+}
+
+p {
+  font-family: 'Roboto', sans-serif;
+}
+
+.welcome-section {
+  padding-left: 8rem;
+}
+
+.welcome-section h2 {
+  padding-top: 3rem;
+}
+
+.text-box {
+  width: 60%;
+  margin: 1rem 1.8rem 3rem 2rem;
+}
+
+a[target='_blank']::after {
+  content: '';
+  width: 11px;
+  height: 11px;
+  margin-left: 4px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M8.636 3.5a.5.5 0 0 0-.5-.5H1.5A1.5 1.5 0 0 0 0 4.5v10A1.5 1.5 0 0 0 1.5 16h10a1.5 1.5 0 0 0 1.5-1.5V7.864a.5.5 0 0 0-1 0V14.5a.5.5 0 0 1-.5.5h-10a.5.5 0 0 1-.5-.5v-10a.5.5 0 0 1 .5-.5h6.636a.5.5 0 0 0 .5-.5z'/%3E%3Cpath fill-rule='evenodd' d='M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0v-5z'/%3E%3C/svg%3E");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  display: inline-block;
+}
+
+.orcid-connect .line {
+  width: 60%;
+}
+
+@media (max-width: 810px) {
+  #info-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .info-component {
+    margin: 5vh 10vw 5vh 10vw;
+    min-width: 340px;
+  }
+
+  #what-is-orcid {
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 775px) {
+  #info-box {
+    width: 100%;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #text-box {
+    margin: 2.5rem 2.5rem 1rem;
+    text-align: center;
+  }
+
+  #login-button {
+    margin: 0 0 2.5rem;
+    box-shadow: 10px 10px #e57401;
+    padding: 0.7rem 2.4rem;
+    height: 3.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #login-section {
+    overflow: auto;
+    padding: 2rem 2rem 2rem 3rem;
+  }
+}
+
+.row-no-gutter {
+  --bs-gutter-x: 0 !important;
+}

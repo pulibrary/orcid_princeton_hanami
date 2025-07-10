@@ -115,7 +115,6 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
     let(:user) { Factory[:user] }
 
     it 'does not allow the ORCID Report download menu option' do
-      pending 'We have a user model'
       login_as user.uid
       visit '/'
       page.find(:css, '.lux-submenu-toggle').click

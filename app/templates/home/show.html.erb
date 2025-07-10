@@ -1,0 +1,51 @@
+<div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
+  <h1 class="page-title">ORCID@Princeton</h1>
+
+  <div class="site-image">
+    <% if current_user %>
+        <div id="login-section">
+            <div id="info-box-user">
+                <div id="text-box-user">
+                    <p>Hello, <%= current_user.given_name %>!</p>
+                    <p>Go to your <%= link_to "Profile Page", "/users/#{current_user.id}" %> to view your account.</p>
+                </div>
+            </div>
+        </div>  
+    <% else %>
+        <div id="login-section">
+            <div id="info-box">
+                <div id="text-box">
+                    <p>Connect your ORCID id to Princeton so that published works can be easily identified as belonging to all Princeton researchers.</p>
+                </div>
+                <%= link_to("Log-in", routes.path(:user_login),id: "login-button", class: "button", onclick:"log_plausible_cas_user_login()") %>
+            </div>
+        </div>
+    <% end %>
+  </div>
+
+  <div id="info-section">
+    <div class="info-component" id="what-is-orcid">
+      <h2 class="info-title">What is ORCiD?</h2>
+      <div class="line"></div>
+      <p>ORCID provides a digital persistent identifier (an ORCID iD) that you own and control, and that distinguishes you from every other researcher. Using an ORCID allows your manuscripts, grants, and other scholarship to be more discoverable and integrated within larger research networks.</p>
+    </div>
+    <div class="info-component">
+      <h2 class="info-title">Why connect your account?</h2>
+      <div class="line"></div>
+      <p>Our goal is to reduce administrative burden for you! We are designing ways for you to send Princeton’s trusted data to your ORCID record to help you meet funder and publisher requirements. There are many ways to easily import trusted data into your ORCID record. Creating and/or connecting your ORCID iD should take less than a minute.</p>
+    </div>
+  </div>
+
+  <div id="landingpage-faq">
+    <%= render 'shared/faqsection' %>
+  </div>
+
+  <div id="help-section">
+    <h2 class="help-contents" id="help-title">Need help?</h2>
+    <div class="help-contents" id="help-text">
+      <p>If you have questions about the value of having an ORCID iD or how it will be used at Princeton, please contact the
+        <a href="mailto:prds@princeton.edu" onclick="log_plausible_contact_us()">Princeton Research Data Service</a>.
+      </p>
+    </div>
+  </div>
+</div>
