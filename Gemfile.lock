@@ -3,13 +3,15 @@ GEM
   specs:
     addressable (2.8.7)
       public_suffix (>= 2.0.2, < 7.0)
+    airbrussh (1.5.3)
+      sshkit (>= 1.6.1, != 1.7.0)
     ast (2.4.3)
-    axe-core-api (4.10.2)
+    axe-core-api (4.10.3)
       dumb_delegator
       ostruct
       virtus
-    axe-core-rspec (4.10.2)
-      axe-core-api (= 4.10.2)
+    axe-core-rspec (4.10.3)
+      axe-core-api (= 4.10.3)
       dumb_delegator
       ostruct
       virtus
@@ -17,7 +19,8 @@ GEM
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    base64 (0.2.0)
+    base64 (0.3.0)
+    bcrypt_pbkdf (1.1.1)
     better_errors (2.10.1)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
@@ -26,6 +29,15 @@ GEM
     binding_of_caller (1.0.1)
       debug_inspector (>= 1.2.0)
     byebug (12.0.0)
+    capistrano (3.19.2)
+      airbrussh (>= 1.0.0)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 1.9.0)
+    capistrano-bundler (2.1.1)
+      capistrano (~> 3.1)
+    capistrano-passenger (0.2.1)
+      capistrano (~> 3.0)
     capybara (3.40.0)
       addressable
       matrix
@@ -35,6 +47,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    chronic (0.10.2)
     coderay (1.1.3)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -44,7 +57,7 @@ GEM
       term-ansicolor (~> 1.7)
       thor (~> 1.2)
       tins (~> 1.32)
-    csv (3.3.3)
+    csv (3.3.5)
     database_cleaner-core (2.0.1)
     database_cleaner-sequel (2.0.2)
       database_cleaner-core (~> 2.0.0)
@@ -78,7 +91,7 @@ GEM
       concurrent-ruby (~> 1.0)
       dry-core (~> 1.1)
       zeitwerk (~> 2.6)
-    dry-monads (1.8.3)
+    dry-monads (1.9.0)
       concurrent-ruby (~> 1.0)
       dry-core (~> 1.1)
       zeitwerk (~> 2.6)
@@ -123,8 +136,9 @@ GEM
       dry-schema (~> 1.14)
       zeitwerk (~> 2.6)
     dumb_delegator (1.1.0)
+    ed25519 (1.4.0)
     erubi (1.13.1)
-    faker (3.5.1)
+    faker (3.5.2)
       i18n (>= 1.8.11, < 2)
     ffaker (2.24.0)
     ffi (1.17.2-aarch64-linux-gnu)
@@ -132,9 +146,6 @@ GEM
     ffi (1.17.2-arm-linux-gnu)
     ffi (1.17.2-arm-linux-musl)
     ffi (1.17.2-arm64-darwin)
-    ffi (1.17.2-x86-linux-gnu)
-    ffi (1.17.2-x86-linux-musl)
-    ffi (1.17.2-x86_64-darwin)
     ffi (1.17.2-x86_64-linux-gnu)
     ffi (1.17.2-x86_64-linux-musl)
     formatador (1.1.0)
@@ -231,7 +242,6 @@ GEM
     matrix (0.4.3)
     method_source (1.1.0)
     mini_mime (1.1.5)
-    mini_portile2 (2.8.9)
     mustermann (3.0.3)
       ruby2_keywords (~> 0.0.1)
     mustermann-contrib (3.0.3)
@@ -240,10 +250,12 @@ GEM
     nenv (0.3.0)
     net-http (0.6.0)
       uri
+    net-scp (4.1.0)
+      net-ssh (>= 2.6.5, < 8.0.0)
+    net-sftp (4.0.0)
+      net-ssh (>= 5.0.0, < 8.0.0)
+    net-ssh (7.3.0)
     nio4r (2.7.4)
-    nokogiri (1.18.8)
-      mini_portile2 (~> 2.8.2)
-      racc (~> 1.4)
     nokogiri (1.18.8-aarch64-linux-gnu)
       racc (~> 1.4)
     nokogiri (1.18.8-aarch64-linux-musl)
@@ -253,8 +265,6 @@ GEM
     nokogiri (1.18.8-arm-linux-musl)
       racc (~> 1.4)
     nokogiri (1.18.8-arm64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.18.8-x86_64-darwin)
       racc (~> 1.4)
     nokogiri (1.18.8-x86_64-linux-gnu)
       racc (~> 1.4)
@@ -335,7 +345,7 @@ GEM
       rspec-core (~> 3.13.0)
       rspec-expectations (~> 3.13.0)
       rspec-mocks (~> 3.13.0)
-    rspec-core (3.13.4)
+    rspec-core (3.13.5)
       rspec-support (~> 3.13.0)
     rspec-expectations (3.13.5)
       diff-lcs (>= 1.2.0, < 2.0)
@@ -344,7 +354,7 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.13.0)
     rspec-support (3.13.4)
-    rubocop (1.76.0)
+    rubocop (1.78.0)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -352,22 +362,22 @@ GEM
       parser (>= 3.3.0.2)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 2.9.3, < 3.0)
-      rubocop-ast (>= 1.45.0, < 2.0)
+      rubocop-ast (>= 1.45.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 2.4.0, < 4.0)
-    rubocop-ast (1.45.0)
+    rubocop-ast (1.45.1)
       parser (>= 3.3.7.2)
       prism (~> 1.4)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
     rubyzip (2.4.1)
-    selenium-webdriver (4.30.1)
+    selenium-webdriver (4.34.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
-    sequel (5.93.0)
+    sequel (5.94.0)
       bigdecimal
     shellany (0.0.1)
     simplecov (0.22.0)
@@ -376,13 +386,20 @@ GEM
       simplecov_json_formatter (~> 0.1)
     simplecov-html (0.13.1)
     simplecov_json_formatter (0.1.4)
+    sshkit (1.24.0)
+      base64
+      logger
+      net-scp (>= 1.1.2)
+      net-sftp (>= 2.1.2)
+      net-ssh (>= 2.8.0)
+      ostruct
     sync (0.5.0)
     temple (0.10.3)
     term-ansicolor (1.11.2)
       tins (~> 1.0)
     thor (1.3.2)
     thread_safe (0.3.6)
-    tilt (2.6.0)
+    tilt (2.6.1)
     tins (1.38.0)
       bigdecimal
       sync
@@ -398,6 +415,8 @@ GEM
     warden (1.2.9)
       rack (>= 2.0.9)
     websocket (1.2.11)
+    whenever (1.0.0)
+      chronic (>= 0.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
     zeitwerk (2.7.3)
@@ -407,23 +426,26 @@ PLATFORMS
   aarch64-linux-musl
   arm-linux-gnu
   arm-linux-musl
-  arm64-darwin
-  x86-linux-gnu
-  x86-linux-musl
-  x86_64-darwin
+  arm64-darwin-24
   x86_64-linux-gnu
   x86_64-linux-musl
 
 DEPENDENCIES
   axe-core-rspec
+  bcrypt_pbkdf
   byebug
+  capistrano (~> 3.17)
+  capistrano-bundler
+  capistrano-passenger
   capybara
   coveralls_reborn
   csv
   database_cleaner-sequel
   dotenv
+  dry-monads (~> 1.9)
   dry-operation
   dry-types (~> 1.7)
+  ed25519
   ffaker
   hanami (~> 2.2)
   hanami-assets (~> 2.2)
@@ -444,7 +466,9 @@ DEPENDENCIES
   rom-factory
   rubocop
   selenium-webdriver
+  tilt (~> 2.0)
   warden
+  whenever
 
 BUNDLED WITH
-   2.6.3
+   2.5.14
