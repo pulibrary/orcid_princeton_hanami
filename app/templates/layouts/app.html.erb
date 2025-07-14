@@ -11,7 +11,19 @@
   <body>
     <div id="lux">
       <div>
-        <% if current_user %>
+        <% if current_user && current_user.admin? == true %>
+          <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
+            <lux-menu-bar type="main-menu" :menu-items="[
+              {name: 'Home', component: 'Home', href: '/'},
+                {name: '<%= current_user.uid %>', component: 'Account', href: '/account/', children: [
+                  {name: 'Profile', component: 'Feedback', href: '/user/current_user'},
+                  {name: 'ORCID Report', component: 'Feedback', href: '/orcid_report'},
+                  {name: 'Logout', component: 'Logout', href: '/logout'}
+                ]}
+              ]"
+            ></lux-menu-bar>
+          </lux-library-header>
+        <% elsif current_user %>
 
           <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
             <lux-menu-bar type="main-menu" :menu-items="[

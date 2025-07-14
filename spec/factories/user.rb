@@ -41,9 +41,9 @@ Factory.define(user_with_orcid: :user) do |f|
   end
 end
 
-# # Factory.define(admin: :user) do |f|
-# #   f.association(:admin_role, count: 1)
-# # end
+Factory.define(admin: :user) do |f|
+  f.association(:roles, traits: [:admin])
+end
 
 # # Factory.define(user_with_orcid_and_token: :user_with_orcid) do |f|
 # #   f.association(:token, count: 1)

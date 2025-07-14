@@ -3,6 +3,7 @@
 require 'axe-rspec'
 require 'pathname'
 require 'coveralls'
+require 'byebug'
 Coveralls.wear!
 
 SPEC_ROOT = Pathname(__dir__).realpath.freeze

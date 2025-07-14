@@ -2,7 +2,8 @@
 
 RSpec.describe OrcidPrinceton::Views::Home::Show do
   let(:view) { described_class.new }
-  let(:user) { Factory[:user] }
+  let(:rom_user) { Factory[:user] }
+  let(:user) { OrcidPrinceton::Repos::UserRepo.new.get(rom_user.id) }
   let(:version_hash) do
     { stale: false, sha: 'sha', branch: 'v0.8.0', version: '10 December 2021', tagged_release: true }
   end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'byebug'
 
 RSpec.describe 'user experience from start to finish', type: :system, js: true do
   context 'a user without an orcid on file' do
@@ -8,7 +9,7 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
     let(:user2) { Factory[:user] }
     let(:orcid_identifier) { Factory.structs[:user_with_orcid].orcid }
     it 'walks the user through the process of entering an ORCID and creating a token' do
-      pending 'We have a user model'
+      pending 'We have a user show'
       login_as user.uid
 
       # The user is redirected to the user edit screen after logging in.
@@ -52,7 +53,7 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
   context 'when a user has an expired token' do
     let(:user) { Factory[:user_with_expired_token] }
     it 'lets them know their token is expired' do
-      pending 'We have a user model'
+      pending 'We have a user show'
       login_as user.uid
       visit "/users/#{user.id}"
       expect(page).to have_content 'Your ORCID token has expired'
@@ -63,7 +64,7 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
   context 'when a user has a valid token' do
     let(:user) { Factory[:user_with_orcid_and_token] }
     it 'displays the token with an expiration date' do
-      pending 'We have a user model'
+      pending 'We have a user show'
       login_as user.uid
       visit "/users/#{user.id}"
       expect(page).to have_content 'is connected to your NetID'
@@ -94,7 +95,7 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
     let(:user) { Factory[:admin] }
 
     it 'walks the user through the process of entering an ORCID and creating a token' do
-      pending 'We have a user model'
+      pending 'We have a user show'
       login_as(user.uid)
       visit '/'
       click_on 'Profile'
@@ -103,7 +104,6 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
     end
 
     it 'allows ORCID Report download menu option' do
-      pending 'We have a user model'
       login_as user.uid
       visit '/'
       page.find(:css, '.lux-submenu-toggle').click
