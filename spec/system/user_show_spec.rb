@@ -7,7 +7,7 @@ RSpec.describe 'user show screen', type: :system, js: true do
     let(:user) { Factory[:user_with_orcid_and_token] }
 
     before do
-      pending 'We have a user model'
+      pending 'We have a user show'
       stub_request(:get, "https://api.sandbox.orcid.org/v3.0/#{user.orcid}/record")
         .with(
           headers: {
