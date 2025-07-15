@@ -4,6 +4,8 @@ module OrcidPrinceton
   module Repos
     # class for accessing the users in the system
     class UserRepo < OrcidPrinceton::DB::Repo
+      include Deps['relations.users_roles']
+
       def get(id)
         user_with_roles_and_tokens.by_pk(id).one!
       end
@@ -18,6 +20,16 @@ module OrcidPrinceton
       def update(id, attributes)
         attributes[:updated_at] = Time.now
         users.by_pk(id).changeset(:update, attributes).commit
+        get(id)
+      end
+
+      def make_admin(id)
+        # Find existing admin role
+        # TODO: this can be a deps once the fix for https://github.com/hanami/hanami/pull/1523 is released
+        role = OrcidPrinceton::Repos::RoleRepo.new.admin_role
+
+        # Associate the role with the user
+        users_roles.changeset(:create, user_id: id).associate(role).commit
         get(id)
       end
 
