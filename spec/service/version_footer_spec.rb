@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe OrcidPrinceton::Service::VersionFooter do
+RSpec.describe OrcidPrinceton::Service::VersionFooter, type: :service do
   let(:fixture_path) { Hanami.app.root.join('spec').join('fixtures') }
 
   describe 'info' do

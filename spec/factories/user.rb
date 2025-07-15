@@ -45,14 +45,14 @@ Factory.define(admin: :user) do |f|
   f.association(:roles, traits: [:admin])
 end
 
-# # Factory.define(user_with_orcid_and_token: :user_with_orcid) do |f|
-# #   f.association(:token, count: 1)
-# # end
+Factory.define(user_with_orcid_and_token: :user_with_orcid) do |f|
+  f.association(:tokens)
+end
 
-# # Factory.define(user_with_expired_token: :user) do |f|
-# #   f.association(:expired_token, count: 1)
-# # end
+Factory.define(user_with_expired_token: :user) do |f|
+  f.association(:tokens, traits: [:expired])
+end
 
-# Factory.define(user_with_university_id: :user_with_expired_token) do |f|
-#   f.sequence(:university_id) { '999999999' }
-# end
+Factory.define(user_with_university_id: :user_with_expired_token) do |f|
+  f.sequence(:university_id) { '999999999' }
+end
