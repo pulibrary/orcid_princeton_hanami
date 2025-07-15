@@ -103,4 +103,14 @@ RSpec.describe OrcidPrinceton::Repos::UserRepo do
       end
     end
   end
+
+  describe '#make_admin' do
+    it 'adds the admin role to the user' do
+      rom_user = Factory[:user]
+      user = repo.get(rom_user.id)
+      expect(user.roles).to eq([])
+      user = repo.make_admin(user.id)
+      expect(user.roles.first.name).to eq('admin')
+    end
+  end
 end
