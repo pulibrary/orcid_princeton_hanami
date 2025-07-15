@@ -9,3 +9,4 @@ UPDATE public.schema_migrations SET filename='20250206153247_add_university_id_t
 UPDATE public.schema_migrations SET filename='20231010182053_add_email_to_user.rb' where version = '20231010182053';
 UPDATE public.schema_migrations SET filename='20250206195504_rolify_create_roles.rb' where version = '20250206195504';
 UPDATE public.schema_migrations SET filename='20231011122309_create_tokens.rb' where version = '20231011122309';
+UPDATE public.schema_migrations SET filename='20250714184248_token_open_ssl.rb' where version = '20250714184248';

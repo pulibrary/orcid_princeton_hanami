@@ -10,7 +10,7 @@ ROM::SQL.migration do
       column(:orcid, String)
       column(:expiration, :timestamp, null: false)
       column(:scope, String)
-      column(:user_id, Integer)
+      foreign_key :user_id, :users, on_delete: :cascade, null: false
       column(:created_at, :timestamp, null: false)
       column(:updated_at, :timestamp, null: false)
     end

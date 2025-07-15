@@ -8,6 +8,7 @@ module OrcidPrinceton
         associations do
           has_many :users_roles
           has_many :roles, through: :users_roles
+          has_many :tokens
         end
       end
     end

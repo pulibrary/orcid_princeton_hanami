@@ -7,6 +7,8 @@ module OrcidPrinceton
     # write a report for peoplesoft in the expected location
     #  This is run daily via cron
     class PeopleSoftReport < OrcidPrinceton::Operation
+      include Deps['repos.user_repo']
+
       def call(filename, rows = nil)
         rows = step load_rows(rows)
 
@@ -17,16 +19,14 @@ module OrcidPrinceton
 
       def load_rows(rows)
         if rows.blank?
-          Failure('no way to generate without the user')
-          # rows = []
-          # User.all.find_each do |user|
-          #   next if user.valid_token.nil?
-          #   rows << PeopleSoftRow.new_from_user(user)
-          # end
-          # Success(rows)
-        else
-          Success(rows)
+          rows = []
+          user_repo.user_with_roles_and_tokens.each do |user|
+            next if user.valid_token.nil?
+
+            rows << OrcidPrinceton::Structs::PeopleSoftRow.new_from_user(user)
+          end
         end
+        Success(rows)
       end
 
       def create_report(filename, data)

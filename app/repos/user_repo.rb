@@ -5,7 +5,7 @@ module OrcidPrinceton
     # class for accessing the users in the system
     class UserRepo < OrcidPrinceton::DB::Repo
       def get(id)
-        user_with_roles.by_pk(id).one!
+        user_with_roles_and_tokens.by_pk(id).one!
       end
 
       def create(attributes)
@@ -21,10 +21,10 @@ module OrcidPrinceton
         get(id)
       end
 
-      def last = user_with_roles.last
+      def last = user_with_roles_and_tokens.last
 
       def find_by_uid(uid)
-        user_with_roles.where(uid: uid)&.first
+        user_with_roles_and_tokens.where(uid: uid)&.first
       end
 
       def from_cas(access_token)
@@ -41,8 +41,8 @@ module OrcidPrinceton
         end
       end
 
-      def user_with_roles
-        users.combine(:roles)
+      def user_with_roles_and_tokens
+        users.combine(:roles).combine(:tokens)
       end
 
       private

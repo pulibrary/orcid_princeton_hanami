@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-# TODO: token must exists before factory can be loaded
-#
-# Factory.define(:token) do |f|
-#   f.token { 'e82938fa-a287-42cf-a2ce-f48ef68c9a35' }
-#   f.expiration { Time.zone.at(2_329_902_061) }
-#   f.association(:user)
-# end
+Factory.define(:token) do |f|
+  f.token { 'e82938fa-a287-42cf-a2ce-f48ef68c9a35' }
+  f.expiration { Time.now + (24 * 60 * 60) } # tomorrow
+  f.token_type { 'ORCID' }
+  f.association(:user)
+  f.timestamps
 
-# Factory.define(:expired_token) do |f|
-#   f.expiration { Time.zone.at(1_698_165_083) }
-# end
+  f.trait :expired do |t|
+    t.expiration { Time.at(1_698_165_083) }
+  end
+end
