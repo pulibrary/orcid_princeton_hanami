@@ -18,7 +18,7 @@ module OrcidPrinceton
       private
 
       def load_rows(rows)
-        if rows.blank?
+        if rows.nil? || rows.blank?
           rows = []
           user_repo.user_with_roles_and_tokens.each do |user|
             next if user.valid_token.nil?

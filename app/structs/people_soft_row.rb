@@ -11,7 +11,7 @@ module OrcidPrinceton
       attribute :netid, Types::String
       attribute :orcid, Types::String
       attribute :row_type, Types::String.default('ORC')
-      attribute :university_id, Types::String
+      attribute :university_id, Types::String.optional
 
       class << self
         def new_from_user(user)
@@ -19,11 +19,8 @@ module OrcidPrinceton
                             netid: user.uid,
                             full_name: user.display_name,
                             orcid: user.orcid,
-                            # TODO: need a token to text expiration OrcidPrinceton::Structs::Token
-                            #  effective_from: user.valid_token.created_at.strftime("%m/%d/%Y")
-                            #  effective_until: user.valid_token.expiration.strftime("%m/%d/%Y"))
-                            effective_from: 'date',
-                            effective_until: 'date')
+                            effective_from: user.valid_token.created_at.strftime('%m/%d/%Y'),
+                            effective_until: user.valid_token.expiration.strftime('%m/%d/%Y'))
         end
       end
     end

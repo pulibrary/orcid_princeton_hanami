@@ -7,7 +7,19 @@ RSpec.describe OrcidPrinceton::Views::Home::Show do
   let(:version_hash) do
     { stale: false, sha: 'sha', branch: 'v0.8.0', version: '10 December 2021', tagged_release: true }
   end
-  subject(:rendered) { view.call(current_user: user, code_version: version_hash) }
+
+  # create a context that can handle the flash message by setting the request
+  # TODO:  This seems really hard.  I wonder if there is a better way...
+  let(:rack_request) { Rack::MockRequest.env_for('http://example.com/') }
+  let(:request) { Hanami::Action::Request.new(env: rack_request, params: {}, session_enabled: true) }
+  let(:default_context) { OrcidPrinceton::Views::Home::Show.config.values[:default_context] }
+  let(:context) do
+    Hanami::View::Context.new(request:, inflector: default_context.inflector,
+                              assets: default_context.assets, settings: default_context.settings,
+                              routes: default_context.routes)
+  end
+
+  subject(:rendered) { view.call(current_user: user, code_version: version_hash, context:) }
 
   it 'exposes current_user' do
     expect(rendered[:current_user].value).to eq(user)

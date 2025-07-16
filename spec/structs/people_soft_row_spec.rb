@@ -55,19 +55,17 @@ RSpec.describe OrcidPrinceton::Structs::PeopleSoftRow do
   end
 
   describe '##new_from_user' do
-    let(:user) { Factory[:user_with_orcid] }
-    # let(:user) { Factory[:user_with_orcid_and_token] }
-
     it 'creates a row from a user' do
+      rom_user = Factory[:user_with_orcid_and_token]
+      user = OrcidPrinceton::Repos::UserRepo.new.get(rom_user.id)
       row = described_class.new_from_user(user)
       expect(row.netid).to eq(user.uid)
       expect(row.university_id).to eq(user.university_id)
       expect(row.row_type).to eq('ORC')
       expect(row.full_name).to eq(user.display_name)
       expect(row.orcid).to eq(user.orcid)
-      # TODO: need a token to text expiration OrcidPrinceton::Structs::Token
-      # expect(row.effective_from).to eq(user.netid)
-      # expect(row.effective_until).to eq(user.netid)
+      expect(row.effective_from).to eq(user.valid_token.created_at.strftime('%m/%d/%Y'))
+      expect(row.effective_until).to eq(user.valid_token.expiration.strftime('%m/%d/%Y'))
     end
   end
 end
