@@ -17,7 +17,7 @@
               {name: 'Home', component: 'Home', href: '/'},
                 {name: '<%= current_user.uid %>', component: 'Account', href: '/account/', children: [
                   {name: 'Profile', component: 'Feedback', href: '/user/current_user'},
-                  {name: 'ORCID Report', component: 'Feedback', href: '/orcid_report'},
+                  {name: 'ORCID Report', component: 'Feedback', href: '<%= routes.path(:admin_report) %>'},
                   {name: 'Logout', component: 'Logout', href: '/logout'}
                 ]}
               ]"
@@ -41,7 +41,13 @@
           </lux-library-header>
         <% end %>
       </div>
-    
+      <% if flash && flash[:notice] %>
+        <div class="row">
+          <div class="col">
+            <div class="alert alert-warning" role="alert" ><%= flash[:notice] %></div>
+          </div>
+        </div>
+      <% end %>
       <%= yield %>
       <div>
         <%= render 'shared/footer' %>

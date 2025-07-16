@@ -24,5 +24,18 @@ module OrcidPrinceton
     def code_version(_request, response)
       response[:code_version] = OrcidPrinceton::Service::VersionFooter.info
     end
+
+    def require_authentication(request, response)
+      unless request.env['warden']&.user
+        response.redirect_to routes.path(:user_login)
+      end
+    end
+
+    def require_admin(_request, response)
+      unless response[:current_user]&.admin?
+        response.flash[:notice] = 'You are not authorized'
+        response.redirect_to routes.path(:root)
+      end
+    end
   end
 end

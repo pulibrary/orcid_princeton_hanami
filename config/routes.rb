@@ -9,5 +9,6 @@ module OrcidPrinceton
     get '/session/new', to: 'session.new', as: 'user_login'
     get '/auth/:provider/callback', to: 'session.create', as: :auth_callback
     post '/auth/:provider/callback', to: 'session.create'
+    get '/admin/orcid_report', to: 'admin.orcid_report', as: :admin_report
   end
 end
