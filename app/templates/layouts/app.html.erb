@@ -37,7 +37,7 @@
           </lux-library-header>
         <% else %>
           <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
-            <lux-menu-bar type="main-menu" :menu-items="[ {name: 'Login', component: 'Login', href: '<%= routes.path(:user_login) %>'}]"></lux-menu-bar>
+            <lux-menu-bar type="main-menu" :menu-items="[ {name: 'Login', component: 'Login', href: '/auth/cas'}]"></lux-menu-bar>
           </lux-library-header>
         <% end %>
       </div>
