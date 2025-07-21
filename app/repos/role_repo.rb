@@ -17,14 +17,16 @@ module OrcidPrinceton
       end
 
       def create(attributes)
-        attributes[:created_at] = Time.now
-        attributes[:updated_at] = Time.now
+        time_now = Time.now
+        attributes[:created_at] = time_now
+        attributes[:updated_at] = time_now
         roles.changeset(:create, attributes).commit
       end
 
-      def update(attributes)
+      def update(id, attributes)
         attributes[:updated_at] = Time.now
-        roles.changeset(:create, attributes).commit
+        roles.by_pk(id).changeset(:update, attributes).commit
+        get(id)
       end
 
       def last = roles.last

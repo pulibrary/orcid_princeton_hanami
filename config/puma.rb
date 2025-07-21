@@ -3,7 +3,7 @@
 #
 # Environment and port
 #
-port ENV.fetch('HANAMI_PORT', 2300)
+port ENV.fetch('HANAMI_PORT', 3000)
 environment ENV.fetch('HANAMI_ENV', 'development')
 
 #

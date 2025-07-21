@@ -2,6 +2,11 @@
 
 This is an updated version of ORCID Princeton written on the Hanami platform.
 
+## Running the application
+
+The application can be run in development moe by running `bin/dev` from the hanami application directory.
+Hanami runs by default at the port 2300, but we have made this application run at the default rails port 3000 [localhost](http://localhost:3000)
+
 ## Converting the rails database
 
 ### Development

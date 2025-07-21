@@ -25,6 +25,10 @@ module OrcidPrinceton
     setting :session_secret, constructor: Types::String
     setting :cas_url, constructor: Types::String
     setting :cas_host, constructor: Types::String
+    setting :original_omniauth_failure, default: '', constructor: Types::String
     setting :banner, default: '', constructor: Types::String
+    setting :orcid_client_id, default: '', constructor: Types::String
+    setting :orcid_client_secret, default: '', constructor: Types::String
+    setting :orcid_sandbox, default: Hanami.env?(:development, :staging), constructor: Types::Params::Bool
   end
 end
