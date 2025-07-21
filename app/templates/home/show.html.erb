@@ -17,7 +17,7 @@
                 <div id="text-box">
                     <p>Connect your ORCID id to Princeton so that published works can be easily identified as belonging to all Princeton researchers.</p>
                 </div>
-                <%= link_to("Log-in", routes.path(:user_login),id: "login-button", class: "button", onclick:"log_plausible_cas_user_login()") %>
+                <%= link_to("Log-in", '/auth/cas',id: "login-button", class: "button", onclick:"log_plausible_cas_user_login()") %>
             </div>
         </div>
     <% end %>
