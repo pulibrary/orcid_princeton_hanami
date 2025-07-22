@@ -27,7 +27,7 @@ module OrcidPrinceton
 
     def require_authentication(request, response)
       unless request.env['warden']&.user
-        response.redirect_to 'auth/cas'
+        response.redirect_to '/auth/cas'
       end
     end
 

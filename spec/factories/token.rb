@@ -8,6 +8,6 @@ Factory.define(:token) do |f|
   f.timestamps
 
   f.trait :expired do |t|
-    t.expiration { Time.at(1_698_165_083) }
+    t.expiration { Time.now - (24 * 60 * 60) } # yesterday
   end
 end

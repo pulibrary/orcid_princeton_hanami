@@ -4,6 +4,7 @@ require 'hanami'
 require 'omniauth-cas'
 require 'omniauth-orcid'
 require 'warden'
+require 'tilt/jbuilder'
 
 module OrcidPrinceton
   # application configuration for each environment
@@ -46,6 +47,8 @@ module OrcidPrinceton
 
     # needed to allow for bootstrap javascript include
     config.actions.content_security_policy[:script_src] += ' https://cdn.jsdelivr.net'
+
+    Tilt.register Tilt[:jbuilder], :json
 
     environment(:test) do
     end

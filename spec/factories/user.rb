@@ -9,6 +9,7 @@ Factory.define(:user) do |f|
   f.family_name { FFaker::Name.last_name }
   f.display_name { |given_name, family_name| "#{given_name} #{family_name}" }
   f.university_id { '999999999' }
+  f.orcid { '' }
   f.timestamps
   # f.roles { [] }
 end
@@ -49,7 +50,7 @@ Factory.define(user_with_orcid_and_token: :user_with_orcid) do |f|
   f.association(:tokens)
 end
 
-Factory.define(user_with_expired_token: :user) do |f|
+Factory.define(user_with_expired_token: :user_with_orcid) do |f|
   f.association(:tokens, traits: [:expired])
 end
 

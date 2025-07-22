@@ -1,0 +1,35 @@
+<div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-gray-50 py-6 sm:py-12">
+
+  <div class="user-page-content">
+  <h1 class="page-title">ORCID@Princeton</h1>
+  <div class="welcome-section">
+      <% if user.admin? %>
+        <h2>Welcome, <%= user.display_name %> (Administrator)</h2>
+      <% else %>
+        <h2>Welcome, <%= user.display_name %></h2>
+      <% end %>
+
+      <!-- If the user doesn't have any tokens or they are all expired, prompt them to create one. -->
+      <% if token_expired || token_empty %>
+        <%= render 'tokenprompt' %>
+    
+      <!-- If the user has a valid token, show them their ORCID iD and tokens with expiration dates -->
+      <% else %>
+        <%= render 'user' %>
+      <% end %>
+  </div>
+
+  <div id="userpage-faq">
+    <%= render 'shared/faqsection' %>
+  </div>
+
+<div id="help-section-user">
+  <h2 class="help-contents" id="help-title">Need help?</h2>
+  <div class="help-contents" id="help-text">
+    <p>If you have questions about the value of having an ORCID iD or how it will be used at Princeton, please contact the <a href="mailto:prds@princeton.edu" onclick="log_plausible_contact_us()">Princeton Research Data Service</a>.</p>
+  </div>
+</div>
+
+  </div>
+
+</div>

@@ -24,6 +24,7 @@ gem 'pg'
 gem 'puma'
 gem 'rake'
 gem 'tilt', '~> 2.0'
+gem 'tilt-jbuilder'
 gem 'warden'
 gem 'whenever'
 
@@ -40,6 +41,7 @@ group :development, :test do
   gem 'dotenv'
   gem 'ffaker'
   gem 'rubocop'
+  gem 'webmock'
 end
 
 group :cli, :development do
