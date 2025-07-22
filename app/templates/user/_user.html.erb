@@ -1,0 +1,27 @@
+<div id="<%= dom_id %>">
+  <p>
+    <div class="orcid_identifier">
+     <% if user.orcid %>
+      <div class='full_orcid_display'>
+        <img src="<%= asset_url('ORCIDiD_icon64x64.png') %>" alt="ORCID Logo" />
+        <%= link_to orcid_url, orcid_url %>
+     </div>
+     <% end %>
+    </div>
+  </p>
+</div>
+
+<% if user.valid_token && orcid_available %>
+  <p>
+    Your ORCID iD is connected to your NetID, <%= user.uid %>
+  </p>
+  <p>
+    Your token grants Princeton access to read and update your ORCID record until <%= user.valid_token.expiration.strftime('%m/%d/%Y') %>.
+  </p>
+  <!-- TODO: Need a way to check if the token is still valid
+  <%# = form_for  "user/validate_tokens/#{user.id}" method: :post, url:  do |form| %>
+    <button id="check-orcid-tokens" class="btn btn-secondary"
+      title="Validates that current tokens are still active with ORCiD">Check Authentication to ORCiD</button>
+  <%# end %>
+  -->
+<% end %>

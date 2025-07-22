@@ -6,7 +6,7 @@
         <div id="login-section">
             <div id="info-box-user">
                 <div id="text-box-user">
-                    <p>Hello, <%= current_user.given_name %>!</p>
+                    <p>Hello, <%= current_user.display_name %>!</p>
                     <p>Go to your <%= link_to "Profile Page", "/users/#{current_user.id}" %> to view your account.</p>
                 </div>
             </div>

@@ -1,0 +1,26 @@
+
+  <div id="minting_a_token_explanation">
+  <lux-icon-base width="30" height="30" icon-name="denied" icon-color="red">
+      <lux-icon-denied></lux-icon-denied>
+  </lux-icon-base>
+  <span><%= token_prompt %></span>
+  <div class="orcid-connect">
+    <h2>Connect your ORCID iD </h2>
+    <div class="line"></div>
+    <div class="info-section flex-container">
+      <div>
+        <p>This button will take you to ORCID to sign and and will add Princeton University as a Trusted Organization.</p>
+        <p>This will allow Princeton University to read your ORCID record and add information to it.</p>
+      </div>
+      <%= link_to( '/auth/orcid', class: "button log-in-orcid primary-button", onclick:"log_plausible_connect_orcid()") do %>
+        <img src="<%= asset_url('ORCIDiD_icon32x32.png') %>" alt="ORCID Logo" />
+        <span>Connect ORCID iD</span>
+      <% end %>
+    </div>
+    <div class="info-section">
+      <div>
+        <%= link_to "Step by Step Tutorial", "https://libguides.princeton.edu/orcid-sciencv#s-lg-box-28907700", target: "_blank" %>
+      </div>
+    </div>
+  </div>
+</div>

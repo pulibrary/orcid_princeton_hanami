@@ -6,6 +6,8 @@ require 'hanami/view'
 module OrcidPrinceton
   # Base Hanami view for the ORCID application
   class View < Hanami::View
+    include Deps['operations.orcid_api_status']
+
     expose :current_user, layout: true
     expose :code_version, layout: true
 
@@ -24,6 +26,11 @@ module OrcidPrinceton
       else
         ''
       end
+    end
+
+    expose :orcid_available do
+      result = orcid_api_status.call
+      result.instance_of?(Dry::Monads::Result::Success)
     end
   end
 end

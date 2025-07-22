@@ -11,5 +11,7 @@ module OrcidPrinceton
     get '/admin/orcid_report', to: 'admin.orcid_report', as: :admin_report
     get '/auth/orcid/callback', to: 'orcid.create', as: :orcid_callback
     get '/orcid/failure', to: 'orcid.failure'
+    get '/users/:id', to: 'user.show'
+    get '/users/:id.json', to: 'user.show'
   end
 end

@@ -10,37 +10,8 @@
   </head>
   <body>
     <div id="lux">
-      <div>
-        <% if current_user && current_user.admin? == true %>
-          <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
-            <lux-menu-bar type="main-menu" :menu-items="[
-              {name: 'Home', component: 'Home', href: '/'},
-                {name: '<%= current_user.uid %>', component: 'Account', href: '/account/', children: [
-                  {name: 'Profile', component: 'Feedback', href: '/user/current_user'},
-                  {name: 'ORCID Report', component: 'Feedback', href: '<%= routes.path(:admin_report) %>'},
-                  {name: 'Logout', component: 'Logout', href: '/logout'}
-                ]}
-              ]"
-            ></lux-menu-bar>
-          </lux-library-header>
-        <% elsif current_user %>
-
-          <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
-            <lux-menu-bar type="main-menu" :menu-items="[
-              {name: 'Home', component: 'Home', href: '/health'},
-                {name: '<%= current_user.display_name %>', component: 'Account', href: '/account/', children: [
-                  {name: 'Profile', component: 'Feedback', href: '/user/current_user'},
-                  {name: 'Logout', component: 'Logout', href: '/logout '}
-                ]}
-              ]"
-            ></lux-menu-bar>
-          </lux-library-header>
-        <% else %>
-          <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
-            <lux-menu-bar type="main-menu" :menu-items="[ {name: 'Login', component: 'Login', href: '/auth/cas'}]"></lux-menu-bar>
-          </lux-library-header>
-        <% end %>
-      </div>
+      <%= render 'shared/header' %>
+      <main>
       <% if flash && flash[:notice] %>
         <div class="row">
           <div class="col">
@@ -53,6 +24,7 @@
         <%= render 'shared/footer' %>
       </div>
     </div>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     <%= javascript_tag "app" %>

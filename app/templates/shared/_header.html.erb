@@ -1,0 +1,33 @@
+<nav>
+    <div class="lux">
+        <% if current_user && current_user.admin? == true %>
+            <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
+                <lux-menu-bar type="main-menu" :menu-items="[
+                {name: 'Home', component: 'Home', href: '/'},
+                    {name: '<%= current_user.uid %>', component: 'Account', href: '/account/', children: [
+                    {name: 'Profile', component: 'Feedback', href: '/users/<%= current_user.id %>'},
+                    {name: 'ORCID Report', component: 'Feedback', href: '<%= routes.path(:admin_report) %>'},
+                    {name: 'Logout', component: 'Logout', href: '/logout'}
+                    ]}
+                ]"
+                ></lux-menu-bar>
+            </lux-library-header>
+        <% elsif current_user %>
+
+            <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
+                <lux-menu-bar type="main-menu" :menu-items="[
+                {name: 'Home', component: 'Home', href: '/health'},
+                    {name: '<%= current_user.display_name %>', component: 'Account', href: '/account/', children: [
+                    {name: 'Profile', component: 'Feedback', href: '/users/<%= current_user.id %>'},
+                    {name: 'Logout', component: 'Logout', href: '/logout '}
+                    ]}
+                ]"
+                ></lux-menu-bar>
+            </lux-library-header>
+        <% else %>
+            <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
+                <lux-menu-bar type="main-menu" :menu-items="[ {name: 'Login', component: 'Login', href: '/auth/cas'}]"></lux-menu-bar>
+            </lux-library-header>
+        <% end %>
+    </div>
+</nav>
