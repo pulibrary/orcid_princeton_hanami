@@ -106,6 +106,8 @@ jobs:
           root: *root
           paths:
             - "coverage"
+      - store_test_results:
+          path: /tmp/rspec
       - store_artifacts:
           path: /home/circleci/orcid_princeton/tmp/capybara
 

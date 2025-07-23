@@ -17,6 +17,8 @@ gem 'dry-operation'
 gem 'dry-types', '~> 1.7'
 gem 'ed25519'
 gem 'honeybadger'
+# TODO: why two different http gems?
+gem 'httparty'
 gem 'net-http'
 gem 'omniauth-cas'
 gem 'omniauth-orcid'

@@ -13,5 +13,6 @@ module OrcidPrinceton
     get '/orcid/failure', to: 'orcid.failure'
     get '/users/:id', to: 'user.show', as: :user
     get '/users/:id.json', to: 'user.show', as: :user_json
+    get '/user/:id/validate_tokens', to: 'user.validate_tokens', as: :validate_tokens
   end
 end

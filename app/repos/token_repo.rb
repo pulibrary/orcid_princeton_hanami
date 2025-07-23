@@ -23,6 +23,10 @@ module OrcidPrinceton
         get(id)
       end
 
+      def expire_now(id)
+        tokens.by_pk(id).changeset(:update, { expiration: Time.now }).commit
+      end
+
       # Create a token from an omniauth hash.
       # @param credentials [OmniAuth::AuthHash] The credentials hash from the omniauth response.
       # @param user [User] The user to associate the token with.

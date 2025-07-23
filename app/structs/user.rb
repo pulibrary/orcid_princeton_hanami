@@ -15,10 +15,11 @@ module OrcidPrinceton
         tokens.all?(&:expired?)
       end
 
-      def valid_token
-        return nil if tokens_expired?
+      def valid_tokens
+        tokens.reject(&:expired?)
+      end
 
-        valid_tokens = tokens.reject(&:expired?)
+      def valid_token
         valid_tokens.first
       end
     end

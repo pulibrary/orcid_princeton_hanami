@@ -21,6 +21,13 @@ module OrcidPrinceton
 
     ENV['SESSION_SECRET'] = '__local_development_secret_only__' unless ENV['SESSION_SECRET']
 
+    orcid_sandbox = Hanami.env?(:development, :staging, :test)
+    orcid_url = if orcid_sandbox
+                  'https://api.sandbox.orcid.org/v3.0'
+                else
+                  'https://api.orcid.org/v3.0'
+                end
+
     setting :database_url, default: database_url, constructor: Types::String
     setting :session_secret, constructor: Types::String
     setting :cas_url, constructor: Types::String
@@ -29,6 +36,7 @@ module OrcidPrinceton
     setting :banner, default: '', constructor: Types::String
     setting :orcid_client_id, default: '', constructor: Types::String
     setting :orcid_client_secret, default: '', constructor: Types::String
-    setting :orcid_sandbox, default: Hanami.env?(:development, :staging), constructor: Types::Params::Bool
+    setting :orcid_sandbox, default: orcid_sandbox, constructor: Types::Params::Bool
+    setting :orcid_url, default: orcid_url, constructor: Types::String
   end
 end

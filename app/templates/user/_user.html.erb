@@ -18,10 +18,7 @@
   <p>
     Your token grants Princeton access to read and update your ORCID record until <%= user.valid_token.expiration.strftime('%m/%d/%Y') %>.
   </p>
-  <!-- TODO: Need a way to check if the token is still valid
-  <%# = form_for  "user/validate_tokens/#{user.id}" method: :post, url:  do |form| %>
-    <button id="check-orcid-tokens" class="btn btn-secondary"
-      title="Validates that current tokens are still active with ORCiD">Check Authentication to ORCiD</button>
-  <%# end %>
-  -->
+  <%= link_to("Check Authentication to ORCiD", routes.path(:validate_tokens, id: current_user.id),
+              id: "check-orcid-tokens", class: "button btn btn-secondary", 
+              title: "Validates that current tokens are still active with ORCiD") %>
 <% end %>
