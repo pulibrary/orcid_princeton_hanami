@@ -6,7 +6,8 @@ module OrcidPrinceton
       # action to load and show a user
       class Show < OrcidPrinceton::Action
         include Deps['repos.user_repo',
-                     alternative_view: 'views.errors.forbidden' ]
+                     alternative_view: 'views.errors.forbidden',
+                     valid_view: 'views.user.show' ]
         before :require_authentication # make sure there is a user logged in before serving the report
 
         format :html, :json
@@ -21,7 +22,7 @@ module OrcidPrinceton
           user_id = request.params[:id].split('.').first.to_i
           if response[:current_user].id == user_id
             response[:user] = user_repo.get(user_id)
-            # response.render(alternative_view, format: response.format )
+            response.render(valid_view, format: response.format)
           else
             response.render(alternative_view)
           end

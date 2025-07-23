@@ -3,6 +3,10 @@
 
 require 'hanami/view'
 
+require 'tilt/jbuilder'
+
+Tilt.register Tilt[:jbuilder], :json
+
 module OrcidPrinceton
   # Base Hanami view for the ORCID application
   class View < Hanami::View
@@ -31,6 +35,15 @@ module OrcidPrinceton
     expose :orcid_available do
       result = orcid_api_status.call
       result.instance_of?(Dry::Monads::Result::Success)
+    end
+
+    # Disables layout when rendering with `format: :json` option
+    def call(format: :html, **options)
+      if format == :json
+        super(**options, format:, layout: nil)
+      else
+        super
+      end
     end
   end
 end
