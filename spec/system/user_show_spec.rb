@@ -26,7 +26,6 @@ RSpec.describe 'user show screen', type: :system, js: true do
     end
 
     it 'it allows a user to revoke linking to ORCiD' do
-      pending 'we have check authentication'
       login_as user.uid
       visit "/users/#{user.id}"
       # user has linked their account to ORCiD

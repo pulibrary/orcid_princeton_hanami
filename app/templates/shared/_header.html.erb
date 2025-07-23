@@ -5,9 +5,9 @@
                 <lux-menu-bar type="main-menu" :menu-items="[
                 {name: 'Home', component: 'Home', href: '/'},
                     {name: '<%= current_user.uid %>', component: 'Account', href: '/account/', children: [
-                    {name: 'Profile', component: 'Feedback', href: '/users/<%= current_user.id %>'},
-                    {name: 'ORCID Report', component: 'Feedback', href: '<%= routes.path(:admin_report) %>'},
-                    {name: 'Logout', component: 'Logout', href: '/logout'}
+                    {name: 'Profile', component: 'Feedback', href: '<%= routes.path(:user, id: current_user.id) %>'},
+                      {name: 'ORCID Report', component: 'Feedback', href: '<%= routes.path(:admin_report) %>'},
+                      {name: 'Logout', component: 'Logout', href: '/logout'}
                     ]}
                 ]"
                 ></lux-menu-bar>
@@ -18,8 +18,8 @@
                 <lux-menu-bar type="main-menu" :menu-items="[
                 {name: 'Home', component: 'Home', href: '/health'},
                     {name: '<%= current_user.display_name %>', component: 'Account', href: '/account/', children: [
-                    {name: 'Profile', component: 'Feedback', href: '/users/<%= current_user.id %>'},
-                    {name: 'Logout', component: 'Logout', href: '/logout '}
+                      {name: 'Profile', component: 'Feedback', href: '<%= routes.path(:user, id: current_user.id) %>'},
+                      {name: 'Logout', component: 'Logout', href: '/logout '}
                     ]}
                 ]"
                 ></lux-menu-bar>

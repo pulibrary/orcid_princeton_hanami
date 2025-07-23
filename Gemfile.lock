@@ -265,6 +265,10 @@ GEM
     honeybadger (5.29.1)
       logger
       ostruct
+    httparty (0.23.1)
+      csv
+      mini_mime (>= 1.0.0)
+      multi_xml (>= 0.5.2)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
@@ -542,6 +546,7 @@ DEPENDENCIES
   hanami-view (~> 2.2)
   hanami-webconsole (~> 2.2)
   honeybadger
+  httparty
   net-http
   omniauth-cas
   omniauth-orcid
