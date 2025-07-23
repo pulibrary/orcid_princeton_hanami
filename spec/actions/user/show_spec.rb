@@ -23,11 +23,13 @@ RSpec.describe OrcidPrinceton::Actions::User::Show do
       let(:params) { Hash['warden' => Warden::Proxy.new({}, warden_manager), id: "#{user.id}.json"] }
 
       it 'renders json' do
-        pending 'I can get tilt to work correctly'
         params['warden'].set_user user.uid
         response = subject.call(params)
         expect(response).to be_successful
-        JSON.parse(response.body)
+        json_data = JSON.parse(response.body.first)
+        expect(json_data['id']).to eq(user.id)
+        expect(json_data['uid']).to eq(user.uid)
+        expect(json_data['url']).to eq("http://0.0.0.0:2300/users/#{user.id}.json")
       end
     end
   end

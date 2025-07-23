@@ -15,6 +15,10 @@ module OrcidPrinceton
           "https://orcid.org/#{user.orcid}"
         end
 
+        expose :user_url do |user|
+          Hanami.app.router.url(:user_json, id: user.id)
+        end
+
         expose :token_prompt do |token_empty, token_expired, user|
           prompt = if token_empty
                      "There is no ORCID iD associated with your NetID, #{user.uid}"
