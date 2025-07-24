@@ -22,9 +22,6 @@ RSpec.describe OrcidPrinceton::Actions::Orcid::Create do
   let(:user_repo) { OrcidPrinceton::Repos::UserRepo.new }
 
   it 'works' do
-    ENV['OPENSSL_KEY'] = '0123456789abcdef0123456789abcdef'[0, 32]
-    ENV['OPENSSL_ALGORITHM'] = 'AES-256-CBC'
-    ENV['OPENSSL_IV_LEN'] = 16.to_s
     env['warden'].set_user user.uid
     response = subject.call(env)
     expect(response).to be_redirect
