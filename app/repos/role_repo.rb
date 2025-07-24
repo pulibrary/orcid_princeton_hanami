@@ -8,6 +8,10 @@ module OrcidPrinceton
         roles.by_pk(id).one!
       end
 
+      def delete_all
+        roles.changeset(:delete).commit
+      end
+
       def admin_role
         role = roles.where(name: 'admin')&.first
         if role.blank?

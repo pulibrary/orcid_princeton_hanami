@@ -37,6 +37,13 @@ module OrcidPrinceton
       result.instance_of?(Dry::Monads::Result::Success)
     end
 
+    expose :banner_title, layout: true do
+      Hanami.app.settings.banner_title
+    end
+    expose :banner_body, layout: true do
+      Hanami.app.settings.banner_body
+    end
+
     # Disables layout when rendering with `format: :json` option
     def call(format: :html, **options)
       if format == :json

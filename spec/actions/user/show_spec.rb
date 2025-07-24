@@ -13,17 +13,29 @@ RSpec.describe OrcidPrinceton::Actions::User::Show do
     let(:warden_manager) { Warden::Manager.new(nil) }
     let(:params) { Hash['warden' => Warden::Proxy.new({}, warden_manager), id: user.id.to_s] }
 
-    it 'renders html' do
+    before do
       params['warden'].set_user user.uid
+    end
+
+    it 'renders html' do
       response = subject.call(params)
       expect(response).to be_successful
+      expect(response.body.first).not_to include('Forbidden')
+      expect(response.body.first).to include(user.display_name)
+    end
+
+    it 'stops the user from viewing another user\'s show page' do
+      user2 = Factory[:user]
+      params[:id] = user2.id.to_s
+      response = subject.call(params)
+      expect(response).to be_successful
+      expect(response.body.first).to include('Forbidden')
     end
 
     context 'the user wants json' do
       let(:params) { Hash['warden' => Warden::Proxy.new({}, warden_manager), id: "#{user.id}.json"] }
 
       it 'renders json' do
-        params['warden'].set_user user.uid
         response = subject.call(params)
         expect(response).to be_successful
         json_data = JSON.parse(response.body.first)
