@@ -13,6 +13,13 @@ RSpec.describe OrcidPrinceton::Repos::RoleRepo do
       expect(admin_role.name).to eq('admin')
       expect(repo.admin_role).to eq(admin_role)
     end
+
+    it 'creates the admin role if it does not exist' do
+      repo.delete_all
+      admin_role = repo.admin_role
+      expect(admin_role.name).to eq('admin')
+      expect(repo.admin_role).to eq(admin_role)
+    end
   end
 
   describe '#create' do

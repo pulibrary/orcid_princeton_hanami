@@ -16,8 +16,7 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
       visit '/'
 
       # The main page has a banner for announcements
-      # TODO: we need a banner
-      # expect(page).to have_css '#banner'
+      expect(page).to have_css '#banner'
 
       # The page should be accessible.
       expect(page).to be_axe_clean
@@ -31,8 +30,7 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
       expect(page).to have_content "Welcome, #{user.display_name}"
 
       # The user page has a banner for announcements and is accessible.
-      # TODO: we need a banner
-      #  expect(page).to have_css '#banner'
+      expect(page).to have_css '#banner'
       expect(page).to be_axe_clean
         .according_to(:wcag2a, :wcag2aa, :wcag21a, :wcag21aa, :section508, :"best-practice")
 
@@ -74,8 +72,7 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
 
   context 'when a banner is not present' do
     before do
-      # TODO: I'm unsure how to set different settings in the tests
-      ENV['BANNER'] = ''
+      allow(Hanami.app.settings).to receive(:banner_title).and_return('')
     end
 
     it 'shows no banner and is axe clean' do
