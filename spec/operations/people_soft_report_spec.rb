@@ -3,7 +3,8 @@
 require 'spec_helper'
 
 RSpec.describe OrcidPrinceton::Operations::PeopleSoftReport, type: :operation do
-  let(:file_name) { "./report#{Random.rand(10_000)}.csv" }
+  let(:temp_file) { Tempfile.new(SecureRandom.uuid) }
+  let(:file_name) { temp_file.path }
   subject(:row1) do
     OrcidPrinceton::Structs::PeopleSoftRow.new(university_id: 'id', netid: 'abc123', full_name: 'Jane Doe',
                                                orcid: 'orcid', effective_from: 'date', effective_until: 'date2')
@@ -13,6 +14,10 @@ RSpec.describe OrcidPrinceton::Operations::PeopleSoftReport, type: :operation do
                                                orcid: 'orcid2', effective_from: 'date', effective_until: 'date2')
   end
   let(:valid_data) { [row1, row2] }
+
+  after do
+    temp_file.unlink
+  end
 
   it 'includes only valid users' do
     user_valid = Factory[:user_with_orcid_and_token, university_id: '111345']

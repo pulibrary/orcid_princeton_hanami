@@ -38,6 +38,7 @@ RSpec.describe OrcidPrinceton::Actions::User::Show do
       it 'renders json' do
         response = subject.call(params)
         expect(response).to be_successful
+        expect(response.body.count).to eq(1)
         json_data = JSON.parse(response.body.first)
         expect(json_data['id']).to eq(user.id)
         expect(json_data['uid']).to eq(user.uid)
