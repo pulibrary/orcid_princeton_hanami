@@ -32,5 +32,8 @@ module OrcidPrinceton
     setting :orcid_client_secret, default: '', constructor: Types::String
     setting :orcid_sandbox, default: false, constructor: Types::Params::Bool
     setting :orcid_url, default: 'https://api.orcid.org/v3.0', constructor: Types::String
+    setting :openssl_key, default: '', constructor: Types::String
+    setting :openssl_algorithm, default: '', constructor: Types::String
+    setting :openssl_iv_len, default: 16, constructor: Types::Params::Integer
   end
 end

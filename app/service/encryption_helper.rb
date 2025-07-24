@@ -8,8 +8,8 @@ module OrcidPrinceton
     class EncryptionHelper
       attr_reader :secret_key, :iv_length, :algorithm
 
-      def initialize(secret_key: ENV['OPENSSL_KEY'], algorithm: ENV['OPENSSL_ALGORITHM'],
-                     iv_length: ENV['OPENSSL_IV_LEN'].to_i)
+      def initialize(secret_key: Hanami.app.settings.openssl_key, algorithm: Hanami.app.settings.openssl_algorithm,
+                     iv_length: Hanami.app.settings.openssl_iv_len)
         @secret_key = secret_key
         @algorithm = algorithm
         @iv_length = iv_length
