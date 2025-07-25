@@ -25,7 +25,8 @@ module OrcidPrinceton
       def validate_tokens(user)
         Time.now
         user.valid_tokens.each do |token|
-          if valid_in_orcid?(token.token, user.orcid) == false
+          decoded_token = token_repo.get(token.id).token
+          if valid_in_orcid?(decoded_token, user.orcid) == false
             token_repo.expire_now(token.id)
           end
         end

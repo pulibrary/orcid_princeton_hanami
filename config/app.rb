@@ -47,6 +47,9 @@ module OrcidPrinceton
     # needed to allow for bootstrap javascript include
     config.actions.content_security_policy[:script_src] += ' https://cdn.jsdelivr.net'
 
+    # needed to allow for plausible javascript include
+    config.actions.content_security_policy[:script_src] += ' https://plausible.io'
+
     environment(:test) do
     end
 

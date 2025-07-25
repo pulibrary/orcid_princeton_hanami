@@ -45,7 +45,7 @@ RSpec.describe OrcidPrinceton::Operations::ValidateUserTokens do
     it 'returns a failure' do
       stub_request(:get, "https://api.sandbox.orcid.org/v3.0/#{user.orcid}/record").to_return(status: 201, body: '',
                                                                                               headers: {})
-      mock_repo = instance_double OrcidPrinceton::Repos::TokenRepo
+      mock_repo = OrcidPrinceton::Repos::TokenRepo.new
       allow(mock_repo).to receive(:expire_now).and_raise('Error')
       allow(OrcidPrinceton::Repos::TokenRepo).to receive(:new).and_return(mock_repo)
 
