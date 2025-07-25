@@ -17,8 +17,7 @@ module OrcidPrinceton
           user_attributes[:orcid] = omniauth.uid
           current_user = user_repo.update(current_user.id, user_attributes)
           token_repo.create_from_omniauth(omniauth.credentials, current_user)
-          # response.redirect_to routes.path(:user, current_user)
-          response.redirect_to routes.path(:root)
+          response.redirect_to routes.path(:user, id: current_user.id)
         end
       end
     end
