@@ -63,5 +63,6 @@ group :test do
   gem 'capybara'
   gem 'rack-test'
   gem 'rom-factory'
+  gem 'rspec-retry'
   gem 'selenium-webdriver'
 end

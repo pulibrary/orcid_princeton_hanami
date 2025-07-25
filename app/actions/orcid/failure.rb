@@ -16,8 +16,7 @@ module OrcidPrinceton
             current_user: current_user.id
           }
           Honeybadger.notify(message, context: honeybadger_context)
-          # response.redirect_to routes.path(:user, current_user)
-          response.redirect_to routes.path(:root)
+          response.redirect_to routes.path(:user, id: current_user.id)
         end
       end
     end
