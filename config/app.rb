@@ -49,6 +49,7 @@ module OrcidPrinceton
 
     # needed to allow for plausible javascript include
     config.actions.content_security_policy[:script_src] += ' https://plausible.io'
+    config.actions.content_security_policy[:connect_src] += ' https://plausible.io'
 
     environment(:test) do
     end
