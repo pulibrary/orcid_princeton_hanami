@@ -181,6 +181,8 @@ a {
   padding: 0.7rem 2.4rem;
   height: 3.5rem;
   margin-right: 2rem;
+  text-decoration: none;
+  color: black;
 }
 
 #login-button-black {

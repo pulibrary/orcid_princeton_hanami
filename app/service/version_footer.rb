@@ -81,16 +81,21 @@ module OrcidPrinceton
                       end
       end
 
+      def self.hanami_root_path
+        # app path is the location of `config/app.rb`, so the root is up two
+        Hanami.app_path.join('..', '..')
+      end
+
       # This file is local to the application.
       # This file only has the git SHA of the version deployed (i.e. no date or branch)
       def self.revision_file
-        @@revision_file ||= Hanami.app_path.join('REVISION')
+        @@revision_file ||= hanami_root_path.join('REVISION')
       end
 
       # Capistrano keeps this file a couple of levels up _outside_ the application.
       # This file includes all the information that we need (git SHA, branch name, date)
       def self.revisions_logfile
-        @@revisions_logfile ||= Hanami.app_path.join('..', '..', 'revisions.log')
+        @@revisions_logfile ||= hanami_root_path.join('..', '..', 'revisions.log')
       end
 
       # These assignment methods are needed to facilitate testing
