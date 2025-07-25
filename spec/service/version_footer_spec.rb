@@ -95,8 +95,7 @@ RSpec.describe OrcidPrinceton::Service::VersionFooter, type: :service do
 
       context 'when outside of the development and test environments' do
         before do
-          allow(Hanami).to receive(:env?).with(:test).and_return(false)
-          allow(Hanami).to receive(:env?).with(:development).and_return(false)
+          allow(Hanami).to receive(:env?).with(:development, :test).and_return(false)
         end
 
         it 'indicates that the application is not in a deployed environment' do
@@ -123,8 +122,7 @@ RSpec.describe OrcidPrinceton::Service::VersionFooter, type: :service do
 
       context 'when outside of the development and test environments' do
         before do
-          allow(Hanami).to receive(:env?).with(:test).and_return(false)
-          allow(Hanami).to receive(:env?).with(:development).and_return(false)
+          allow(Hanami).to receive(:env?).with(:development, :test).and_return(false)
         end
 
         it 'indicates that the application is not in a deployed environment' do

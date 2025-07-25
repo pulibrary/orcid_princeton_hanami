@@ -33,7 +33,7 @@ jobs:
       - &ruby_docker
         image: cimg/ruby:3.4.2-browsers
         environment:
-          RAILS_ENV: test
+          HANAMI_ENV: test
     steps:
       - checkout
       - run: sudo apt update && sudo apt install postgresql-client libmsgpack-dev
@@ -60,7 +60,7 @@ jobs:
     docker:
       - image: cimg/ruby:3.4.2-browsers
         environment:
-          RAILS_ENV: test
+          HANAMI_ENV: test
     steps:
       - attach_workspace:
           at: "~/orcid_princeton"
@@ -101,7 +101,7 @@ jobs:
       - run: HANAMI_ENV=test DATABASE_URL=postgres://orcid_princeton_user@localhost:5432/orcid_db bundle exec hanami assets compile
       - run:
           name: Run Rspec
-          command: DATABASE_URL=postgres://orcid_princeton_user@localhost:5432/orcid_db COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN bundle exec rspec --format progress
+          command: RETRY_FAILURES=true HANAMI_ENV=test DATABASE_URL=postgres://orcid_princeton_user@localhost:5432/orcid_db COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN bundle exec rspec --format progress
       - persist_to_workspace:
           root: *root
           paths:

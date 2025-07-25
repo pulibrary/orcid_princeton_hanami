@@ -22,14 +22,14 @@ RSpec.describe 'user show screen', type: :system, js: true do
     it "shows the user's account information" do
       login_as user.uid
       visit "/users/#{user.id}"
-      expect(page).to have_content("https://orcid.org/#{user.orcid}")
+      expect(page).to have_content("#{Hanami.app.settings.orcid_url}/#{user.orcid}")
     end
 
     it 'it allows a user to revoke linking to ORCiD' do
       login_as user.uid
       visit "/users/#{user.id}"
       # user has linked their account to ORCiD
-      expect(page).to have_content("https://orcid.org/#{user.orcid}")
+      expect(page).to have_content("#{Hanami.app.settings.orcid_url}/#{user.orcid}")
       click_on 'Check Authentication to ORCiD'
       # account is not linked anymore
       expect(page).to have_content('Connect your ORCID iD')
@@ -39,7 +39,7 @@ RSpec.describe 'user show screen', type: :system, js: true do
       login_as user.uid
       visit "/users/#{user.id}"
       # user has linked their account to ORCiD
-      expect(page).to have_content("https://orcid.org/#{user.orcid}")
+      expect(page).to have_content("#{Hanami.app.settings.orcid_url}/#{user.orcid}")
       expect(page).not_to have_content('You can quickly and easily remove your duplicate account')
       click_on 'What do I do if I have more than one ORCID iD?'
       expect(page).to have_content('You can quickly and easily remove your duplicate account')

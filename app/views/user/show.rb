@@ -12,7 +12,7 @@ module OrcidPrinceton
         end
 
         expose :orcid_url do |user|
-          "https://orcid.org/#{user.orcid}"
+          "#{Hanami.app.settings.orcid_url}/#{user.orcid}"
         end
 
         expose :user_url do |user|

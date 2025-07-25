@@ -50,7 +50,7 @@ module OrcidPrinceton
       def self.git_sha
         @@git_sha ||= if File.exist?(revisions_logfile)
                         log_line(revisions_logfile).chomp.split(' ')[3].gsub(/\)$/, '')
-                      elsif Hanami.env?(:development) || Hanami.env?(:test)
+                      elsif Hanami.env?(:development, :test)
                         `git rev-parse HEAD`.chomp
                       else
                         'Unknown SHA'
@@ -65,7 +65,7 @@ module OrcidPrinceton
       def self.branch
         @@branch ||= if File.exist?(revisions_logfile)
                        log_line(revisions_logfile).chomp.split(' ')[1]
-                     elsif Hanami.env?(:development) || Hanami.env?(:test)
+                     elsif Hanami.env?(:development, :test)
                        `git rev-parse --abbrev-ref HEAD`.chomp
                      else
                        'Unknown branch'
