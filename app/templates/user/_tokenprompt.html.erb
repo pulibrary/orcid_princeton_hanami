@@ -12,9 +12,11 @@
         <p>This button will take you to ORCID to sign and and will add Princeton University as a Trusted Organization.</p>
         <p>This will allow Princeton University to read your ORCID record and add information to it.</p>
       </div>
-      <%= link_to( '/auth/orcid', class: "button log-in-orcid primary-button", onclick:"log_plausible_connect_orcid()") do %>
+      <%= link_to( '/auth/orcid', onclick:"log_plausible_connect_orcid()") do %>
+        <button class="log-in-orcid primary-button">
         <img src="<%= asset_url('ORCIDiD_icon32x32.png') %>" alt="ORCID Logo" />
         <span>Connect ORCID iD</span>
+        </button>
       <% end %>
     </div>
     <div class="info-section">
