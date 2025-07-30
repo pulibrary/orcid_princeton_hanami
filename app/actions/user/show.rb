@@ -8,7 +8,7 @@ module OrcidPrinceton
         include Deps['repos.user_repo',
                      alternative_view: 'views.errors.forbidden',
                      valid_view: 'views.user.show' ]
-        before :require_authentication # make sure there is a user logged in before serving the report
+        before :require_authentication # make sure there is a user logged in before serving the user
 
         format :html, :json
 
