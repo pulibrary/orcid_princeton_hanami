@@ -19,10 +19,8 @@ module OrcidPrinceton
       ENV['DATABASE_URL'] = database_url
     end
 
-    ENV['SESSION_SECRET'] = '__local_development_secret_only__' unless ENV['SESSION_SECRET']
-
     setting :database_url, default: database_url, constructor: Types::String
-    setting :session_secret, constructor: Types::String
+    setting :session_secret, default: '__local_development_secret_only__', constructor: Types::String
     setting :cas_url, constructor: Types::String
     setting :cas_host, constructor: Types::String
     setting :original_omniauth_failure, default: '', constructor: Types::String
