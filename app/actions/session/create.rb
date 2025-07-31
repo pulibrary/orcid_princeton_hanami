@@ -26,7 +26,7 @@ module OrcidPrinceton
         end
 
         def handle_user(user, request, response)
-          response.env['warden'].set_user user.uid
+          warden_session(request).set_user user.uid
           requested_path = request.session[:login_redirect_url]
           response.flash[:notice] = 'You were successfully authenticated'
           response.redirect_to requested_path || routes.path(:root)

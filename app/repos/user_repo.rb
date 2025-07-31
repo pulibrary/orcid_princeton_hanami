@@ -61,7 +61,7 @@ module OrcidPrinceton
 
       def token_to_attributes(access_token)
         { uid: access_token.uid, university_id: access_token.universityid,
-          email: access_token.extra.mail, provider: access_token.provider,
+          email: access_token.extra.mail, provider: access_token.provider.to_s,
           given_name: access_token.extra.givenname || access_token.uid,
           family_name: access_token.extra.sn || access_token.uid,
           display_name: access_token.extra.displayname || access_token.uid }
