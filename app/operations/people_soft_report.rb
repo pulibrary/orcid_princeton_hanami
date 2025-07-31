@@ -33,12 +33,18 @@ module OrcidPrinceton
         CSV.open(filename, 'w') do |csv|
           csv << ['University ID', 'Net ID', 'Full Name', 'Identifier Type', 'ORCID iD', 'Date Effective',
                   'Effective Until']
-          data.each do |row|
-            csv << [row.university_id, row.netid, row.full_name, row.row_type, row.orcid, row.effective_from,
-                    row.effective_until]
-          end
+          write_data(data, csv)
         end
         Success(filename)
+      rescue StandardError => e
+        Failure(e.message)
+      end
+
+      def write_data(data, csv)
+        data.each do |row|
+          csv << [row.university_id, row.netid, row.full_name, row.row_type, row.orcid, row.effective_from,
+                  row.effective_until]
+        end
       end
     end
   end
