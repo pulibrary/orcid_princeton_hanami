@@ -33,5 +33,7 @@ module OrcidPrinceton
     setting :openssl_key, default: '', constructor: Types::String
     setting :openssl_algorithm, default: '', constructor: Types::String
     setting :openssl_iv_len, default: 16, constructor: Types::Params::Integer
+    setting :peoplesoft_output_location, default: '/mnt/peoplesoft/sr_orcid/prod/ORCID_portal_report.csv',
+                                         constructor: Types::String
   end
 end

@@ -45,4 +45,10 @@ RSpec.describe OrcidPrinceton::Operations::PeopleSoftReport, type: :operation do
     expect(lines[2]).to eq "id2,def456,Sally Smith,ORC,orcid2,date,date2\n"
     File.delete(file_name)
   end
+
+  it 'it responds with a failure if we try to save the file to a directory that does not exists' do
+    report = described_class.new
+    result = report.call('/bad_location/bad_file', valid_data)
+    expect(result).to be_a Dry::Monads::Result::Failure
+  end
 end
