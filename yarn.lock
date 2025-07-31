@@ -20,9 +20,9 @@
     "@babel/types" "^7.28.0"
 
 "@babel/runtime@^7.21.0":
-  version "7.27.6"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.27.6.tgz#ec4070a04d76bae8ddbb10770ba55714a417b7c6"
-  integrity sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==
+  version "7.28.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.28.2.tgz#2ae5a9d51cc583bd1f5673b3bb70d6d819682473"
+  integrity sha512-KHp2IflsnGywDjBWDkR9iEqiWSpc8GIi0lgTT3mOElT0PP1tG26P4tmFI2YvAdzgq9RGyoHZQEIEdZy6Ec5xCA==
 
 "@babel/types@^7.28.0":
   version "7.28.2"
@@ -627,9 +627,9 @@ lru-cache@^11.0.0:
   integrity sha512-QIXZUBJUx+2zHUdQujWejBkcD9+cs94tLn0+YL8UrCh+D5sCXZ4c7LaEH48pNwRY3MLDgqUFyhlCyjJPf1WP0A==
 
 lux-design-system@^6.8.2:
-  version "6.8.2"
-  resolved "https://registry.yarnpkg.com/lux-design-system/-/lux-design-system-6.8.2.tgz#0748176005e08c4e80095e5a18a4ce58eac77ea4"
-  integrity sha512-J3WG/S9asHDfHyJX7WVQQz8kx8kFTfkQm8EacAZaWWgfnAoa1odviVmQ0oDiBquvz9icQC+eKY0cQk/sKs2AnQ==
+  version "6.10.0"
+  resolved "https://registry.yarnpkg.com/lux-design-system/-/lux-design-system-6.10.0.tgz#3ca8bb3ccc9ce20220d07c31cb143599b117fff1"
+  integrity sha512-LP9pQZKjXqz+v/iNBnNL1qELPhdLfgz8jg37EC7+/aXjW5zGcyNg4taUshVG3THIHDhSNpGCEq5ytTe7Jam1dQ==
   dependencies:
     core-js "^3.8.3"
     register-service-worker "^1.7.2"
@@ -803,9 +803,9 @@ vue-draggable-plus@^0.3.5:
   integrity sha512-HqIxV4Wr4U5LRPLRi2oV+EJ4g6ibyRKhuaiH4ZQo+LxK4zrk2XcBk9UyXC88OXp4SAq0XYH4Wco/T3LX5kJ79A==
 
 vue-multiselect@^3.0.0-beta.3:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/vue-multiselect/-/vue-multiselect-3.2.0.tgz#810077710ee7bf98e86534c31eebf22a0ab054d7"
-  integrity sha512-ExI+IPvSbILbtaHrU0CgbBmfbD6yBpIWJKsGLPmuQMC7VWK8Nj1XSAI9eIt3n9/e+LSFYdt8VgfHxeS1O1OeVA==
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/vue-multiselect/-/vue-multiselect-3.3.1.tgz#25a04d2e5e6caeba4fd2eec949300d5aa6b81bcf"
+  integrity sha512-QZPxG60HK4HCeBNq4rkpzHSzh3ow8blipZbKmYdRvN65If/aFWO/Bzz6eUCED4LQNYlvXG7UJuiFlbqFkAeKXg==
 
 vue-screen-utils@^1.0.0-beta.13:
   version "1.0.0-beta.13"
