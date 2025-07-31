@@ -14,5 +14,6 @@ module OrcidPrinceton
     get '/users/:id', to: 'user.show', as: :user
     get '/users/:id.json', to: 'user.show', as: :user_json
     get '/users/:id/validate_tokens', to: 'user.validate_tokens', as: :validate_tokens
+    get "/session/destroy", to: "session.destroy", as: :logout
   end
 end
