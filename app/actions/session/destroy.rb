@@ -3,6 +3,7 @@
 module OrcidPrinceton
   module Actions
     module Session
+      # This logs the current user out
       class Destroy < OrcidPrinceton::Action
         def handle(request, response)
           if request.env['warden']&.user
