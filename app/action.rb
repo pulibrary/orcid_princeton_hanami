@@ -16,8 +16,8 @@ module OrcidPrinceton
     before :code_version
 
     def current_user(request, response)
-      if request.env['warden']
-        response[:current_user] = user_repo.find_by_uid(request.env['warden'].user)
+      if warden_session(request)
+        response[:current_user] = user_repo.find_by_uid(warden_session(request).user)
       end
     end
 
@@ -26,7 +26,7 @@ module OrcidPrinceton
     end
 
     def require_authentication(request, response)
-      unless request.env['warden']&.user
+      unless warden_session(request)&.user
         response.redirect_to '/auth/cas'
       end
     end
@@ -37,5 +37,7 @@ module OrcidPrinceton
         response.redirect_to routes.path(:root)
       end
     end
+
+    def warden_session(request) = request.env['warden']
   end
 end

@@ -11,7 +11,7 @@ RSpec.describe OrcidPrinceton::Actions::Session::Destroy do
   context 'A user is logged in' do
     let(:user) { Factory[:admin] }
     let(:warden_manager) { Warden::Manager.new({}) }
-    let(:params) { Hash['warden' => Warden::Proxy.new({}, warden_manager), 'rack.session' => {}] }
+    let(:params) { Hash['warden' => Warden::Proxy.new({}, warden_manager)] }
 
     it 'logs the user out and redirects to root' do
       params['warden'].set_user user.uid
