@@ -9,13 +9,13 @@ namespace :servers do
 
   desc 'Starts development dependencies'
   task start: :environment do
-    system('lando start')
+    # should start automatically for server start
     system('rake servers:initialize')
-    system('rake servers:initialize RAILS_ENV=test')
+    system('rake servers:initialize HANAMI_ENV=test')
   end
 
   desc 'Stop development dependencies'
-  task stop: :environment do
+  task :stop do
     system 'lando stop'
   end
 end
