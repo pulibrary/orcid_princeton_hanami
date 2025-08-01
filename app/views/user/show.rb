@@ -23,6 +23,15 @@ module OrcidPrinceton
           Hanami.app.router.url(:user_json, id: user.id)
         end
 
+        expose :display_name do |user|
+          name = user.display_name
+          if user.admin?
+            "#{name} (Administrator)"
+          else
+            name
+          end
+        end
+
         expose :token_prompt do |token_empty, token_expired, user|
           prompt = if token_empty
                      "There is no ORCID iD associated with your NetID, #{user.uid}"
