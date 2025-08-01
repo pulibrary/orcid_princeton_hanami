@@ -7,16 +7,35 @@ module OrcidPrinceton
     #
     # setting :my_flag, default: false, constructor: Types::Params::Bool
 
-    unless ENV['DATABASE_URL']
-      database_service = JSON.parse(`lando info --format json`, symbolize_names: true).select do |service|
-        service[:service] == 'database'
-      end.first
-      connection = database_service[:external_connection]
-      credentials = database_service[:creds]
-      database_url = "#{database_service[:type]}://" \
-                    "#{credentials[:user]}@#{connection[:host]}:#{connection[:port]}/" \
-                    "#{Hanami.env}_db"
-      ENV['DATABASE_URL'] = database_url
+    # Do not worry about the database url for the server:stop rake tasks
+    if Object.const_defined?('Rake') && Rake.application.top_level_tasks.include?('servers:stop')
+      ENV['DATABASE_URL'] = 'do_not_care'
+    # Get the database url from lando if it is not set
+    elsif ENV['DATABASE_URL'].nil?
+      ENV['DATABASE_URL'] =
+        begin
+          database_service = JSON.parse(`lando info --format json`, symbolize_names: true).select do |service|
+            service[:service] == 'database'
+          end.first
+          connection = database_service[:external_connection]
+          credentials = database_service[:creds]
+          port = connection[:port].to_i
+          database_url = "#{database_service[:type]}://" \
+                        "#{credentials[:user]}@#{connection[:host]}:#{port}/" \
+                        "#{Hanami.env}_db"
+
+        # we did not get the correct information from lando
+        rescue JSON::ParserError, NoMethodError
+          # if we are starting the servers run lando and retry
+          if Object.const_defined?('Rake') && Rake.application.top_level_tasks.include?('servers:start')
+            system('lando start') # lando was not already started, so we will start it now
+            sleep(2)
+            retry
+          # otherwise just error and tell the user they need to start the servers
+          else
+            raise "Lando should be running for development.  Start with 'rake servers:start'"
+          end
+        end
     end
 
     setting :database_url, default: database_url, constructor: Types::String
