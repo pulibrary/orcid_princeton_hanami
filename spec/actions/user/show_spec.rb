@@ -9,7 +9,7 @@ RSpec.describe OrcidPrinceton::Actions::User::Show do
   end
 
   context 'a user is logged in' do
-    let(:user) { Factory[:user] }
+    let(:user) { Factory[:user, family_name: "O'Reilley"] }
     let(:warden_manager) { Warden::Manager.new(nil) }
     let(:params) { Hash['warden' => Warden::Proxy.new({}, warden_manager), id: user.id.to_s] }
 

@@ -3,16 +3,13 @@
   <div class="user-page-content">
   <h1 class="page-title">ORCID@Princeton</h1>
   <div class="welcome-section">
-      <% if user.admin? %>
-        <h2>Welcome, <%= user.display_name %> (Administrator)</h2>
-      <% else %>
-        <h2>Welcome, <%= user.display_name %></h2>
-      <% end %>
+
+    <h2>Welcome, <%= raw(display_name) %></h2>
 
       <!-- If the user doesn't have any tokens or they are all expired, prompt them to create one. -->
       <% if token_expired || token_empty %>
         <%= render 'tokenprompt' %>
-    
+
       <!-- If the user has a valid token, show them their ORCID iD and tokens with expiration dates -->
       <% else %>
         <%= render 'user' %>
