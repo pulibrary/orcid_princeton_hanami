@@ -43,9 +43,9 @@ RSpec.describe 'user show screen', type: :system, js: true do
       expect(page).not_to have_content('You can quickly and easily remove your duplicate account')
       click_on 'What do I do if I have more than one ORCID iD?'
       expect(page).to have_content('You can quickly and easily remove your duplicate account')
-      expect(page).not_to have_content('For other federal grantmaking agencies')
+      expect(page).not_to have_content('and other federal grantmaking agencies')
       click_on 'Are Federal Agencies requiring ORCID?'
-      expect(page).to have_content('For other federal grantmaking agencies')
+      expect(page).to have_content('and other federal grantmaking agencies')
     end
   end
 end
