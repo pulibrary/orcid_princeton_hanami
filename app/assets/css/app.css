@@ -360,6 +360,10 @@ button > span {
   vertical-align: middle;
 }
 
+button.log-in-orcid > img {
+  padding-right: 0.25em;
+}
+
 #banner {
   text-align: center;
   background-color: #000000;
