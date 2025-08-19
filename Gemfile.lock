@@ -262,7 +262,7 @@ GEM
     hansi (0.2.1)
     hashdiff (1.2.0)
     hashie (5.0.0)
-    honeybadger (6.0.2)
+    honeybadger (6.0.6)
       logger
       ostruct
     httparty (0.23.1)
