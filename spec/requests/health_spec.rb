@@ -7,7 +7,7 @@ RSpec.describe 'health', type: :request do
     expect(last_response).to be_successful
     expect(last_response.content_type).to eq('text/html; charset=utf-8')
 
-    expect(last_response.body).to include 'Status: OK'
+    expect(last_response.body).to include 'Status: ok'
   end
 
   it 'is json without .json extension' do
@@ -18,7 +18,7 @@ RSpec.describe 'health', type: :request do
 
     response_body = JSON.parse(last_response.body)
 
-    expect(response_body).to eq({ 'status' => 'OK',
+    expect(response_body).to eq({ 'status' => 'ok',
                                   'results' => [{ 'message' => '', 'name' => 'ORCID', 'status' => 'OK' }] })
   end
 
@@ -30,7 +30,7 @@ RSpec.describe 'health', type: :request do
 
     response_body = JSON.parse(last_response.body)
 
-    expect(response_body).to eq({ 'status' => 'OK',
+    expect(response_body).to eq({ 'status' => 'ok',
                                   'results' => [{ 'message' => '', 'name' => 'ORCID', 'status' => 'OK' }] })
   end
 
@@ -49,7 +49,7 @@ RSpec.describe 'health', type: :request do
 
       response_body = JSON.parse(last_response.body)
 
-      expect(response_body).to eq({ 'status' => 'ERROR',
+      expect(response_body).to eq({ 'status' => 'error',
                                     'results' => [{ 'message' => 'The ORCID API returned HTTP error code: 502',
                                                     'name' => 'ORCID', 'status' => 'ERROR' }] })
     end
