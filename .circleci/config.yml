@@ -25,7 +25,7 @@ commands:
             - ~/.cache/yarn
 orbs:
   coveralls: coveralls/coveralls@2.2.5
-  browser-tools: circleci/browser-tools@2.3.0
+  browser-tools: circleci/browser-tools@2.3.1
 jobs:
   build:
     working_directory: ~/orcid_princeton
