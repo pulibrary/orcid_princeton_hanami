@@ -21,6 +21,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every :month, at: '1:00am', roles: [:cron] do
+every :thursday, at: '1:00am', roles: [:cron] do
   rake 'people_soft:cron_report'
 end
