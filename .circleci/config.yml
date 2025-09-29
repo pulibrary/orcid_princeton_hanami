@@ -79,7 +79,7 @@ jobs:
     working_directory: *root
     docker:
       - *ruby_docker
-      - image: postgres:17-alpine
+      - image: postgres:18-alpine
         environment:
           POSTGRES_USER: orcid_princeton_user
           POSTGRES_DB: test_db
