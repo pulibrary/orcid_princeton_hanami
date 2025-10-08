@@ -31,7 +31,7 @@ jobs:
     working_directory: ~/orcid_princeton
     docker:
       - &ruby_docker
-        image: cimg/ruby:3.4.6-browsers
+        image: cimg/ruby:3.4.7-browsers
         environment:
           HANAMI_ENV: test
     steps:
@@ -58,7 +58,7 @@ jobs:
     # We don't actually need any of the ruby environment to lint JS... but use what we have for now.
     working_directory: ~/orcid_princeton
     docker:
-      - image: cimg/ruby:3.4.6-browsers
+      - image: cimg/ruby:3.4.7-browsers
         environment:
           HANAMI_ENV: test
     steps:
