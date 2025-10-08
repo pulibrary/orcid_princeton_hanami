@@ -45,7 +45,7 @@ GEM
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
       rouge (>= 1.0.0)
-    bigdecimal (3.2.2)
+    bigdecimal (3.2.3)
     binding_of_caller (1.0.1)
       debug_inspector (>= 1.2.0)
     builder (3.3.0)
@@ -265,7 +265,7 @@ GEM
     honeybadger (6.1.0)
       logger
       ostruct
-    httparty (0.23.1)
+    httparty (0.23.2)
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
