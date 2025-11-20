@@ -225,7 +225,7 @@ GEM
       hanami-utils (~> 2.2)
       rack (~> 2.0)
       zeitwerk (~> 2.6)
-    hanami-db (2.2.1)
+    hanami-db (2.3.0)
       rom (~> 5.4, >= 5.4.1)
       rom-sql (~> 3.7)
       zeitwerk (~> 2.6)
@@ -459,7 +459,7 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
-    sequel (5.94.0)
+    sequel (5.98.0)
       bigdecimal
     shellany (0.0.1)
     simplecov (0.22.0)
