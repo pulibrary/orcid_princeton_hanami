@@ -16,9 +16,13 @@
     "rsync@latest"
   ],
   "env": {
+    "DEVBOX_COREPACK_ENABLED": "true",
+    "TMPDIR": "/private/tmp/orcid_princeton_hanami",
+    "LD_LIBRARY_PATH": "$PWD/.devbox/nix/profile/default/lib",
+    "FONTCONFIG_PATH": "$PWD/.devbox/nix/profile/default/etc/fonts",
     "BUNDLE_PATH": ".bundle",
-    "BUNDLE_BIN": "bin",
-    "PATH": "bin:$PATH",
+    "BUNDLE_BIN": "binstubs",
+    "PATH": "binstubs:$PATH",
     "HANAMI_ENV": "development",
     "RACK_ENV": "development"
   },
