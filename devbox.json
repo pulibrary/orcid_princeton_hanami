@@ -1,0 +1,45 @@
+{
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.14.0/.schema/devbox.schema.json",
+  "packages": [
+    "ruby_3_3@latest",
+    "postgresql@latest",
+    "libxml2@latest",
+    "libxslt@latest",
+    "openssl@latest",
+    "readline@latest",
+    "libffi@latest",
+    "libyaml@latest",
+    "zlib@latest",
+    "pkg-config@latest",
+    "gnumake@latest",
+    "git@latest",
+    "rsync@latest"
+  ],
+  "env": {
+    "BUNDLE_PATH": ".bundle",
+    "BUNDLE_BIN": "bin",
+    "PATH": "bin:$PATH",
+    "HANAMI_ENV": "development",
+    "RACK_ENV": "development"
+  },
+  "shell": {
+    "init_hook": [
+      "ruby -v",
+      "gem --version",
+      "if [ ! -x bin/bundle ]; then gem install bundler -v 2.5.14 --no-document; fi",
+      "bundle config set path \"$BUNDLE_PATH\"",
+      "bundle config set bin \"$BUNDLE_BIN\""
+    ],
+    "scripts": {
+      "setup": "gem install bundler -v 2.5.14 --no-document && bundle install",
+      "server": "bundle exec hanami server -h 0.0.0.0 -p 3000",
+      "console": "bundle exec hanami console",
+      "lint": "bundle exec rubocop",
+      "test": "bundle exec rspec",
+      "test:headless": "if command -v chromedriver >/dev/null 2>&1 && (command -v chromium >/dev/null 2>&1 || command -v chromium-browser >/dev/null 2>&1 || command -v google-chrome >/dev/null 2>&1); then WEBDRIVER_CHROME_DRIVER=$(command -v chromedriver) CHROME_BIN=$(command -v chromium || command -v chromium-browser || command -v google-chrome) bundle exec rspec; else echo 'Chromium/Chrome + chromedriver not found; skipping headless browser tests.' && exit 0; fi",
+      "cap:staging": "bundle exec cap staging deploy",
+      "cap:prod": "bundle exec cap production deploy"
+    }
+  }
+}
+
