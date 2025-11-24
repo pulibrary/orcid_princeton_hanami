@@ -2,13 +2,13 @@
 
 source 'https://gem.coop'
 
-gem 'hanami', '~> 2.2'
-gem 'hanami-assets', '~> 2.2'
-gem 'hanami-controller', '~> 2.2'
-gem 'hanami-db', '~> 2.2'
-gem 'hanami-router', '~> 2.2'
-gem 'hanami-validations', '~> 2.2'
-gem 'hanami-view', '~> 2.2'
+gem 'hanami', '~> 2.3'
+gem 'hanami-assets', '~> 2.3'
+gem 'hanami-controller', '~> 2.3'
+gem 'hanami-db', '~> 2.3'
+gem 'hanami-router', '~> 2.3'
+gem 'hanami-validations', '~> 2.3'
+gem 'hanami-view', '~> 2.3'
 
 gem 'bcrypt_pbkdf'
 gem 'csv'
@@ -25,6 +25,7 @@ gem 'omniauth-cas'
 gem 'omniauth-orcid'
 gem 'pg'
 gem 'puma'
+gem 'rack', '~> 2.2'
 gem 'rake'
 gem 'tilt', '~> 2.0'
 gem 'tilt-jbuilder'
@@ -35,7 +36,7 @@ group :development do
   gem 'capistrano', '~> 3.17', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-passenger', require: false
-  gem 'hanami-webconsole', '~> 2.2'
+  gem 'hanami-webconsole', '~> 2.3'
 end
 
 group :development, :test do
@@ -48,11 +49,11 @@ group :development, :test do
 end
 
 group :cli, :development do
-  gem 'hanami-reloader', '~> 2.2'
+  gem 'hanami-reloader', '~> 2.3'
 end
 
 group :cli, :development, :test do
-  gem 'hanami-rspec', '~> 2.2'
+  gem 'hanami-rspec', '~> 2.3'
 end
 
 group :test do

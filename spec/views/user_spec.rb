@@ -13,9 +13,10 @@ RSpec.describe OrcidPrinceton::Views::User::Show do
   let(:rack_request) { Rack::MockRequest.env_for('http://example.com/') }
   let(:request) { Hanami::Action::Request.new(env: rack_request, params: {}, session_enabled: true) }
   let(:default_context) { OrcidPrinceton::Views::Home::Show.config.values[:default_context] }
+  let(:settings) { Hanami.app.settings }
   let(:context) do
     Hanami::View::Context.new(request:, inflector: default_context.inflector,
-                              assets: default_context.assets, settings: default_context.settings,
+                              assets: default_context.assets,
                               routes: default_context.routes)
   end
 
@@ -27,7 +28,7 @@ RSpec.describe OrcidPrinceton::Views::User::Show do
 
   context 'not the sandbox' do
     it 'exposes orcid_url' do
-      allow(default_context.settings).to receive(:orcid_sandbox).and_return(false)
+      allow(settings).to receive(:orcid_sandbox).and_return(false)
       expect(rendered[:orcid_url].value).to eq('https://orcid.org/')
     end
   end
