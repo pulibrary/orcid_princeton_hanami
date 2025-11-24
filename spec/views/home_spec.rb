@@ -15,7 +15,7 @@ RSpec.describe OrcidPrinceton::Views::Home::Show do
   let(:default_context) { OrcidPrinceton::Views::Home::Show.config.values[:default_context] }
   let(:context) do
     Hanami::View::Context.new(request:, inflector: default_context.inflector,
-                              assets: default_context.assets, settings: default_context.settings,
+                              assets: default_context.assets,
                               routes: default_context.routes)
   end
 
