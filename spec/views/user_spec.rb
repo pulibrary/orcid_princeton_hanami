@@ -13,13 +13,12 @@ RSpec.describe OrcidPrinceton::Views::User::Show do
   let(:rack_request) { Rack::MockRequest.env_for('http://example.com/') }
   let(:request) { Hanami::Action::Request.new(env: rack_request, params: {}, session_enabled: true) }
   let(:default_context) { OrcidPrinceton::Views::Home::Show.config.values[:default_context] }
-  let(:settings) {Hanami.app.settings}
+  let(:settings) { Hanami.app.settings }
   let(:context) do
     Hanami::View::Context.new(request:, inflector: default_context.inflector,
                               assets: default_context.assets,
                               routes: default_context.routes)
   end
-
 
   subject(:rendered) { view.call(user: user, current_user: user, code_version: version_hash, context:) }
 
