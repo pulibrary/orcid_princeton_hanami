@@ -13,7 +13,8 @@
     "pkg-config@latest",
     "gnumake@latest",
     "git@latest",
-    "rsync@latest"
+    "rsync@latest",
+    "jq@latest"
   ],
   "env": {
     "DEVBOX_COREPACK_ENABLED": "true",
@@ -42,8 +43,8 @@
       "test": "bundle exec rspec",
       "test:headless": "if command -v chromedriver >/dev/null 2>&1 && (command -v chromium >/dev/null 2>&1 || command -v chromium-browser >/dev/null 2>&1 || command -v google-chrome >/dev/null 2>&1); then WEBDRIVER_CHROME_DRIVER=$(command -v chromedriver) CHROME_BIN=$(command -v chromium || command -v chromium-browser || command -v google-chrome) bundle exec rspec; else echo 'Chromium/Chrome + chromedriver not found; skipping headless browser tests.' && exit 0; fi",
       "cap:staging": "bundle exec cap staging deploy",
-      "cap:prod": "bundle exec cap production deploy"
+      "cap:prod": "bundle exec cap production deploy",
+      "fmt:devbox": "jq '.' devbox.json > devbox.json.tmp && mv devbox.json.tmp devbox.json"
     }
   }
 }
-

@@ -197,6 +197,122 @@
         }
       }
     },
+    "jq@latest": {
+      "last_modified": "2025-11-18T11:19:29Z",
+      "resolved": "github:NixOS/nixpkgs/6f374686605df381de8541c072038472a5ea2e2d#jq",
+      "source": "devbox-search",
+      "version": "1.8.1",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "bin",
+              "path": "/nix/store/hj66dnrdllkidzm3yl840n85qvflybiw-jq-1.8.1-bin",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/gwszffrxwyfsvrwlk40aialj1nr8xjg1-jq-1.8.1-man",
+              "default": true
+            },
+            {
+              "name": "dev",
+              "path": "/nix/store/rjhvnnci60jmyrr91fbc5pv5g7zhx44z-jq-1.8.1-dev"
+            },
+            {
+              "name": "doc",
+              "path": "/nix/store/8jnv0d701i3w8r7aylw86c57cb1yc1rl-jq-1.8.1-doc"
+            },
+            {
+              "name": "out",
+              "path": "/nix/store/wjs9n35srzrv2frs2r4dsc8dxx2spwr2-jq-1.8.1"
+            }
+          ],
+          "store_path": "/nix/store/hj66dnrdllkidzm3yl840n85qvflybiw-jq-1.8.1-bin"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "bin",
+              "path": "/nix/store/pkb3hk4g46vm656gcd7rckcw9vfr2h7p-jq-1.8.1-bin",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/j0qw73im7c8gqhni87dmjlgnp200iaah-jq-1.8.1-man",
+              "default": true
+            },
+            {
+              "name": "out",
+              "path": "/nix/store/vbq92kscq4f6mh8jnf20i1g22hng13x1-jq-1.8.1"
+            },
+            {
+              "name": "dev",
+              "path": "/nix/store/4898rw4jac7z9ay93p72i1n235a2lmsy-jq-1.8.1-dev"
+            },
+            {
+              "name": "doc",
+              "path": "/nix/store/l23rq3gzr9bz02xlpg92y2lw0yxkdckh-jq-1.8.1-doc"
+            }
+          ],
+          "store_path": "/nix/store/pkb3hk4g46vm656gcd7rckcw9vfr2h7p-jq-1.8.1-bin"
+        },
+        "x86_64-darwin": {
+          "outputs": [
+            {
+              "name": "bin",
+              "path": "/nix/store/pz9k36gd0mqdg2mcmafkcmnkhp7881rf-jq-1.8.1-bin",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/sxq38g57w0n864mvvgprhi3gk56kyvdr-jq-1.8.1-man",
+              "default": true
+            },
+            {
+              "name": "out",
+              "path": "/nix/store/js9nmc0h3v7igb4y6z31imwrhj487zdz-jq-1.8.1"
+            },
+            {
+              "name": "dev",
+              "path": "/nix/store/i1jln7lyynjpyxw4pz1nfpb2jinikg2g-jq-1.8.1-dev"
+            },
+            {
+              "name": "doc",
+              "path": "/nix/store/93w0wf4rv1kldk1xfnzhhmh2rydcgmza-jq-1.8.1-doc"
+            }
+          ],
+          "store_path": "/nix/store/pz9k36gd0mqdg2mcmafkcmnkhp7881rf-jq-1.8.1-bin"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "bin",
+              "path": "/nix/store/c6rkwr11izd7jvkrfcg6pygild509nvm-jq-1.8.1-bin",
+              "default": true
+            },
+            {
+              "name": "man",
+              "path": "/nix/store/n5y4w24f4w2wgqhpbw6cgc431q1f7agh-jq-1.8.1-man",
+              "default": true
+            },
+            {
+              "name": "dev",
+              "path": "/nix/store/25ixq10lb7ppch0qvrgb0fd36ldpwshf-jq-1.8.1-dev"
+            },
+            {
+              "name": "doc",
+              "path": "/nix/store/3c7i8848442hvc74jhwwwszp27haiv6v-jq-1.8.1-doc"
+            },
+            {
+              "name": "out",
+              "path": "/nix/store/iiv41cngzdr0925wzi4z14ii7d8kx2d4-jq-1.8.1"
+            }
+          ],
+          "store_path": "/nix/store/c6rkwr11izd7jvkrfcg6pygild509nvm-jq-1.8.1-bin"
+        }
+      }
+    },
     "libffi@latest": {
       "last_modified": "2025-11-18T11:19:29Z",
       "resolved": "github:NixOS/nixpkgs/6f374686605df381de8541c072038472a5ea2e2d#libffi",
