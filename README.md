@@ -6,16 +6,48 @@ This is an updated version of ORCID Princeton written on the [Hanami platform](h
 
 The original code for the rails application is located at [https://github.com/pulibrary/orcid_princeton](https://github.com/pulibrary/orcid_princeton)
 
-
 [![CircleCI](https://circleci.com/gh/pulibrary/orcid_princeton_hanami/tree/main.svg?style=svg)](https://circleci.com/gh/pulibrary/orcid_princeton_hanamo/tree/main)
 
 [![Coverage Status](https://coveralls.io/repos/github/pulibrary/orcid_princeton_hanami/badge.svg?branch=main)](https://coveralls.io/github/pulibrary/orcid_princeton_hanami?branch=main)
 
+## Devbox (Quick Start)
+
+We ship a Devbox environment to standardize Ruby, Postgres client libs, and build deps.
+
+```bash
+# 1) enter the reproducible shell
+devbox update
+devbox shell
+
+# 2) install gems (and JS deps if present)
+devbox run setup
+
+# 3) create & migrate your dev DB (Postgres runs via your local/lan setup)
+bundle exec hanami db create
+bundle exec hanami db migrate
+
+# 4) run the app on http://localhost:3000
+devbox run server
+```
+
+Helpful commands:
+
+```bash
+devbox run console        # hanami console
+devbox run lint           # rubocop
+devbox run test           # rspec
+```
+
+  > Binstubs are written to `.binstubs/` and added to PATH. Bundled gems go to `.bundle/`. Both are `.gitignored`.
+
 ## Dependencies
+
 * Ruby: 3.4.2
 * nodejs: 22.14.0
 * yarn: 1.22.22
 * Lando: 3.6.2
+
+If not using Devbox: you’ll need Ruby (with OpenSSL/Readline), Postgres client libs/headers, and build tools installed locally.
 
 ## Updating the banner
 
@@ -23,26 +55,29 @@ Update the the environment variables either via [Princeton Ansible](https://gith
 
 ## Creating an ORCID sandbox account
 
-  1. A Mailinator account is required for you to be able to verify your ORCID account. "Setup" your Mailinator your email:
-     1. visit https://www.mailinator.com/v4/public/inboxes.jsp
+1. A Mailinator account is required for you to be able to verify your ORCID account. "Setup" your Mailinator your email:
+     1. visit <https://www.mailinator.com/v4/public/inboxes.jsp>
      1. put a fake email address (e.g., myname) into the search box at the top of the page.
         * your email wil include `@mailinator.com` (e.g. `myname@mailinator.com`) even though you do not need to put `@mailinator.com` in the search box
      1. Click go and you will be taken to the "inbox" for that email.
-  1. Use the mailinator email address (e.g. `myname@mailinator.com`) to register an account at https://sandbox.orcid.org/register
-  1. Record your login and password in a password manager so you can find them again.
-  1. Now in mailinator respond to the verification email.
+1. Use the mailinator email address (e.g. `myname@mailinator.com`) to register an account at <https://sandbox.orcid.org/register>
+1. Record your login and password in a password manager so you can find them again.
+1. Now in mailinator respond to the verification email.
      * If you do not see your email make sure the search box has your email.  You do not need to include `mailinator.com`
      * Click the verify button in the email
-  1. Your account should now be verified in the OCRID Sandbox
+1. Your account should now be verified in the OCRID Sandbox
 
 ---
+
 ## Converting the rails database
 
 Prior to utilizing the rails database for the hanami application you need convert the tokens in the [rails application](https://github.com/pulibrary/orcid_princeton/blob/main/lib/tasks/tokens.rake) and to update the migrations table.
 
 ### Development
+
 In development to convert your rails database to be able to run with Hanami you need to run (the commands below assume the port returned in lando info is 51512 )
-```
+
+```bash
 cd orcid_princeton
 bundle exec rake tokens:openssl
 cd orcid_princeton_hanami
@@ -50,21 +85,26 @@ lando info
 psql --host 127.0.0.1 --username=postgres --port 51512 -d development_db < config/db/update_rails_migration.sql
 ```
 
+
+
 ### Staging and Production 
+
 Before deploying the hanami application for the first time or in a rails release of the application on the server run the following to update the the encrypted tokens.
 
-```
+
+```bash
 cd /opt/orcid_princeton/current
 bundle exec rake tokens:openssl
 ```
 
 In staging and production the database information is stored in environment variables. To update the database you should run
 
-```
+```bash
 cd /opt/orcid_princeton/current
 echo $APP_DB_PASSWORD
 psql --host $APP_DB_HOST --username=$APP_DB_USERNAME -d $APP_DB < config/db/update_rails_migration.sql
 ```
+
 ---
 ## Local development
 
@@ -94,7 +134,7 @@ We use lando to run services required for both test and development environments
 
 Start and initialize database services with:
 
-```
+```text
 lando start
 hanami db create
 hanami db migrate
