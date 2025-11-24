@@ -21,8 +21,8 @@
     "LD_LIBRARY_PATH": "$PWD/.devbox/nix/profile/default/lib",
     "FONTCONFIG_PATH": "$PWD/.devbox/nix/profile/default/etc/fonts",
     "BUNDLE_PATH": ".bundle",
-    "BUNDLE_BIN": "binstubs",
-    "PATH": "binstubs:$PATH",
+    "BUNDLE_BIN": ".binstubs",
+    "PATH": ".binstubs:bin:$PATH",
     "HANAMI_ENV": "development",
     "RACK_ENV": "development"
   },
@@ -30,7 +30,7 @@
     "init_hook": [
       "ruby -v",
       "gem --version",
-      "if [ ! -x bin/bundle ]; then gem install bundler -v 2.5.14 --no-document; fi",
+      "sh -lc '[ -x bin/bundle ] || gem install bundler -v 2.5.14 --no-document'",
       "bundle config set path \"$BUNDLE_PATH\"",
       "bundle config set bin \"$BUNDLE_BIN\""
     ],
