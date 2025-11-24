@@ -120,6 +120,9 @@ psql --host $APP_DB_HOST --username=$APP_DB_USERNAME -d $APP_DB < config/db/upda
     1. `asdf plugin add yarn`
     1. `asdf install`
     1. ... but because asdf is not a dependency manager, if there are errors, you may need to install other dependencies. For example: `brew install gpg`
+1. Install [devbox](bin/first-time-setup)
+    1. `devbox shell`
+    1. `devbox run setup`
 1. Or, if you are using `ruby-install` and `chruby` (instead of `asdf`):
    1. `ruby-install 3.2.0 -- --with-openssl-dir=$(brew --prefix openssl@1.1)`
    2. close the terminal window and open a new terminal
