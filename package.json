@@ -7,7 +7,7 @@
     "esbuild": "^0.27.0",
     "esbuild-plugin-vue3": "^0.5.0",
     "hanami-assets": "^2.2.1",
-    "lux-design-system": "^6.8.2",
+    "lux-design-system": "^7.0.0",
     "prettier": "^3.6.0",
     "vue": "^3.5.17",
     "vue3-runtime-template": "^1.0.2"
