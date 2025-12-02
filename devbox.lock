@@ -364,6 +364,19 @@
             }
           ],
           "store_path": "/nix/store/bn7ia6cxsqkiglv70n0qdqyfdgnny0gr-libffi-40"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "man",
+              "path": "/tmp/containerbase/cache/nix/store/0q9vawa3c4ciwpcbsa5wznynk8myl44c-libffi-3.5.2-man",
+              "default": true
+            },
+            {
+              "path": "/tmp/containerbase/cache/nix/store/jwm26w8mj3p2qd3xs28q43f3p1gdmk7r-libffi-3.5.2",
+              "default": true
+            }
+          ]
         }
       }
     },
@@ -1184,7 +1197,7 @@
         }
       }
     },
-    "ruby_3_3@latest": {
+    "ruby_3_3@3.3.4": {
       "last_modified": "2024-09-10T15:01:03Z",
       "plugin_version": "0.0.2",
       "resolved": "github:NixOS/nixpkgs/5ed627539ac84809c78b2dd6d26a5cebeb5ae269#ruby",
