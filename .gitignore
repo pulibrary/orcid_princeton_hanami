@@ -6,3 +6,7 @@ db/*.sqlite
 spec/examples.txt
 .byebug_history
 coverage
+
+.binstubs/
+.bundle/
+.devbox/
