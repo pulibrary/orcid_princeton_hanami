@@ -7,7 +7,7 @@
     "libxslt@latest",
     "openssl@latest",
     "readline@latest",
-    "libffi@latest",
+    "libffi@3.5.2",
     "libyaml@latest",
     "zlib@latest",
     "pkg-config@latest",
