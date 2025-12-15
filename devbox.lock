@@ -1,9 +1,9 @@
 {
   "lockfile_version": "1",
   "packages": {
-    "git@latest": {
-      "last_modified": "2025-11-15T07:28:48Z",
-      "resolved": "github:NixOS/nixpkgs/1d4c88323ac36805d09657d13a5273aea1b34f0c#git",
+    "git@2.51.2": {
+      "last_modified": "2025-12-03T20:43:00Z",
+      "resolved": "github:NixOS/nixpkgs/ebc94f855ef25347c314258c10393a92794e7ab9#git",
       "source": "devbox-search",
       "version": "2.51.2",
       "systems": {
@@ -11,65 +11,65 @@
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/k2vlwnvjcmnig77p65zipibvvim8rxq7-git-2.51.2",
+              "path": "/nix/store/x34bh6s6ighg7lb74nkjbx3nx52zj0j9-git-2.51.2",
               "default": true
             },
             {
               "name": "doc",
-              "path": "/nix/store/6x44hx2f6g1y1viiaian2bvypb8djq39-git-2.51.2-doc"
+              "path": "/nix/store/6wnscv0364r6430qmx33nn927dlw2vnf-git-2.51.2-doc"
             }
           ],
-          "store_path": "/nix/store/k2vlwnvjcmnig77p65zipibvvim8rxq7-git-2.51.2"
+          "store_path": "/nix/store/x34bh6s6ighg7lb74nkjbx3nx52zj0j9-git-2.51.2"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/55j9qicj9fghz8yk3xsn2y9ab5mj4jdr-git-2.51.2",
+              "path": "/nix/store/gzdcfmx2p9nvd4z21b6ns00cp4sv1d2h-git-2.51.2",
               "default": true
             },
             {
               "name": "debug",
-              "path": "/nix/store/vspa1pprrnj7xz3bhqayzih5mi7vhvvh-git-2.51.2-debug"
+              "path": "/nix/store/5l5ln59lpi4qv2qm59aqchlz32j9zcm9-git-2.51.2-debug"
             },
             {
               "name": "doc",
-              "path": "/nix/store/6zdv508cvrgfsnvvv5003ivsfcqngfvs-git-2.51.2-doc"
+              "path": "/nix/store/w28mqxb1bd51f5rwh5127pvbp31lnqmv-git-2.51.2-doc"
             }
           ],
-          "store_path": "/nix/store/55j9qicj9fghz8yk3xsn2y9ab5mj4jdr-git-2.51.2"
+          "store_path": "/nix/store/gzdcfmx2p9nvd4z21b6ns00cp4sv1d2h-git-2.51.2"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/sz4zzn7y6gal019wmqzxvcxc97wkgp9n-git-2.51.2",
+              "path": "/nix/store/zz5xiyzpnn06cdgw1xnlvs1sbly5247r-git-2.51.2",
               "default": true
             },
             {
               "name": "doc",
-              "path": "/nix/store/np4lannd0w8jpagqw7mry4gklr903s2n-git-2.51.2-doc"
+              "path": "/nix/store/vrisnm56c5v8mzbv55yrq28wgkvga8nm-git-2.51.2-doc"
             }
           ],
-          "store_path": "/nix/store/sz4zzn7y6gal019wmqzxvcxc97wkgp9n-git-2.51.2"
+          "store_path": "/nix/store/zz5xiyzpnn06cdgw1xnlvs1sbly5247r-git-2.51.2"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/q6jjgnyivwx7r4wynsi6g36k6srfy7mk-git-2.51.2",
+              "path": "/nix/store/4qhdhmi7pzgad0zfd7c5lsg235mbf9hv-git-2.51.2",
               "default": true
             },
             {
               "name": "debug",
-              "path": "/nix/store/f6zjr2bcd31qpvj4d4qsvqhfnnyc1kaz-git-2.51.2-debug"
+              "path": "/nix/store/pjr2vd588sxa47glfg0ky0df3vk79dcs-git-2.51.2-debug"
             },
             {
               "name": "doc",
-              "path": "/nix/store/9bir646idszbrn3j3wz98xq4m0kvzgrp-git-2.51.2-doc"
+              "path": "/nix/store/9k6ivrdddy9s3z1hiwgavl0kfr2czgav-git-2.51.2-doc"
             }
           ],
-          "store_path": "/nix/store/q6jjgnyivwx7r4wynsi6g36k6srfy7mk-git-2.51.2"
+          "store_path": "/nix/store/4qhdhmi7pzgad0zfd7c5lsg235mbf9hv-git-2.51.2"
         }
       }
     },
@@ -364,6 +364,19 @@
             }
           ],
           "store_path": "/nix/store/bn7ia6cxsqkiglv70n0qdqyfdgnny0gr-libffi-40"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "man",
+              "path": "/tmp/containerbase/cache/nix/store/0q9vawa3c4ciwpcbsa5wznynk8myl44c-libffi-3.5.2-man",
+              "default": true
+            },
+            {
+              "path": "/tmp/containerbase/cache/nix/store/jwm26w8mj3p2qd3xs28q43f3p1gdmk7r-libffi-3.5.2",
+              "default": true
+            }
+          ]
         }
       }
     },
