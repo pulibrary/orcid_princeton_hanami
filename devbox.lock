@@ -313,70 +313,57 @@
         }
       }
     },
-    "libffi@latest": {
-      "last_modified": "2025-11-18T11:19:29Z",
-      "resolved": "github:NixOS/nixpkgs/6f374686605df381de8541c072038472a5ea2e2d#libffi",
+    "libffi@3.5.2": {
+      "last_modified": "2025-12-09T08:49:39Z",
+      "resolved": "github:NixOS/nixpkgs/677fbe97984e7af3175b6c121f3c39ee5c8d62c9#libffi",
       "source": "devbox-search",
-      "version": "40",
+      "version": "3.5.2",
       "systems": {
-        "aarch64-darwin": {
+        "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/hk33kx46msxx8ypdla7a1nlgb7dslami-libffi-40",
+              "path": "/nix/store/g98lm6aclxc6k738i61gmx7pxlm3wwnb-libffi-3.5.2",
               "default": true
             },
             {
               "name": "man",
-              "path": "/nix/store/yapmq0770j8v60wjjr7rn1dm0skqiiff-libffi-40-man",
+              "path": "/nix/store/msmk8gai5zpm1j4d5xjw47d2l72flrbk-libffi-3.5.2-man",
               "default": true
-            },
-            {
-              "name": "dev",
-              "path": "/nix/store/inbdrncrz1i2m8nrlh7a9pzivxlswpbk-libffi-40-dev"
             },
             {
               "name": "info",
-              "path": "/nix/store/fs7qyfqbm1l57krfxf1py96nrbhn5997-libffi-40-info"
-            }
-          ],
-          "store_path": "/nix/store/hk33kx46msxx8ypdla7a1nlgb7dslami-libffi-40"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/bn7ia6cxsqkiglv70n0qdqyfdgnny0gr-libffi-40",
-              "default": true
-            },
-            {
-              "name": "man",
-              "path": "/nix/store/7hgj8v2ssc8grv2iplx674j922f6pyc1-libffi-40-man",
-              "default": true
+              "path": "/nix/store/k12567mh80jk9gv5hsfjz0wfs4mvkjvw-libffi-3.5.2-info"
             },
             {
               "name": "dev",
-              "path": "/nix/store/mw83hxd3x5i8dyp26yc1icd6nfsj5dwj-libffi-40-dev"
-            },
-            {
-              "name": "info",
-              "path": "/nix/store/3rbp2qn144xvbyg2r1rfcz177mq4lhfn-libffi-40-info"
+              "path": "/nix/store/lmk5vs4mbhpcf156q858ks2j9hdnman2-libffi-3.5.2-dev"
             }
           ],
-          "store_path": "/nix/store/bn7ia6cxsqkiglv70n0qdqyfdgnny0gr-libffi-40"
+          "store_path": "/nix/store/g98lm6aclxc6k738i61gmx7pxlm3wwnb-libffi-3.5.2"
         },
         "x86_64-linux": {
           "outputs": [
             {
-              "name": "man",
-              "path": "/tmp/containerbase/cache/nix/store/0q9vawa3c4ciwpcbsa5wznynk8myl44c-libffi-3.5.2-man",
+              "name": "out",
+              "path": "/nix/store/b9p0zpa93hwvh4d0r1rmgc2500yx2ldn-libffi-3.5.2",
               "default": true
             },
             {
-              "path": "/tmp/containerbase/cache/nix/store/jwm26w8mj3p2qd3xs28q43f3p1gdmk7r-libffi-3.5.2",
+              "name": "man",
+              "path": "/nix/store/7ajr61xm512g0nx5wqjslrkviskj17b1-libffi-3.5.2-man",
               "default": true
+            },
+            {
+              "name": "dev",
+              "path": "/nix/store/9pvv6nip8hbk19ca24wmncjir9pv8vas-libffi-3.5.2-dev"
+            },
+            {
+              "name": "info",
+              "path": "/nix/store/0brgyni03z8ghp0x8w2d9k00nv876vbz-libffi-3.5.2-info"
             }
-          ]
+          ],
+          "store_path": "/nix/store/b9p0zpa93hwvh4d0r1rmgc2500yx2ldn-libffi-3.5.2"
         }
       }
     },
