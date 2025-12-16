@@ -14,7 +14,7 @@
     "gnumake@4.4.1",
     "git@2.51.2",
     "rsync@latest",
-    "jq@latest"
+    "jq@1.8.1"
   ],
   "env": {
     "DEVBOX_COREPACK_ENABLED": "true",
