@@ -8,7 +8,7 @@
     "openssl@latest",
     "readline@latest",
     "libffi@latest",
-    "libyaml@latest",
+    "libyaml@0.2.5",
     "zlib@latest",
     "pkg-config@latest",
     "gnumake@latest",

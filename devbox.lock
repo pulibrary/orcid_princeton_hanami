@@ -572,9 +572,9 @@
         }
       }
     },
-    "libyaml@latest": {
-      "last_modified": "2025-11-15T07:28:48Z",
-      "resolved": "github:NixOS/nixpkgs/1d4c88323ac36805d09657d13a5273aea1b34f0c#libyaml",
+    "libyaml@0.2.5": {
+      "last_modified": "2025-11-23T21:50:36Z",
+      "resolved": "github:NixOS/nixpkgs/ee09932cedcef15aaf476f9343d1dea2cb77e261#libyaml",
       "source": "devbox-search",
       "version": "0.2.5",
       "systems": {
@@ -582,57 +582,57 @@
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/zdvhliymqd0qxi9rh97q2rczskanwxrb-libyaml-0.2.5",
+              "path": "/nix/store/wxyx2v0n3161fp99fbwvfwn5as0ar9a4-libyaml-0.2.5",
               "default": true
             },
             {
               "name": "dev",
-              "path": "/nix/store/1rxzbh80dpmwb17icclc45d21my2fwdw-libyaml-0.2.5-dev"
+              "path": "/nix/store/cs0cgvwchwcrar646br5gypz4l1vl81s-libyaml-0.2.5-dev"
             }
           ],
-          "store_path": "/nix/store/zdvhliymqd0qxi9rh97q2rczskanwxrb-libyaml-0.2.5"
+          "store_path": "/nix/store/wxyx2v0n3161fp99fbwvfwn5as0ar9a4-libyaml-0.2.5"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/m0padlpfqzcgw0s389nvaqdsacrx36fk-libyaml-0.2.5",
+              "path": "/nix/store/agw30m9f59nadpl9q9snrh0kcb2n3sna-libyaml-0.2.5",
               "default": true
             },
             {
               "name": "dev",
-              "path": "/nix/store/y6pxwc6v4syy6z9p0rz8i7vy9ick9a9x-libyaml-0.2.5-dev"
+              "path": "/nix/store/r5a87zf925qqn5yi8i2iahmmg55ril0x-libyaml-0.2.5-dev"
             }
           ],
-          "store_path": "/nix/store/m0padlpfqzcgw0s389nvaqdsacrx36fk-libyaml-0.2.5"
+          "store_path": "/nix/store/agw30m9f59nadpl9q9snrh0kcb2n3sna-libyaml-0.2.5"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/iilslf0affw7m9cc5bxacv7kfgwyhiqf-libyaml-0.2.5",
+              "path": "/nix/store/43ar5k2iz58xgv652ajrbl2q7s5rxcij-libyaml-0.2.5",
               "default": true
             },
             {
               "name": "dev",
-              "path": "/nix/store/b8lkwh85wrc7vhhrj6nj7pr116wqyxhq-libyaml-0.2.5-dev"
+              "path": "/nix/store/30yl7fv0ydbmf4ppsz3j8b2dldaas24k-libyaml-0.2.5-dev"
             }
           ],
-          "store_path": "/nix/store/iilslf0affw7m9cc5bxacv7kfgwyhiqf-libyaml-0.2.5"
+          "store_path": "/nix/store/43ar5k2iz58xgv652ajrbl2q7s5rxcij-libyaml-0.2.5"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/vdm06c8m9igvzpw0fnig5yn84rv05l29-libyaml-0.2.5",
+              "path": "/nix/store/vg0afp6lmdrs4li4q4viry8blf5pbjrr-libyaml-0.2.5",
               "default": true
             },
             {
               "name": "dev",
-              "path": "/nix/store/4amwxbyxibc0y9d1s7ly69cg6i7xq3fi-libyaml-0.2.5-dev"
+              "path": "/nix/store/ndjrn9a0xhs1gzw1dssnk5icy1fhimxp-libyaml-0.2.5-dev"
             }
           ],
-          "store_path": "/nix/store/vdm06c8m9igvzpw0fnig5yn84rv05l29-libyaml-0.2.5"
+          "store_path": "/nix/store/vg0afp6lmdrs4li4q4viry8blf5pbjrr-libyaml-0.2.5"
         }
       }
     },
