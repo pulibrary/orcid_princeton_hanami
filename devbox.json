@@ -11,7 +11,7 @@
     "libyaml@0.2.5",
     "zlib@latest",
     "pkg-config@latest",
-    "gnumake@latest",
+    "gnumake@4.4.1",
     "git@2.51.2",
     "rsync@latest",
     "jq@latest"
