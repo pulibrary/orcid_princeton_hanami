@@ -367,9 +367,9 @@
         }
       }
     },
-    "libxml2@latest": {
-      "last_modified": "2025-11-15T07:28:48Z",
-      "resolved": "github:NixOS/nixpkgs/1d4c88323ac36805d09657d13a5273aea1b34f0c#libxml2",
+    "libxml2@2.15.1": {
+      "last_modified": "2025-12-02T02:29:13Z",
+      "resolved": "github:NixOS/nixpkgs/f720de59066162ee879adcc8c79e15c51fe6bfb4#libxml2",
       "source": "devbox-search",
       "version": "2.15.1",
       "systems": {
@@ -377,73 +377,73 @@
           "outputs": [
             {
               "name": "bin",
-              "path": "/nix/store/4kx8h7d86mpp5scm7hqqxax24q3717v9-libxml2-2.15.1-bin",
+              "path": "/nix/store/qqynnhwcn3ylri0vjl7czm3fc05gm1wr-libxml2-2.15.1-bin",
               "default": true
             },
             {
               "name": "dev",
-              "path": "/nix/store/cblnb2hi8vqfrzy5wzpjzl0zg14lmr21-libxml2-2.15.1-dev"
+              "path": "/nix/store/5gqh047ripng0qjbzkqv42q1p49caj2v-libxml2-2.15.1-dev"
             },
             {
               "name": "out",
-              "path": "/nix/store/hpkli14k1rk5bw2mgd950byrxz77725d-libxml2-2.15.1"
+              "path": "/nix/store/bq8ak04f6qy5xbwwn8kg788zxv7y577b-libxml2-2.15.1"
             }
           ],
-          "store_path": "/nix/store/4kx8h7d86mpp5scm7hqqxax24q3717v9-libxml2-2.15.1-bin"
+          "store_path": "/nix/store/qqynnhwcn3ylri0vjl7czm3fc05gm1wr-libxml2-2.15.1-bin"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "bin",
-              "path": "/nix/store/arcclsamdjnn34433j4j7ycf33gwdpf4-libxml2-2.15.1-bin",
+              "path": "/nix/store/zx44jqrjv2i9mnjigqxcr05p81p9d2jf-libxml2-2.15.1-bin",
               "default": true
             },
             {
               "name": "dev",
-              "path": "/nix/store/4hajqp9mgjgdda4zs8ffpg7lqwyqjnqx-libxml2-2.15.1-dev"
+              "path": "/nix/store/zl5aba33g1ncihjx6vfnzvrdzx1r10s0-libxml2-2.15.1-dev"
             },
             {
               "name": "out",
-              "path": "/nix/store/y56bcwzj2as93jrljs42vj3n94q39pkf-libxml2-2.15.1"
+              "path": "/nix/store/k9y09yx4ihsgy0w1bx022va3vy9z3216-libxml2-2.15.1"
             }
           ],
-          "store_path": "/nix/store/arcclsamdjnn34433j4j7ycf33gwdpf4-libxml2-2.15.1-bin"
+          "store_path": "/nix/store/zx44jqrjv2i9mnjigqxcr05p81p9d2jf-libxml2-2.15.1-bin"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "bin",
-              "path": "/nix/store/gz68j7mkhm9mipmy3m3560g7h27l8ix9-libxml2-2.15.1-bin",
+              "path": "/nix/store/71h2m7c0b1kgzggkynxrpnccx0fllva4-libxml2-2.15.1-bin",
               "default": true
             },
             {
               "name": "dev",
-              "path": "/nix/store/l4npjh2r91r23j5n2yrazzls4l19xqf6-libxml2-2.15.1-dev"
+              "path": "/nix/store/3gxxxnb1w4yh3d5wxz53ffh4a306y5x5-libxml2-2.15.1-dev"
             },
             {
               "name": "out",
-              "path": "/nix/store/a244kbm03p8gr49zcg3ilgv7a9x2ckkl-libxml2-2.15.1"
+              "path": "/nix/store/wavh49lp6i1hwf0im88rkyvjcr5bhfhk-libxml2-2.15.1"
             }
           ],
-          "store_path": "/nix/store/gz68j7mkhm9mipmy3m3560g7h27l8ix9-libxml2-2.15.1-bin"
+          "store_path": "/nix/store/71h2m7c0b1kgzggkynxrpnccx0fllva4-libxml2-2.15.1-bin"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "bin",
-              "path": "/nix/store/7y7a63qs948ysi5kdixcsif54cxvz07m-libxml2-2.15.1-bin",
+              "path": "/nix/store/h6f8n3198gjcv61kk0bayrzcgg3dzm8s-libxml2-2.15.1-bin",
               "default": true
             },
             {
               "name": "dev",
-              "path": "/nix/store/xhgf4ypbd96dj6ppn6v2jzkb3096k8vl-libxml2-2.15.1-dev"
+              "path": "/nix/store/www785flca9qwyacn033z0p18p8vp00l-libxml2-2.15.1-dev"
             },
             {
               "name": "out",
-              "path": "/nix/store/daaji7qdamflps1xxwgiq5fxhl0kmn7x-libxml2-2.15.1"
+              "path": "/nix/store/jcr97i4l3gqxyy6x3rb5yjwwxhi4454l-libxml2-2.15.1"
             }
           ],
-          "store_path": "/nix/store/7y7a63qs948ysi5kdixcsif54cxvz07m-libxml2-2.15.1-bin"
+          "store_path": "/nix/store/h6f8n3198gjcv61kk0bayrzcgg3dzm8s-libxml2-2.15.1-bin"
         }
       }
     },
