@@ -5,7 +5,7 @@
     "postgresql@latest",
     "libxml2@2.15.1",
     "libxslt@1.1.43",
-    "openssl@latest",
+    "openssl@3.6.0",
     "readline@latest",
     "libffi@3.5.2",
     "libyaml@0.2.5",
