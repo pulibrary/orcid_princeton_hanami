@@ -3,7 +3,7 @@
   "packages": [
     "ruby_3_3@latest",
     "postgresql@latest",
-    "libxml2@latest",
+    "libxml2@2.15.1",
     "libxslt@1.1.43",
     "openssl@latest",
     "readline@latest",
