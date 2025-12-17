@@ -1184,7 +1184,7 @@
         }
       }
     },
-    "ruby_3_3@latest": {
+    "ruby_3_3@3.3.4": {
       "last_modified": "2024-09-10T15:01:03Z",
       "plugin_version": "0.0.2",
       "resolved": "github:NixOS/nixpkgs/5ed627539ac84809c78b2dd6d26a5cebeb5ae269#ruby",
