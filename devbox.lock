@@ -1136,9 +1136,9 @@
         }
       }
     },
-    "rsync@latest": {
-      "last_modified": "2025-11-15T07:28:48Z",
-      "resolved": "github:NixOS/nixpkgs/1d4c88323ac36805d09657d13a5273aea1b34f0c#rsync",
+    "rsync@3.4.1": {
+      "last_modified": "2025-11-23T21:50:36Z",
+      "resolved": "github:NixOS/nixpkgs/ee09932cedcef15aaf476f9343d1dea2cb77e261#rsync",
       "source": "devbox-search",
       "version": "3.4.1",
       "systems": {
@@ -1146,41 +1146,41 @@
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/p6i3z8k7gd1spb2b60hl8x9cig9rin8n-rsync-3.4.1",
+              "path": "/nix/store/lwn2zm30m8lqfi30z66a9pfjrihlwa57-rsync-3.4.1",
               "default": true
             }
           ],
-          "store_path": "/nix/store/p6i3z8k7gd1spb2b60hl8x9cig9rin8n-rsync-3.4.1"
+          "store_path": "/nix/store/lwn2zm30m8lqfi30z66a9pfjrihlwa57-rsync-3.4.1"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/6jw9kxkhfjh1ab9y9aawfkxgyqkab5ki-rsync-3.4.1",
+              "path": "/nix/store/8zcn5pipw8lbhibi0h52kwbcljcv1xi0-rsync-3.4.1",
               "default": true
             }
           ],
-          "store_path": "/nix/store/6jw9kxkhfjh1ab9y9aawfkxgyqkab5ki-rsync-3.4.1"
+          "store_path": "/nix/store/8zcn5pipw8lbhibi0h52kwbcljcv1xi0-rsync-3.4.1"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/fn86fjsd6891lspd23bm5263dcfwly5z-rsync-3.4.1",
+              "path": "/nix/store/prn8741xa768y7i2na8dwb7ifmrb7ckz-rsync-3.4.1",
               "default": true
             }
           ],
-          "store_path": "/nix/store/fn86fjsd6891lspd23bm5263dcfwly5z-rsync-3.4.1"
+          "store_path": "/nix/store/prn8741xa768y7i2na8dwb7ifmrb7ckz-rsync-3.4.1"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/m3zz2dn7x68bmnh5vaknwra8r5v49iyw-rsync-3.4.1",
+              "path": "/nix/store/m1cyx858qr5qv5qdmkmq9w6jj65qsh3n-rsync-3.4.1",
               "default": true
             }
           ],
-          "store_path": "/nix/store/m3zz2dn7x68bmnh5vaknwra8r5v49iyw-rsync-3.4.1"
+          "store_path": "/nix/store/m1cyx858qr5qv5qdmkmq9w6jj65qsh3n-rsync-3.4.1"
         }
       }
     },

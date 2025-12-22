@@ -13,7 +13,7 @@
     "pkg-config@latest",
     "gnumake@4.4.1",
     "git@2.51.2",
-    "rsync@latest",
+    "rsync@3.4.1",
     "jq@1.8.1"
   ],
   "env": {
