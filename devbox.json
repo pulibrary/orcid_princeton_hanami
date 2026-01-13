@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.14.0/.schema/devbox.schema.json",
   "packages": [
-    "ruby_3_3@latest",
+    "ruby_3_3@3.3.4",
     "postgresql@latest",
     "libxml2@2.15.1",
     "libxslt@1.1.43",
