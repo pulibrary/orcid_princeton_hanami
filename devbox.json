@@ -4,7 +4,7 @@
     "ruby_3_3@3.3.4",
     "postgresql@latest",
     "libxml2@2.15.1",
-    "libxslt@1.1.43",
+    "libxslt@1.1.45",
     "openssl@3.6.0",
     "readline@latest",
     "libffi@3.5.2",

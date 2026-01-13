@@ -447,115 +447,115 @@
         }
       }
     },
-    "libxslt@1.1.43": {
-      "last_modified": "2025-12-05T06:24:47Z",
-      "resolved": "github:NixOS/nixpkgs/42e29df35be6ef54091d3a3b4e97056ce0a98ce8#libxslt",
+    "libxslt@1.1.45": {
+      "last_modified": "2026-01-02T14:39:32Z",
+      "resolved": "github:NixOS/nixpkgs/16c7794d0a28b5a37904d55bcca36003b9109aaa#libxslt",
       "source": "devbox-search",
-      "version": "1.1.43",
+      "version": "1.1.45",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "bin",
-              "path": "/nix/store/sgcbjj7zc3rfnz387314cxxgb4ldzdzn-libxslt-1.1.43-bin",
+              "path": "/nix/store/qracl6zwydi3ird77c05b6z4yrm38pzd-libxslt-1.1.45-bin",
               "default": true
             },
             {
-              "name": "doc",
-              "path": "/nix/store/cndjz7snfdqcid2q4rla12jczmhbrsn8-libxslt-1.1.43-doc"
-            },
-            {
-              "name": "out",
-              "path": "/nix/store/jha8a0i0kxs64j2im4k90hknlwlk158z-libxslt-1.1.43"
-            },
-            {
               "name": "dev",
-              "path": "/nix/store/by0xfv2vipxz4bky9bq8vqb73gjg2ik7-libxslt-1.1.43-dev"
+              "path": "/nix/store/qbgb0v3h662b204jfl5s2nrx06xi8jfi-libxslt-1.1.45-dev"
             },
             {
               "name": "devdoc",
-              "path": "/nix/store/9m8sw234vghcb9v3wvvc4cf45bc4g76i-libxslt-1.1.43-devdoc"
+              "path": "/nix/store/f6h35m4lr3wdpfqnxz11skc314y7j613-libxslt-1.1.45-devdoc"
+            },
+            {
+              "name": "doc",
+              "path": "/nix/store/sn8ls1w0z65l12cqlk5pcxrmchr4fnlw-libxslt-1.1.45-doc"
+            },
+            {
+              "name": "out",
+              "path": "/nix/store/alh7wajzz7c0vcf9z6zic5ad3w1a2jhf-libxslt-1.1.45"
             }
           ],
-          "store_path": "/nix/store/sgcbjj7zc3rfnz387314cxxgb4ldzdzn-libxslt-1.1.43-bin"
+          "store_path": "/nix/store/qracl6zwydi3ird77c05b6z4yrm38pzd-libxslt-1.1.45-bin"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "bin",
-              "path": "/nix/store/bg5vcn9sd2d6dahzakxj4nmadsfr4hwi-libxslt-1.1.43-bin",
+              "path": "/nix/store/iyalzzlr5qhbjydg6p5nw4j0m1jh9l8s-libxslt-1.1.45-bin",
               "default": true
             },
             {
               "name": "dev",
-              "path": "/nix/store/k59ni6rs0k0ijr240qmwb31kkk0mdzkd-libxslt-1.1.43-dev"
+              "path": "/nix/store/z2320501hq8agbhi1mhhsyynyacx25bx-libxslt-1.1.45-dev"
             },
             {
               "name": "devdoc",
-              "path": "/nix/store/4057zknsg6d23ras0xxcfr9zipn4rrha-libxslt-1.1.43-devdoc"
+              "path": "/nix/store/wjlmpf54ns9haj1psvqr2jihd52x76bq-libxslt-1.1.45-devdoc"
             },
             {
               "name": "doc",
-              "path": "/nix/store/zimfp2nvg1y4c5ldvsmgw7074wp7l9ng-libxslt-1.1.43-doc"
+              "path": "/nix/store/my5dvpnprllyygnz6vz6vq3v4lslyjn3-libxslt-1.1.45-doc"
             },
             {
               "name": "out",
-              "path": "/nix/store/cy5wxnld1kyap2r4bjd2q44syqx43anj-libxslt-1.1.43"
+              "path": "/nix/store/aflxg7bhgx0axp1cfv3iwc745n969j50-libxslt-1.1.45"
             }
           ],
-          "store_path": "/nix/store/bg5vcn9sd2d6dahzakxj4nmadsfr4hwi-libxslt-1.1.43-bin"
+          "store_path": "/nix/store/iyalzzlr5qhbjydg6p5nw4j0m1jh9l8s-libxslt-1.1.45-bin"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "bin",
-              "path": "/nix/store/b3rhlclcm2cs8cv8kz9h50ayn3rw68bp-libxslt-1.1.43-bin",
+              "path": "/nix/store/mpbvh5wrmjckgg0i83yj2d2m07h1h5xh-libxslt-1.1.45-bin",
               "default": true
             },
             {
-              "name": "out",
-              "path": "/nix/store/0kpx8yvc1skh9rq4axm1b7hd4m71a7n7-libxslt-1.1.43"
-            },
-            {
-              "name": "dev",
-              "path": "/nix/store/facc0daccjcaas8ncf83jz2xpj7zi8j4-libxslt-1.1.43-dev"
-            },
-            {
               "name": "devdoc",
-              "path": "/nix/store/3izhysaqwk6qnlqiqzmyryp4im2c430g-libxslt-1.1.43-devdoc"
+              "path": "/nix/store/k2pi5c2ricwhrksmijx09hbz9yi46kyn-libxslt-1.1.45-devdoc"
             },
             {
               "name": "doc",
-              "path": "/nix/store/66aji4yan7w5hzfnixyjc5vmzwni04q1-libxslt-1.1.43-doc"
+              "path": "/nix/store/qfd6slgv8f5fkkkbql10fg7hj9dyj0il-libxslt-1.1.45-doc"
+            },
+            {
+              "name": "out",
+              "path": "/nix/store/1zwmixzy31lspjm5piqvicv7badhrnqi-libxslt-1.1.45"
+            },
+            {
+              "name": "dev",
+              "path": "/nix/store/h8sfsys9cx2pfl5f5p8sdxp3m1j5ydxd-libxslt-1.1.45-dev"
             }
           ],
-          "store_path": "/nix/store/b3rhlclcm2cs8cv8kz9h50ayn3rw68bp-libxslt-1.1.43-bin"
+          "store_path": "/nix/store/mpbvh5wrmjckgg0i83yj2d2m07h1h5xh-libxslt-1.1.45-bin"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "bin",
-              "path": "/nix/store/baabckksj29mr07715pkw9gg7ydfr389-libxslt-1.1.43-bin",
+              "path": "/nix/store/i945qn5hw2l6ia86p8cd6d9wdfiy67jm-libxslt-1.1.45-bin",
               "default": true
             },
             {
               "name": "dev",
-              "path": "/nix/store/rhpjc99p0pxx9rbply1daykj63fq1lqx-libxslt-1.1.43-dev"
+              "path": "/nix/store/bc1x5zsl9wyqj35yjd9c3f2gf1b4r7qv-libxslt-1.1.45-dev"
             },
             {
               "name": "devdoc",
-              "path": "/nix/store/g4s9x5wx30xr8pd7rsy68h8vp31ci1wl-libxslt-1.1.43-devdoc"
+              "path": "/nix/store/r28rlsz4scq36lmsciyq26m11b7bi40p-libxslt-1.1.45-devdoc"
             },
             {
               "name": "doc",
-              "path": "/nix/store/cqcqkjxn9szygyn5drl1bxjczmds5qks-libxslt-1.1.43-doc"
+              "path": "/nix/store/pjkihhb1azw5fkrman8fj32v44v7wrqx-libxslt-1.1.45-doc"
             },
             {
               "name": "out",
-              "path": "/nix/store/075b6j43x9hvl1d565xgicgdjkd4qw3m-libxslt-1.1.43"
+              "path": "/nix/store/0xb68zjvlafm41b2m04kshxhsx8ab9ic-libxslt-1.1.45"
             }
           ],
-          "store_path": "/nix/store/baabckksj29mr07715pkw9gg7ydfr389-libxslt-1.1.43-bin"
+          "store_path": "/nix/store/i945qn5hw2l6ia86p8cd6d9wdfiy67jm-libxslt-1.1.45-bin"
         }
       }
     },
