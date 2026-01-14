@@ -12,7 +12,7 @@
     "zlib@1.3.1",
     "pkg-config@latest",
     "gnumake@4.4.1",
-    "git@2.51.2",
+    "git@2.52.0",
     "rsync@3.4.1",
     "jq@1.8.1"
   ],
