@@ -49,7 +49,8 @@ GEM
     binding_of_caller (1.0.1)
       debug_inspector (>= 1.2.0)
     builder (3.3.0)
-    byebug (12.0.0)
+    byebug (13.0.0)
+      reline (>= 0.6.0)
     capistrano (3.20.0)
       airbrussh (>= 1.0.0)
       i18n
