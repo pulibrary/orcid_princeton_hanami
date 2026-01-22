@@ -33,7 +33,7 @@ gem 'warden'
 gem 'whenever'
 
 group :development do
-  gem 'capistrano', '~> 3.17', require: false
+  gem 'capistrano', '~> 3.19.2', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-passenger', require: false
   gem 'hanami-webconsole', '~> 2.3'
