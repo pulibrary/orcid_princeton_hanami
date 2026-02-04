@@ -1,39 +1,72 @@
 {
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.16.0/.schema/devbox.schema.json",
   "packages": [
-    "ruby_3_3@3.3.4",
-    "nodejs@20",
-    "postgresql@latest",
-    "libyaml@0.2.5",
+    "ruby@3.3.2",
+    "nodejs@18.17.0",
+    "yarn@1.22.19",
+    "postgresql@15.7",
+    "libyaml@latest",
     "libyaml.dev",
     "pkg-config@latest",
-    "libiconv",
-    "gcc",
-    "libxml2@2.15.1",
-    "libxslt@1.1.45",
-    "openssl@3.6.0",
-    "readline@latest",
-    "libffi@3.5.2",
-    "zlib@1.3.1",
-    "gnumake@4.4.1",
-    "git@2.52.0",
-    "rsync@3.4.1",
-    "jq@1.8.1"
+    "gcc@latest",
+    "gnumake@latest",
+    "git@latest",
+    "bash@latest",
+    "zsh@latest"
   ],
   "env": {
-    "TMPDIR": "/private/tmp/orcid_princeton_hanami",
-    "PKG_CONFIG_PATH": ".devbox/nix/profile/default/lib/pkgconfig:.devbox/nix/profile/default/share/pkgconfig",
-    "BUNDLE_BUILD__PSYCH": "--with-libyaml-dir=.devbox/nix/profile/default --with-yaml-0.1-include=.devbox/nix/profile/default/include --with-yaml-0.1-lib=.devbox/nix/profile/default/lib",
-    "BUNDLE_PATH": ".bundle",
-    "BUNDLE_BIN": ".binstubs",
-    "PATH": ".binstubs:bin:$PATH"
+    "DEVBOX": "1",
+    "PATH": "$PWD/.devbox/virtenv/ruby/bin:$PWD/.devbox/nix/profile/default/bin:$PATH",
+    "TMPDIR": "$PWD/.tmp",
+
+    "BUNDLER_VERSION": "2.5.9",
+    "PKG_CONFIG_PATH": "$PWD/.devbox/nix/profile/default/lib/pkgconfig:$PWD/.devbox/nix/profile/default/share/pkgconfig",
+    "BUNDLE_BUILD__PSYCH": "--with-libyaml-dir=$PWD/.devbox/nix/profile/default --with-pkg-config=$PWD/.devbox/nix/profile/default/bin/pkg-config",
+
+    "BUNDLE_PATH": "$PWD/.devbox/virtenv/ruby/bundle",
+    "BUNDLE_WITHOUT": "",
+    "BUNDLE_DEPLOYMENT": "0",
+
+    "PGDATA": "$PWD/.postgres/data",
+    "PGHOST": "$PWD/.postgres",
+    "PGPORT": "5432",
+    "PGUSER": "$USER",
+    "PGPASSWORD": "",
+    "HANAMI_PORT": "2300"
   },
   "shell": {
     "init_hook": [
-      "mkdir -p $TMPDIR",
-      "bundle config set --local path '.bundle'",
-      "bundle config set --local bin '.binstubs'",
-      "bundle config set --local build.psych \"--with-libyaml-dir=.devbox/nix/profile/default --with-yaml-0.1-include=.devbox/nix/profile/default/include --with-yaml-0.1-lib=.devbox/nix/profile/default/lib\"",
-      "[ -x bin/bundle ] || gem install bundler -v 2.5.14 --no-document --conservative"
-    ]
+      "mkdir -p \"$PWD/.tmp\" \"$PWD/.postgres\"",
+      "bundle config set --local path \"$BUNDLE_PATH\" >/dev/null 2>&1 || true",
+      "bundle config set --local build.psych \"--with-libyaml-dir=$PWD/.devbox/nix/profile/default --with-pkg-config=$PWD/.devbox/nix/profile/default/bin/pkg-config\" >/dev/null 2>&1 || true",
+      "gem install -N bundler -v \"$BUNDLER_VERSION\" >/dev/null 2>&1 || true",
+      "bundle install",
+      "bash -c 'if [ -f \"$PWD/package.json\" ]; then yarn install; fi'",
+      "bash -c 'mkdir -p \"$(dirname \"$PGDATA\")\"; test -d \"$PGDATA\" || initdb -D \"$PGDATA\" -A trust'"
+    ],
+    "scripts": {
+      "setup": [
+        "bundle config set --local path \"$BUNDLE_PATH\"",
+        "bundle install",
+        "bash -c 'if [ -f \"$PWD/package.json\" ]; then yarn install; fi'"
+      ],
+
+      "postgres-start": "devbox run postgres-ensure",
+      "postgres-stop": "bash -c 'source bin/devbox-env && test -d \"$PGDATA\" && pg_ctl -D \"$PGDATA\" -m fast stop || true'",
+      "postgres-status": "bash -c 'source bin/devbox-env && test -d \"$PGDATA\" && pg_ctl -D \"$PGDATA\" status || true'",
+      "postgres-log": "tail -200 \"$PWD/.postgres/postgres.log\" || true",
+
+      "postgres-ensure": "./bin/postgres-ensure",
+      "prepare": "devbox run db-prepare",
+      "db-prepare": "bash -c 'source bin/devbox-env && devbox run postgres-ensure >/dev/null && bundle exec hanami db prepare'",
+
+      "db-migrate": "devbox run postgres-ensure >/dev/null && bundle exec hanami db migrate",
+
+      "ruby": "bash -c 'source bin/devbox-env && ruby'",
+      "web": "bash -c 'source bin/devbox-env && bundle exec puma -C config/puma.rb'",
+
+      "assets": "bundle exec hanami assets watch",
+      "zsh": "zsh -l"
+    }
   }
 }

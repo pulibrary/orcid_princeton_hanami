@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+source "$(cd "$(dirname "$0")/.." && pwd)/bin/devbox-env"
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+
+# Ensure we're running inside devbox where postgres is on PATH
+command -v psql >/dev/null 2>&1 || {
+  echo "psql not found. Run inside 'devbox shell' or 'devbox run ...'." >&2
+  exit 1
+}
+
+# If you need initdb/pg_ctl explicitly:
+INITDB="$(command -v initdb)"
+PG_CTL="$(command -v pg_ctl)"
+PSQL="$(command -v psql)"
+
+# Now run the prepare using the normal tooling
+devbox run postgres-ensure >/dev/null
+bundle exec hanami db prepare

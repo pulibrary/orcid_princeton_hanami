@@ -1,0 +1,52 @@
+#!/usr/bin/env bash
+set -euo pipefail
+source "$(cd "$(dirname "$0")/.." && pwd)/bin/devbox-env"
+
+# Ensure we're running inside devbox where postgres tools are on PATH
+command -v pg_ctl >/dev/null 2>&1 || {
+  echo "pg_ctl not found. Run inside 'devbox shell' or via 'devbox run ...'." >&2
+  exit 1
+}
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+mkdir -p "$PGHOST" "$(dirname "$PGDATA")"
+
+INITDB="$(command -v initdb)"
+PG_CTL="$(command -v pg_ctl)"
+PG_ISREADY="$(command -v pg_isready)"
+
+if [ ! -d "$PGDATA" ]; then
+  "$INITDB" -D "$PGDATA" -A trust
+fi
+
+# If it's already answering on either socket dir, we're good
+if "$PG_ISREADY" -h "$PGHOST" -p "$PGPORT" >/dev/null 2>&1; then
+  exit 0
+fi
+if "$PG_ISREADY" -h "/tmp" -p "$PGPORT" >/dev/null 2>&1; then
+  exit 0
+fi
+
+# clean stale pidfile
+PIDFILE="$PGDATA/postmaster.pid"
+if [ -f "$PIDFILE" ]; then
+  PID="$(head -1 "$PIDFILE" || true)"
+  if [ -n "${PID:-}" ] && ! kill -0 "$PID" 2>/dev/null; then
+    rm -f "$PIDFILE"
+  fi
+fi
+
+SOCKET_DIRS="$PGHOST,/tmp"
+
+"$PG_CTL" -D "$PGDATA" -l "$PGHOST/postgres.log" \
+  -o "-p $PGPORT -c listen_addresses= -c unix_socket_directories=$SOCKET_DIRS" start
+
+for _ in $(seq 1 50); do
+  "$PG_ISREADY" -h "$PGHOST" -p "$PGPORT" >/dev/null 2>&1 && exit 0
+  "$PG_ISREADY" -h "/tmp" -p "$PGPORT" >/dev/null 2>&1 && exit 0
+  sleep 0.1
+done
+
+echo "Postgres did not become ready" >&2
+tail -200 "$PGHOST/postgres.log" || true
+exit 1

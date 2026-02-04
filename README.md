@@ -12,33 +12,39 @@ The original code for the rails application is located at [https://github.com/pu
 
 ## Devbox (Quick Start)
 
-We ship a Devbox environment to standardize Ruby, Postgres client libs, and build deps.
+We ship a Devbox environment to standardize Ruby, Postgres, and build dependencies.
+Devbox runs a **local Postgres server** backed by a unix socket at `./.postgres` (and `/tmp`).
+Database URLs are derived from repo-local defaults (so nothing user-specific needs to be committed).
 
-```bash
-# 1) enter the reproducible shell
+### 1) enter the reproducible shell (first time only: install deps)
+
+```sh
 devbox update
-devbox shell
-
-# 2) install gems (and JS deps if present)
 devbox run setup
+```
 
-# 3) create & migrate your dev DB (Postgres runs via your local/lan setup)
-bundle exec hanami db create
-bundle exec hanami db migrate
+### 2) initialize/start Postgres and prepare dev & test DBs
 
-# 4) run the app on http://localhost:3000
-devbox run server
+```sh
+devbox run db-prepare
+```
+
+### 3) Run the Hanami app local/lan setup)
+
+```sh
+devbox run web
 ```
 
 Helpful commands:
 
-```bash
-devbox run console        # hanami console
-devbox run lint           # rubocop
-devbox run test           # rspec
+```sh
+devbox run postgres-status
+devbox run postgres-log
+devbox run db-migrate
 ```
 
   > Binstubs are written to `.binstubs/` and added to PATH. Bundled gems go to `.bundle/`. Both are `.gitignored`.
+  > Notes: Postgres data lives in `./.postgres/data` and logs in `./.postgres/postgres.log`
 
 ## Dependencies
 
@@ -63,8 +69,8 @@ Update the the environment variables either via [Princeton Ansible](https://gith
 1. Use the mailinator email address (e.g. `myname@mailinator.com`) to register an account at <https://sandbox.orcid.org/register>
 1. Record your login and password in a password manager so you can find them again.
 1. Now in mailinator respond to the verification email.
-     * If you do not see your email make sure the search box has your email.  You do not need to include `mailinator.com`
-     * Click the verify button in the email
+   * If you do not see your email make sure the search box has your email. You do not need to include `mailinator.com`
+   * Click the verify button in the email
 1. Your account should now be verified in the OCRID Sandbox
 
 ---
@@ -85,12 +91,9 @@ lando info
 psql --host 127.0.0.1 --username=postgres --port 51512 -d development_db < config/db/update_rails_migration.sql
 ```
 
-
-
-### Staging and Production 
+### Staging and Production
 
 Before deploying the hanami application for the first time or in a rails release of the application on the server run the following to update the the encrypted tokens.
-
 
 ```bash
 cd /opt/orcid_princeton/current
@@ -106,9 +109,11 @@ psql --host $APP_DB_HOST --username=$APP_DB_USERNAME -d $APP_DB < config/db/upda
 ```
 
 ---
+
 ## Local development
 
 ### Setup
+
 1. Check out code and `cd`
 1. Install tool dependencies; If you've worked on other PUL projects they will already be installed.
     1. [Lando](https://docs.lando.dev/getting-started/installation.html)
@@ -124,15 +129,16 @@ psql --host $APP_DB_HOST --username=$APP_DB_USERNAME -d $APP_DB < config/db/upda
     1. `devbox shell`
     1. `devbox run setup`
 1. Or, if you are using `ruby-install` and `chruby` (instead of `asdf`):
-   1. `ruby-install 3.2.0 -- --with-openssl-dir=$(brew --prefix openssl@1.1)`
-   2. close the terminal window and open a new terminal
-   3. `chruby 3.2.0`
-   4. `ruby --version`
+    1. `ruby-install 3.2.0 -- --with-openssl-dir=$(brew --prefix openssl@1.1)`
+    2. close the terminal window and open a new terminal
+    3. `chruby 3.2.0`
+    4. `ruby --version`
 1. Install language-specific dependencies
     1. `bundle install`
     2. `yarn install`
 
 ### Starting / stopping services
+
 We use lando to run services required for both test and development environments.
 
 Start and initialize database services with:
@@ -148,6 +154,7 @@ To stop database services:
 `lando stop`
 
 ### Running tests
+
 1. Fast: `bundle exec rspec spec`
 2. Run in browser: `RUN_IN_BROWSER=true bundle exec rspec spec`
 
@@ -160,18 +167,21 @@ Hanami runs by default at the port 2300, but we have made this application run a
 1. Access application at [http://localhost:3000/](http://localhost:3000/)
 
 ### ORCID Environment variables
-You need to have the following variables in your environment to connect with the ORCID sandbox.  Actual values are in lastpass under "ORCID Local API key".
+
+You need to have the following variables in your environment to connect with the ORCID sandbox. Actual values are in lastpass under "ORCID Local API key".
 export ORCID_CLIENT_ID="xxx"
 export ORCID_CLIENT_SECRET="xxx"
 
 ### environment files
- With Hanami environment variables for development and test are put in `.env` & `.env.test` or `.env.dev` files.  You can keep secret information in  `.env.dev.local` if you like or set them up as environment variables/
+
+ With Hanami environment variables for development and test are put in `.env` & `.env.test` or `.env.dev` files. You can keep secret information in `.env.dev.local` if you like or set them up as environment variables/
 
 ## Release and deployment
 
 RDSS uses the same [release and deployment process](https://github.com/pulibrary/rdss-handbook/blob/main/release_process.md) for all projects.
 
 ## Monitoring
+
 You can view the ORCID [Honeybadger Uptime check](https://app.honeybadger.io/projects/114910/sites/e8dbf0b6-00b3-4b71-afb2-5ce88138a9a6). Currently it checks every minute and will report downtime when two checks fail in a row (i.e. we should know within 2 minutes).
 
 To be notified of downtime enable notifications in Honeybadger under: Settings + Alerts & Integrtions + email (Edit). Enable notifications for "Uptime Events" for "ORCID Production". Notice that email notifications settings are *per project*.

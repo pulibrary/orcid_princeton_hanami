@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+PGHOST="${PGHOST:-$ROOT/.postgres}"
+PGPORT="${PGPORT:-5432}"
+PGUSER="${PGUSER:-${USER}}"
+
+# Prefer standard names
+DEV_DB="${DEV_DB:-orcid_princeton_hanami_development}"
+TEST_DB="${TEST_DB:-orcid_princeton_hanami_test}"
+
+export PGHOST PGPORT PGUSER
+export DATABASE_URL="postgres://${PGUSER}@/${DEV_DB}?host=${PGHOST}&port=${PGPORT}"
+export DATABASE_TEST_URL="postgres://${PGUSER}@/${TEST_DB}?host=${PGHOST}&port=${PGPORT}"
+
