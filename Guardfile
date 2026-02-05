@@ -11,8 +11,7 @@ ignore %r{^\.tmp/}
 ignore %r{^\./\.tmp/}
 
 group :server do
-  guard "puma", port: ENV.fetch("HANAMI_PORT", 2300) do
+  guard 'puma', port: ENV.fetch('HANAMI_PORT', 2300) do
     watch(%r{^(app|config|lib|slices)(/[^/]+)*\.(rb|erb|haml|slim)$}i)
   end
 end
-
