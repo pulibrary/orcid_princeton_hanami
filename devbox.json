@@ -1,50 +1,72 @@
 {
-  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.14.0/.schema/devbox.schema.json",
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.16.0/.schema/devbox.schema.json",
   "packages": [
-    "ruby_3_3@3.3.4",
-    "postgresql@latest",
-    "libxml2@2.15.1",
-    "libxslt@1.1.45",
-    "openssl@3.6.0",
-    "readline@latest",
-    "libffi@3.5.2",
-    "libyaml@0.2.5",
-    "zlib@1.3.1",
+    "ruby@3.3.2",
+    "nodejs@18.17.0",
+    "yarn@1.22.19",
+    "postgresql@15.7",
+    "libyaml@latest",
+    "libyaml.dev",
     "pkg-config@latest",
-    "gnumake@4.4.1",
-    "git@2.52.0",
-    "rsync@3.4.1",
-    "jq@1.8.1"
+    "gcc@latest",
+    "gnumake@latest",
+    "git@latest",
+    "bash@latest",
+    "zsh@latest"
   ],
   "env": {
-    "DEVBOX_COREPACK_ENABLED": "true",
-    "TMPDIR": "/private/tmp/orcid_princeton_hanami",
-    "LD_LIBRARY_PATH": "$PWD/.devbox/nix/profile/default/lib",
-    "FONTCONFIG_PATH": "$PWD/.devbox/nix/profile/default/etc/fonts",
-    "BUNDLE_PATH": ".bundle",
-    "BUNDLE_BIN": ".binstubs",
-    "PATH": ".binstubs:bin:$PATH",
-    "HANAMI_ENV": "development",
-    "RACK_ENV": "development"
+    "DEVBOX": "1",
+    "PATH": "$PWD/.devbox/virtenv/ruby/bin:$PWD/.devbox/nix/profile/default/bin:$PATH",
+    "TMPDIR": "$PWD/.tmp",
+
+    "BUNDLER_VERSION": "2.5.9",
+    "PKG_CONFIG_PATH": "$PWD/.devbox/nix/profile/default/lib/pkgconfig:$PWD/.devbox/nix/profile/default/share/pkgconfig",
+    "BUNDLE_BUILD__PSYCH": "--with-libyaml-dir=$PWD/.devbox/nix/profile/default --with-pkg-config=$PWD/.devbox/nix/profile/default/bin/pkg-config",
+
+    "BUNDLE_PATH": "$PWD/.devbox/virtenv/ruby/bundle",
+    "BUNDLE_WITHOUT": "",
+    "BUNDLE_DEPLOYMENT": "0",
+
+    "PGDATA": "$PWD/.postgres/data",
+    "PGHOST": "$PWD/.postgres",
+    "PGPORT": "5432",
+    "PGUSER": "$USER",
+    "PGPASSWORD": "",
+    "HANAMI_PORT": "2300"
   },
   "shell": {
     "init_hook": [
-      "ruby -v",
-      "gem --version",
-      "sh -lc '[ -x bin/bundle ] || gem install bundler -v 2.5.14 --no-document'",
-      "bundle config set path \"$BUNDLE_PATH\"",
-      "bundle config set bin \"$BUNDLE_BIN\""
+      "mkdir -p \"$PWD/.tmp\" \"$PWD/.postgres\"",
+      "bundle config set --local path \"$BUNDLE_PATH\" >/dev/null 2>&1 || true",
+      "bundle config set --local build.psych \"--with-libyaml-dir=$PWD/.devbox/nix/profile/default --with-pkg-config=$PWD/.devbox/nix/profile/default/bin/pkg-config\" >/dev/null 2>&1 || true",
+      "gem install -N bundler -v \"$BUNDLER_VERSION\" >/dev/null 2>&1 || true",
+      "bundle install",
+      "bash -c 'if [ -f \"$PWD/package.json\" ]; then yarn install; fi'",
+      "bash -c 'mkdir -p \"$(dirname \"$PGDATA\")\"; test -d \"$PGDATA\" || initdb -D \"$PGDATA\" -A trust'"
     ],
     "scripts": {
-      "setup": "gem install bundler -v 2.5.14 --no-document && bundle install",
-      "server": "bundle exec hanami server -h 0.0.0.0 -p 3000",
-      "console": "bundle exec hanami console",
-      "lint": "bundle exec rubocop",
-      "test": "bundle exec rspec",
-      "test:headless": "if command -v chromedriver >/dev/null 2>&1 && (command -v chromium >/dev/null 2>&1 || command -v chromium-browser >/dev/null 2>&1 || command -v google-chrome >/dev/null 2>&1); then WEBDRIVER_CHROME_DRIVER=$(command -v chromedriver) CHROME_BIN=$(command -v chromium || command -v chromium-browser || command -v google-chrome) bundle exec rspec; else echo 'Chromium/Chrome + chromedriver not found; skipping headless browser tests.' && exit 0; fi",
-      "cap:staging": "bundle exec cap staging deploy",
-      "cap:prod": "bundle exec cap production deploy",
-      "fmt:devbox": "jq '.' devbox.json > devbox.json.tmp && mv devbox.json.tmp devbox.json"
+      "setup": [
+        "bundle config set --local path \"$BUNDLE_PATH\"",
+        "bundle install",
+        "bash -c 'if [ -f \"$PWD/package.json\" ]; then yarn install; fi'"
+      ],
+
+      "postgres-start": "devbox run postgres-ensure",
+      "postgres-stop": "bash -c 'source bin/devbox-env && test -d \"$PGDATA\" && pg_ctl -D \"$PGDATA\" -m fast stop || true'",
+      "postgres-status": "bash -c 'source bin/devbox-env && test -d \"$PGDATA\" && pg_ctl -D \"$PGDATA\" status || true'",
+      "postgres-log": "tail -200 \"$PWD/.postgres/postgres.log\" || true",
+
+      "postgres-ensure": "./bin/postgres-ensure",
+      "prepare": "devbox run db-prepare",
+      "db-prepare": "bash -c 'source bin/devbox-env && devbox run postgres-ensure >/dev/null && bundle exec hanami db prepare'",
+
+      "db-migrate": "devbox run postgres-ensure >/dev/null && bundle exec hanami db migrate",
+
+      "ruby": "bash -c 'source bin/devbox-env && ruby'",
+      "web": "bash -c 'source bin/devbox-env && bundle exec puma -C config/puma.rb'",
+
+      "assets": "bundle exec hanami assets watch",
+      "zsh": "zsh -l"
     }
   }
 }

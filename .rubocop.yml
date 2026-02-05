@@ -3,3 +3,5 @@ Style/GuardClause:
   Enabled: false
 Style/IfUnlessModifier:
   Enabled: false
+Metrics/BlockNesting:
+  Max: 4

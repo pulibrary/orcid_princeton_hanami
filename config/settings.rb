@@ -1,42 +1,62 @@
 # frozen_string_literal: true
 
+require 'json'
+
 module OrcidPrinceton
   # application settings
+  # DB URL resolution priority:
+  # 1) Respect DATABASE_URL if already set (Devbox/CI/explicit user config)
+  # 2) If lando is available, use lando db (existing behavior)
+  # 3) If lando is NOT available, default to local devbox postgres socket
   class Settings < Hanami::Settings
-    # Define your app settings here, for example:
-    #
-    # setting :my_flag, default: false, constructor: Types::Params::Bool
+    def self.lando_available?(cmd)
+      system("#{cmd} --version > /dev/null 2>&1")
+    end
 
-    # Do not worry about the database url for the server:stop rake tasks
-    if Object.const_defined?('Rake') && Rake.application.top_level_tasks.include?('servers:stop')
-      ENV['DATABASE_URL'] = 'do_not_care'
-    # Get the database url from lando if it is not set
-    elsif ENV['DATABASE_URL'].nil?
-      ENV['DATABASE_URL'] =
+    def self.rake_task?(task_name)
+      Object.const_defined?('Rake') && Rake.application.top_level_tasks.include?(task_name)
+    end
+
+    def self.devbox_socket_url(root, env)
+      host_dir = File.join(root, '.postgres')
+      dbname = (env.to_s == 'test' ? 'orcid_princeton_hanami_test' : 'orcid_princeton_hanami_development')
+      "postgres://#{ENV.fetch('USER', 'postgres')}@/#{dbname}?host=#{host_dir}&port=5432"
+    end
+
+    def self.lando_database_url(cmd, hanami_env)
+      services = JSON.parse(`#{cmd} info --format json`, symbolize_names: true)
+      database_service = services.find { |svc| svc[:service] == 'database' }
+      raise NoMethodError unless database_service
+
+      connection = database_service[:external_connection]
+      creds = database_service[:creds]
+      "#{database_service[:type]}://#{creds[:user]}@#{connection[:host]}:#{connection[:port]}/#{hanami_env}_db"
+    end
+
+    root = Dir.pwd
+    env_name = Hanami.env.to_s
+    lando_cmd = ENV.fetch('LANDO', 'lando')
+
+    database_url = rake_task?('servers:stop') ? 'do_not_care' : ENV.fetch('DATABASE_URL', nil)
+
+    if database_url.to_s.strip.empty?
+      if lando_available?(lando_cmd)
         begin
-          database_service = JSON.parse(`lando info --format json`, symbolize_names: true).select do |service|
-            service[:service] == 'database'
-          end.first
-          connection = database_service[:external_connection]
-          credentials = database_service[:creds]
-          port = connection[:port].to_i
-          database_url = "#{database_service[:type]}://" \
-                        "#{credentials[:user]}@#{connection[:host]}:#{port}/" \
-                        "#{Hanami.env}_db"
-
-        # we did not get the correct information from lando
+          database_url = lando_database_url(lando_cmd, env_name)
         rescue JSON::ParserError, NoMethodError
-          # if we are starting the servers run lando and retry
-          if Object.const_defined?('Rake') && Rake.application.top_level_tasks.include?('servers:start')
-            system('lando start') # lando was not already started, so we will start it now
+          if rake_task?('servers:start')
+            system("#{lando_cmd} start")
             sleep(2)
             retry
-          # otherwise just error and tell the user they need to start the servers
-          else
-            raise "Lando should be running for development.  Start with 'rake servers:start'"
           end
+          database_url = devbox_socket_url(root, env_name)
         end
+      else
+        database_url = devbox_socket_url(root, env_name)
+      end
     end
+
+    ENV['DATABASE_URL'] = database_url
 
     setting :database_url, default: database_url, constructor: Types::String
     setting :session_secret, default: '__local_development_secret_only__', constructor: Types::String
@@ -52,7 +72,8 @@ module OrcidPrinceton
     setting :openssl_key, default: '', constructor: Types::String
     setting :openssl_algorithm, default: '', constructor: Types::String
     setting :openssl_iv_len, default: 16, constructor: Types::Params::Integer
-    setting :peoplesoft_output_location, default: '/mnt/peoplesoft/sr_orcid/prod/ORCID_portal_report.csv',
-                                         constructor: Types::String
+    setting :peoplesoft_output_location,
+            default: '/mnt/peoplesoft/sr_orcid/prod/ORCID_portal_report.csv',
+            constructor: Types::String
   end
 end

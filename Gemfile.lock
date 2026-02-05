@@ -40,6 +40,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     base64 (0.3.0)
     bcrypt_pbkdf (1.1.2)
+    bcrypt_pbkdf (1.1.2-arm64-darwin)
     benchmark (0.4.1)
     better_errors (2.10.1)
       erubi (>= 1.0.0)
@@ -51,7 +52,7 @@ GEM
     builder (3.3.0)
     byebug (13.0.0)
       reline (>= 0.6.0)
-    capistrano (3.20.0)
+    capistrano (3.19.2)
       airbrussh (>= 1.0.0)
       i18n
       rake (>= 10.0.0)
@@ -280,7 +281,7 @@ GEM
       csv
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
-    i18n (1.14.7)
+    i18n (1.14.8)
       concurrent-ruby (~> 1.0)
     ice_nine (0.11.2)
     io-console (0.8.2)
@@ -566,7 +567,7 @@ DEPENDENCIES
   axe-core-rspec
   bcrypt_pbkdf
   byebug
-  capistrano (~> 3.17)
+  capistrano (~> 3.19.2)
   capistrano-bundler
   capistrano-passenger
   capybara

@@ -10,3 +10,5 @@ coverage
 .binstubs/
 .bundle/
 .devbox/
+.postgres
+.tmp
