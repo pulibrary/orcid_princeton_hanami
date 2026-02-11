@@ -26,7 +26,11 @@ devbox run setup
 bundle exec hanami db create
 bundle exec hanami db migrate
 
-# 4) run the app on http://localhost:3000
+# 4) start up postgres with lando
+
+bundle exec rake servers:start
+
+# 5) run the app on http://localhost:3000
 devbox run server
 ```
 
