@@ -35,6 +35,8 @@ module OrcidPrinceton
 
       def last = user_with_roles_and_tokens.last
 
+      def count = users.count
+
       def find_by_uid(uid)
         user_with_roles_and_tokens.where(uid: uid)&.first
       end
@@ -55,6 +57,20 @@ module OrcidPrinceton
 
       def user_with_roles_and_tokens
         users.combine(:roles).combine(:tokens)
+      end
+
+      def create_admin(uid)
+        user = find_by_uid(uid)
+        if user.nil?
+          user = create(uid: uid, provider: 'cas')
+        end
+        make_admin(user.id)
+      end
+
+      def create_default_users
+        Hanami.app.settings.admin_netids.each do |uid|
+          create_admin(uid)
+        end
       end
 
       private

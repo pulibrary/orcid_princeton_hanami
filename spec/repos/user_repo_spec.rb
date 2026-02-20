@@ -113,4 +113,23 @@ RSpec.describe OrcidPrinceton::Repos::UserRepo do
       expect(user.roles.first.name).to eq('admin')
     end
   end
+  # def self.create_default_users
+  #   Rails.configuration.admins.each do |uid|
+  #     create_admin(uid)
+  #   end
+  # end
+  describe '#create_default_users' do
+    it 'creates the default users and makes them admins', db: true do
+      repo.create_default_users
+      expect(repo.count).to eq(10)
+      expect(repo.find_by_uid('cac9')).not_to be_nil
+    end
+
+    it 'updates the default users and makes them admins', db: true do
+      Factory[:user, uid: 'cac9']
+      repo.create_default_users
+      expect(repo.count).to eq(10)
+      expect(repo.find_by_uid('cac9')).not_to be_nil
+    end
+  end
 end

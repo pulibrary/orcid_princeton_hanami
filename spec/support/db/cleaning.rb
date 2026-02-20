@@ -25,12 +25,9 @@ RSpec.configure do |config|
     end
   end
 
-  config.before :each, :db do |example|
-    strategy = example.metadata[:js] ? :truncation : :transaction
-
+  config.before :each, :db do |_example|
     all_databases.call.each do |db|
-      DatabaseCleaner[:sequel, db: db].strategy = strategy
-      DatabaseCleaner[:sequel, db: db].start
+      DatabaseCleaner[:sequel, db: db].clean_with :truncation, except: ['schema_migrations']
     end
   end
 
