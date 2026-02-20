@@ -129,7 +129,7 @@ GEM
       dry-configurable (~> 1.0, < 2)
       dry-core (~> 1.0, < 2)
       dry-events (~> 1.0, < 2)
-    dry-operation (1.0.1)
+    dry-operation (1.1.0)
       dry-monads (~> 1.6)
       zeitwerk (~> 2.6)
     dry-schema (1.14.1)
@@ -550,7 +550,7 @@ GEM
       chronic (>= 0.6.3)
     xpath (3.2.0)
       nokogiri (~> 1.8)
-    zeitwerk (2.7.4)
+    zeitwerk (2.7.5)
 
 PLATFORMS
   aarch64-linux-gnu
