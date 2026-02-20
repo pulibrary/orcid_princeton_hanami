@@ -5,7 +5,7 @@
     "nodejs-slim@24.13.0",
     "yarn@1.22.22",
     "postgresql@15.7",
-    "libyaml@latest",
+    "libyaml@0.2.5",
     "libyaml.dev",
     "pkg-config@latest",
     "gcc@latest",
