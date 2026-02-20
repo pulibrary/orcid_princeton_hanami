@@ -54,5 +54,8 @@ module OrcidPrinceton
     setting :openssl_iv_len, default: 16, constructor: Types::Params::Integer
     setting :peoplesoft_output_location, default: '/mnt/peoplesoft/sr_orcid/prod/ORCID_portal_report.csv',
                                          constructor: Types::String
+
+    setting :admin_netids,
+            default: %w[abartelm bs3097 cac9 cl4928 hc8719 jh6441 jrg5 kl37 neggink rl3667], constructor: Types::Array
   end
 end

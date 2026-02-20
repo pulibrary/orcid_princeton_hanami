@@ -14,7 +14,7 @@ module OrcidPrinceton
 
       def admin_role
         role = roles.where(name: 'admin')&.first
-        if role.blank?
+        if role.nil?
           role = create(name: 'admin')
         end
         role
