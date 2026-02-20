@@ -16,7 +16,7 @@
     "jdk11@latest",
     "jq@latest",
     "chromedriver@latest",
-    "libmsgpack@latest"
+    "libmsgpack@3.3.0"
   ],
   "env": {
     "DEVBOX_BIN": "$PWD/.devbox/nix/profile/default/bin",
