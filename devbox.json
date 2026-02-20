@@ -14,7 +14,7 @@
     "bash@latest",
     "zsh@latest",
     "jdk11@latest",
-    "jq@latest",
+    "jq@1.8.1",
     "chromedriver@latest",
     "libmsgpack@latest"
   ],
