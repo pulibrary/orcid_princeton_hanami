@@ -150,6 +150,14 @@
             }
           ],
           "store_path": "/nix/store/avmmv6m9hbc51ddparihskqhpnx3jy96-chromedriver-144.0.7559.133"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "path": "/tmp/containerbase/cache/nix/store/21qlxkgniymr207ha03hh5c1sd6m5hi2-chromedriver-unwrapped-144.0.7559.132",
+              "default": true
+            }
+          ]
         }
       }
     },
@@ -237,9 +245,9 @@
         }
       }
     },
-    "git@latest": {
-      "last_modified": "2026-01-23T17:20:52Z",
-      "resolved": "github:NixOS/nixpkgs/a1bab9e494f5f4939442a57a58d0449a109593fe#git",
+    "git@2.52.0": {
+      "last_modified": "2026-02-15T17:45:47Z",
+      "resolved": "github:NixOS/nixpkgs/ac055f38c798b0d87695240c7b761b82fc7e5bc2#git",
       "source": "devbox-search",
       "version": "2.52.0",
       "systems": {
@@ -474,6 +482,14 @@
             }
           ],
           "store_path": "/nix/store/kl9yv2dppl8cbj2zy23lm7n8gppv4sp5-zulu-ca-jdk-11.0.24"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "path": "/tmp/containerbase/cache/nix/store/bmpmh904xwqsrx2n3hk6gaw8ykgwlf6s-openjdk-11.0.29+5",
+              "default": true
+            }
+          ]
         }
       }
     },
@@ -597,11 +613,32 @@
       "last_modified": "2022-02-15T04:21:50Z",
       "resolved": "github:NixOS/nixpkgs/3a641defd170a4ef25ce8c7c64cb13f91f867fca#libmsgpack",
       "source": "devbox-search",
-      "version": "3.3.0"
+      "version": "3.3.0",
+      "systems": {
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "path": "/tmp/containerbase/cache/nix/store/x5hb4p8iglbcavk0m0rlahq62r5fxdin-msgpack-3.3.0",
+              "default": true
+            }
+          ]
+        }
+      }
     },
     "libyaml.dev": {
       "resolved": "github:NixOS/nixpkgs/878e468e02bfabeda08c79250f7ad583037f2227#libyaml.dev",
-      "source": "nixpkg"
+      "source": "nixpkg",
+      "systems": {
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "dev",
+              "path": "/tmp/containerbase/cache/nix/store/qmri1yxg74hvnnxx9r8r8l79hskphbpj-libyaml-0.2.5-dev",
+              "default": true
+            }
+          ]
+        }
+      }
     },
     "libyaml@latest": {
       "last_modified": "2026-01-23T17:20:52Z",
