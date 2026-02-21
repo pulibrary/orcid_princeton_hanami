@@ -4,7 +4,7 @@
     "ruby@3.4.8",
     "nodejs-slim@24.13.0",
     "yarn@1.22.22",
-    "postgresql@15.7",
+    "postgresql@17.8",
     "libyaml@0.2.5",
     "libyaml.dev",
     "pkg-config@latest",
