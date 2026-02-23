@@ -110,6 +110,10 @@ RSpec.describe OrcidPrinceton::Repos::UserRepo do
       user = repo.get(rom_user.id)
       expect(user.roles).to eq([])
       user = repo.make_admin(user.id)
+      expect(user.roles.count).to eq(1)
+      expect(user.roles.first.name).to eq('admin')
+      user = repo.make_admin(user.id)
+      expect(user.roles.count).to eq(1)
       expect(user.roles.first.name).to eq('admin')
     end
   end
@@ -129,7 +133,10 @@ RSpec.describe OrcidPrinceton::Repos::UserRepo do
       Factory[:user, uid: 'cac9']
       repo.create_default_users
       expect(repo.count).to eq(10)
-      expect(repo.find_by_uid('cac9')).not_to be_nil
+      user = repo.find_by_uid('cac9')
+      expect(user).not_to be_nil
+      expect(user.roles.count).to eq(1)
+      expect(user.roles.first.name).to eq('admin')
     end
   end
 end

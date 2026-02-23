@@ -24,6 +24,9 @@ module OrcidPrinceton
       end
 
       def make_admin(id)
+        user = get(id)
+        return user if user.admin?
+
         # Find existing admin role
         # TODO: this can be a deps once the fix for https://github.com/hanami/hanami/pull/1523 is released
         role = OrcidPrinceton::Repos::RoleRepo.new.admin_role
