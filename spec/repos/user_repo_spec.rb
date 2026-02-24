@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe OrcidPrinceton::Repos::UserRepo do
+RSpec.describe OrcidPrinceton::Repos::UserRepo, :db do
   subject(:repo) do
     described_class.new
   end
@@ -90,7 +90,7 @@ RSpec.describe OrcidPrinceton::Repos::UserRepo do
     end
 
     context 'user is only partially set up' do
-      let(:user) { Factory[:user, given_name: ''] }
+      let(:user) { Factory[:user, given_name: nil] }
 
       it 'updates a users and sets the update time' do
         updated_user = repo.from_cas(auth_hash)

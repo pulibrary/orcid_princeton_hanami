@@ -35,4 +35,22 @@ namespace :users do
     users.delete_all_roles
     users.create_default_users
   end
+
+  desc 'load missing university ids from ldap'
+  task load_university_ids: :environment do
+    user_repo = OrcidPrinceton::Repos::UserRepo.new
+    operation = OrcidPrinceton::Operations::UserFromAttributes.new
+    blank_id_users = user_repo.users.where(university_id: nil)
+    if blank_id_users.count.positive?
+      puts "There are #{blank_id_users.count} blank university ids"
+      blank_id_users.each do |user|
+        operation.call(uid: user.uid,
+                       access_token: OmniAuth::AuthHash.new(provider: 'cas',
+                                                            uid: user.uid,
+                                                            extra: OmniAuth::AuthHash.new))
+      end
+    else
+      puts 'No ids need to be updated'
+    end
+  end
 end
