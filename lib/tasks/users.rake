@@ -29,11 +29,10 @@ namespace :users do
     OrcidPrinceton::Repos::UserRepo.new.create_default_users
   end
 
-  # TODO: Do we want this rake task in the future
-  # desc "Deletes existing user data and recreates the defaults."
-  # task reset_default: :environment do
-  #   Role.delete_all
-  #   User.delete_all
-  #   OrcidPrinceton::Repos::UserRepo.create_default_users
-  # end
+  desc 'Deletes existing user roles and recreates the defaults.'
+  task reset_default: :environment do
+    users = OrcidPrinceton::Repos::UserRepo.new
+    users.delete_all_roles
+    users.create_default_users
+  end
 end
