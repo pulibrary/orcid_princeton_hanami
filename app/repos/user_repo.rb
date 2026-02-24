@@ -76,6 +76,10 @@ module OrcidPrinceton
         end
       end
 
+      def delete_all_roles
+        users_roles.command(:delete).call
+      end
+
       private
 
       def token_to_attributes(access_token)
