@@ -73,43 +73,46 @@ Update the the environment variables either via [Princeton Ansible](https://gith
 
 ---
 
-## Converting the rails database
+## Hanami Console Examples
 
-Prior to utilizing the rails database for the hanami application you need convert the tokens in the [rails application](https://github.com/pulibrary/orcid_princeton/blob/main/lib/tasks/tokens.rake) and to update the migrations table.
-
-### Development
-
-In development to convert your rails database to be able to run with Hanami you need to run (the commands below assume the port returned in lando info is 51512 )
-
-```bash
-cd orcid_princeton
-bundle exec rake tokens:openssl
-cd orcid_princeton_hanami
-lando info
-psql --host 127.0.0.1 --username=postgres --port 51512 -d development_db < config/db/update_rails_migration.sql
+Open the console
+```
+bundle exec hanami console
 ```
 
-
-
-### Staging and Production 
-
-Before deploying the hanami application for the first time or in a rails release of the application on the server run the following to update the the encrypted tokens.
-
-
-```bash
-cd /opt/orcid_princeton/current
-bundle exec rake tokens:openssl
+### Create a User
+```
+user_repo = app["repos.user_repo"]
+user_repo.create(uid: "sss123", given_name: "Sally", family_name: "Smith")
 ```
 
-In staging and production the database information is stored in environment variables. To update the database you should run
-
-```bash
-cd /opt/orcid_princeton/current
-echo $APP_DB_PASSWORD
-psql --host $APP_DB_HOST --username=$APP_DB_USERNAME -d $APP_DB < config/db/update_rails_migration.sql
+### Read a User
+```
+user_repo = app["repos.user_repo"]
+user = user_repo.find_by_uid("sss123")
 ```
 
----
+### Update a User
+```
+user_repo = app["repos.user_repo"]
+user = user_repo.find_by_uid("sss123")
+user_repo.update(user.id, display_name: "Sally Smith")
+```
+
+### Delete a User
+ nothing in the application deletes users, so this is a bit more convoluted.  
+ 1. Access the users relation from the user_repo.  This is the ROM relation which allows queries ect.
+ 1. Query for the user you want to delete
+ 1. Create a command to delete the user
+ 1. call the command
+
+```
+user_repo = app["repos.user_repo"]
+users = user_repo.users
+command = users.where(uid: 'sss123').command(:delete)
+command.call
+```
+
 ## Local development
 
 ### Setup
