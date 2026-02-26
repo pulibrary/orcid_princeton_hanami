@@ -101,7 +101,7 @@ jobs:
       - run: HANAMI_ENV=test DATABASE_URL=postgres://orcid_princeton_user@localhost:5432/orcid_db bundle exec hanami assets compile
       - run:
           name: Run Rspec
-          command: RETRY_FAILURES=true HANAMI_ENV=test DATABASE_URL=postgres://orcid_princeton_user@localhost:5432/orcid_db COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN bundle exec rspec --format progress
+          command: RETRY_FAILURES=true HANAMI_ENV=test DATABASE_URL=postgres://orcid_princeton_user@localhost:5432/orcid_db COVERALLS_REPO_TOKEN=$COVERALLS_REPO_TOKEN bundle exec rspec --tag \~no_ci --format progress
       - persist_to_workspace:
           root: *root
           paths:

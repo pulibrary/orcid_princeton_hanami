@@ -318,6 +318,9 @@ GEM
     nenv (0.3.0)
     net-http (0.9.1)
       uri (>= 0.11.1)
+    net-ldap (0.20.0)
+      base64
+      ostruct
     net-scp (4.1.0)
       net-ssh (>= 2.6.5, < 8.0.0)
     net-sftp (4.0.0)
@@ -593,6 +596,7 @@ DEPENDENCIES
   honeybadger
   httparty
   net-http
+  net-ldap
   nokogiri (>= 1.18.9)
   omniauth-cas
   omniauth-orcid

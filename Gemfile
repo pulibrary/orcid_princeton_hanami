@@ -20,6 +20,7 @@ gem 'honeybadger'
 # TODO: why two different http gems?
 gem 'httparty'
 gem 'net-http'
+gem 'net-ldap'
 gem 'nokogiri', '>= 1.18.9'
 gem 'omniauth-cas'
 gem 'omniauth-orcid'

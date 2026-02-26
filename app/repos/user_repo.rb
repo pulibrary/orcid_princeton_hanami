@@ -47,14 +47,10 @@ module OrcidPrinceton
       def from_cas(access_token)
         return nil if access_token.nil?
 
-        user = find_by_uid(access_token.uid)
-        # create and persist the new model
-        if user.nil?
-          create(token_to_attributes(access_token))
-        elsif user.given_name.nil? || user.given_name.empty?
-          update(user.id, token_to_attributes(access_token))
-        else
-          user
+        result = OrcidPrinceton::Operations::UserFromAttributes.new.call(uid: access_token.uid,
+                                                                         access_token: access_token)
+        if result.instance_of?(Dry::Monads::Result::Success)
+          result.value!
         end
       end
 
@@ -78,16 +74,6 @@ module OrcidPrinceton
 
       def delete_all_roles
         users_roles.command(:delete).call
-      end
-
-      private
-
-      def token_to_attributes(access_token)
-        { uid: access_token.uid, university_id: access_token.extra.universityid,
-          email: access_token.extra.mail, provider: access_token.provider.to_s,
-          given_name: access_token.extra.givenname || access_token.uid,
-          family_name: access_token.extra.sn || access_token.uid,
-          display_name: access_token.extra.displayname || access_token.uid }
       end
     end
   end
