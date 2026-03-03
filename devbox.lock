@@ -457,7 +457,7 @@
         }
       }
     },
-    "jdk11@latest": {
+    "jdk11@11.0.24": {
       "last_modified": "2025-10-22T20:59:19Z",
       "resolved": "github:NixOS/nixpkgs/01b6809f7f9d1183a2b3e081f0a1e6f8f415cb09#jdk11",
       "source": "devbox-search",
