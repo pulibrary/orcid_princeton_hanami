@@ -292,18 +292,6 @@
   resolved "https://registry.yarnpkg.com/@esbuild/win32-x64/-/win32-x64-0.27.4.tgz#1f7ba71a3d6155d44a6faa8dbe249c62ab3e408c"
   integrity sha512-+knoa0BDoeXgkNvvV1vvbZX4+hizelrkwmGJBdT17t8FNPwG2lKemmuMZlmaNQ3ws3DKKCxpb4zRZEIp3UxFCg==
 
-"@isaacs/balanced-match@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.npmjs.org/@isaacs/balanced-match/-/balanced-match-4.0.1.tgz"
-  integrity sha512-yzMTt9lEb8Gv7zRioUilSglI0c0smZ9k5D65677DLWLtWJaXIS3CqcGyUFByYKlnUj6TkjLVs54fBl6+TiGQDQ==
-
-"@isaacs/brace-expansion@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.npmjs.org/@isaacs/brace-expansion/-/brace-expansion-5.0.1.tgz"
-  integrity sha512-WMz71T1JS624nWj2n2fnYAuPovhv7EUhk69R6i9dsVyzxt5eM3bjwvgk9L+APE1TRscGysAVMANkB0jh0LQZrQ==
-  dependencies:
-    "@isaacs/balanced-match" "^4.0.1"
-
 "@isaacs/cliui@^9.0.0":
   version "9.0.0"
   resolved "https://registry.npmjs.org/@isaacs/cliui/-/cliui-9.0.0.tgz"
@@ -408,6 +396,18 @@
   version "3.5.30"
   resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.5.30.tgz#5d7a0d3ca151647484303fd9f057e2e13ecb80ef"
   integrity sha512-YXgQ7JjaO18NeK2K9VTbDHaFy62WrObMa6XERNfNOkAhD1F1oDSf3ZJ7K6GqabZ0BvSDHajp8qfS5Sa2I9n8uQ==
+
+balanced-match@^4.0.2:
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-4.0.4.tgz#bfb10662feed8196a2c62e7c68e17720c274179a"
+  integrity sha512-BLrgEcRTwX2o6gGxGOCNyMvGSp35YofuYzw9h1IMTRmKqttAZZVU67bdb9Pr2vUHA8+j3i2tJfjO6C6+4myGTA==
+
+brace-expansion@^5.0.2:
+  version "5.0.4"
+  resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-5.0.4.tgz#614daaecd0a688f660bbbc909a8748c3d80d4336"
+  integrity sha512-h+DEnpVvxmfVefa4jFbCf5HdH5YMDXRsmKflpf1pILZWRFlTbJpxeU55nJl4Smt5HQaGzg1o6RHFPJaOqnmBDg==
+  dependencies:
+    balanced-match "^4.0.2"
 
 core-js@^3.8.3:
   version "3.45.0"
@@ -614,11 +614,11 @@ magic-string@^0.30.21:
     "@jridgewell/sourcemap-codec" "^1.5.5"
 
 minimatch@^10.1.1:
-  version "10.1.2"
-  resolved "https://registry.npmjs.org/minimatch/-/minimatch-10.1.2.tgz"
-  integrity sha512-fu656aJ0n2kcXwsnwnv9g24tkU5uSmOlTjd6WyyaKm2Z+h1qmY6bAjrcaIxF/BslFqbZ8UBtbJi7KgQOZD2PTw==
+  version "10.2.4"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-10.2.4.tgz#465b3accbd0218b8281f5301e27cedc697f96fde"
+  integrity sha512-oRjTw/97aTBN0RHbYCdtF1MQfvusSIBQM0IZEgzl6426+8jSC0nF1a/GmnVLpfB9yyr6g6FTqWqiZVbxrtaCIg==
   dependencies:
-    "@isaacs/brace-expansion" "^5.0.1"
+    brace-expansion "^5.0.2"
 
 minipass@^7.1.2:
   version "7.1.2"
