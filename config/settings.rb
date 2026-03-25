@@ -37,9 +37,10 @@ module OrcidPrinceton
           end
         end
     end
+    default_secret = '__local_development_secret_only____local_development_secret_only__'
 
     setting :database_url, default: database_url, constructor: Types::String
-    setting :session_secret, default: '__local_development_secret_only__', constructor: Types::String
+    setting :session_secret, default: default_secret, constructor: Types::String
     setting :cas_url, constructor: Types::String
     setting :cas_host, constructor: Types::String
     setting :original_omniauth_failure, default: '', constructor: Types::String
