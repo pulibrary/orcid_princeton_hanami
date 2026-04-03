@@ -80,19 +80,37 @@ If you are dealing with a database failure of some kind and need to restore a da
    exit
    ```
    *If you are restoring on your local system CTRL-C the rails server*
-1. On the database server  wait until the connections have closed. You can check for active connections with 
+1. On the database server  wait until the connections have closed. You can check for active connections with
+   For Production
    ```
    ssh pulsys@lib-postgres-prod1.princeton.edu
    ps aux | grep postgres | grep <database-name>
    ```
-1. ~~The restore process is designed to drop the original database and recreate it before restoring the tables from the backup, but right now those tasks fail, so we need to do them manually.~~ We want to test if this is still true **skip for now**
+   For Production
+   ```
+   ssh pulsys@lib-postgres-prod1.princeton.edu
+   ps aux | grep postgres | grep <database-name>
+   ```
+1. The restore process is designed to drop the original database and recreate it before restoring the tables from the backup, but right now those tasks fail, so we need to do them manually.
     1. On the database server, as the postgres user, manually drop the existing/old/corrupted database:
+       For Production
          ```bash
-         dropdb <database-name>
+         sudo su - postgres
+         dropdb orcid_prod
+         ```
+       For Staging
+         ```bash
+         sudo su - postgres
+         dropdb orcid_staging
          ```
     1. On the database server, as the postgres user, manually recreate an empty database to restore to:
+       For Production
+        ```bash
+         createdb -O orcid_staging orcid_staging
+         ```
+       For Staging
          ```bash
-         createdb -O <database-name> <database-owner>
+         createdb -O orcid_staging orcid_staging
          ```
 1. On the web server, run the command to restore the tables from the backup file - the command passes the correct database owner: **Note** The password will be on the sccreen from the cat command
      For Production
