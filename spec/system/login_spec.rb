@@ -24,7 +24,7 @@ RSpec.describe 'Login link is part of the layout', type: :system, js: true do
     it 'shows the logged in user info' do
       login_as user.uid
       visit '/health'
-      expect(page).to have_content  user.uid
+      expect(page).to have_content user.uid
     end
   end
 end
