@@ -13,11 +13,11 @@
                 ></lux-menu-bar>
             </lux-library-header>
         <% elsif current_user %>
-
+        byebug
             <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
                 <lux-menu-bar type="main-menu" :menu-items="[
-                {name: 'Home', component: 'Home', href: '/health'},
-                    {name: '<%= current_user.display_name %>', component: 'Account', href: '/account/', children: [
+                {name: 'Home', component: 'Home', href: '/'},
+                    {name: '<%= current_user.uid %>', component: 'Account', href: '/account/', children: [
                       {name: 'Profile', component: 'Feedback', href: '<%= routes.path(:user, id: current_user.id) %>'},
                       {name: 'Logout', component: 'Logout', href: '<%= routes.path(:logout) %>'}
                     ]}

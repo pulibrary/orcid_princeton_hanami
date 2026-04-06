@@ -14,7 +14,17 @@ RSpec.describe 'Login link is part of the layout', type: :system, js: true do
     it 'shows the logged in user info' do
       login_as user.uid
       visit '/health'
-      expect(page).to have_content user.display_name
+      expect(page).to have_content user.uid
+    end
+  end
+
+  context 'a user with an apostrophe in their family name is logged in' do
+    let(:user) { Factory[:user_with_apostrophe] }
+
+    it 'shows the logged in user info' do
+      login_as user.uid
+      visit '/health'
+      expect(page).to have_content  user.uid
     end
   end
 end
