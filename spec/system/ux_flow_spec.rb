@@ -23,7 +23,7 @@ RSpec.describe 'user experience from start to finish', type: :system, js: true d
         .according_to(:wcag2a, :wcag2aa, :wcag21a, :wcag21aa, :section508, :"best-practice")
       expect(page).to have_content(user.display_name)
       # Expand the user menu dropdown
-      click_on user.display_name.to_s
+      click_on user.uid.to_s
       click_on 'Profile'
 
       # The user is redirected to the user page after logging in.

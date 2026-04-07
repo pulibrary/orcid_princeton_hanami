@@ -6,7 +6,19 @@ Factory.define(:user) do |f|
   f.sequence(:uid) { "uid#{srand}" }
   f.provider { 'cas' }
   f.given_name { FFaker::Name.first_name }
-  f.family_name { FFaker::Name.last_name }
+  f.family_name { 'Smith' }
+  f.display_name { |given_name, family_name| "#{given_name} #{family_name}" }
+  f.university_id { '999999999' }
+  f.orcid { '' }
+  f.timestamps
+  # f.roles { [] }
+end
+
+Factory.define(user_with_apostrophe: :user) do |f|
+  f.sequence(:uid) { "uid#{srand}" }
+  f.provider { 'cas' }
+  f.given_name { FFaker::Name.first_name }
+  f.family_name { "O'Smith" }
   f.display_name { |given_name, family_name| "#{given_name} #{family_name}" }
   f.university_id { '999999999' }
   f.orcid { '' }
