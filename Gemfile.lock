@@ -25,12 +25,12 @@ GEM
     airbrussh (1.6.0)
       sshkit (>= 1.6.1, != 1.7.0)
     ast (2.4.3)
-    axe-core-api (4.11.2)
+    axe-core-api (4.11.3)
       dumb_delegator
       ostruct
       virtus
-    axe-core-rspec (4.11.2)
-      axe-core-api (= 4.11.2)
+    axe-core-rspec (4.11.3)
+      axe-core-api (= 4.11.3)
       dumb_delegator
       ostruct
       virtus
