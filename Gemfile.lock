@@ -40,7 +40,6 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     base64 (0.3.0)
     bcrypt_pbkdf (1.1.2)
-    bcrypt_pbkdf (1.1.2-arm64-darwin)
     benchmark (0.4.1)
     better_errors (2.10.1)
       erubi (>= 1.0.0)
