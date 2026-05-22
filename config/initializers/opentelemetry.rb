@@ -3,18 +3,11 @@
 require 'opentelemetry/sdk'
 require 'opentelemetry/exporter/otlp'
 require 'opentelemetry/instrumentation/rack'
-require 'opentelemetry/instrumentation/rails'
-require 'opentelemetry/instrumentation/active_record'
-require 'opentelemetry/instrumentation/action_pack'
+require 'opentelemetry/instrumentation/net/http'
 
 OpenTelemetry::SDK.configure do |c|
-  c.service_name = ENV.fetch('OTEL_SERVICE_NAME', 'pulmap')
+  c.service_name = ENV.fetch('OTEL_SERVICE_NAME', 'orcid')
 
-  c.use 'OpenTelemetry::Instrumentation::Rails'
   c.use 'OpenTelemetry::Instrumentation::Rack'
-  c.use 'OpenTelemetry::Instrumentation::ActiveRecord'
-  c.use 'OpenTelemetry::Instrumentation::ActionPack'
-
-  # Do not enable this for now:
-  # c.use 'OpenTelemetry::Instrumentation::Net::HTTP'
+  c.use 'OpenTelemetry::Instrumentation::Net::HTTP'
 end
