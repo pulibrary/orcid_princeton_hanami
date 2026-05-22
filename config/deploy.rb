@@ -15,6 +15,11 @@ set :deploy_to, '/opt/orcid_princeton'
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
+set :ssh_options, {
+  keys: %w[~/.ssh/id_ed25519_pul_desktop_2025-08-26],
+  auth_methods: %w[publickey]
+}
+
 
 # You can configure the Airbrussh format using :format_options.
 # These are the defaults.
