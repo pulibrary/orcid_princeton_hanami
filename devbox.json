@@ -10,7 +10,7 @@
     "pkg-config@latest",
     "gcc@15.2.0",
     "gnumake@4.4.1",
-    "git@2.53.0",
+    "git@2.54.0",
     "bash@latest",
     "zsh@latest",
     "jdk11@11.0.24",
