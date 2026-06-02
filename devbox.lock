@@ -161,87 +161,87 @@
         }
       }
     },
-    "gcc@15.2.0": {
+    "gcc@16.1.0": {
       "last_modified": "2026-05-21T08:15:18Z",
-      "resolved": "github:NixOS/nixpkgs/4a29d733e8a7d5b824c3d8c958a946a9867b3eb2#gcc",
+      "resolved": "github:NixOS/nixpkgs/4a29d733e8a7d5b824c3d8c958a946a9867b3eb2#gcc16",
       "source": "devbox-search",
-      "version": "15.2.0",
+      "version": "16.1.0",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/b6igqq05cjkm04jar9b4p3rkp9abcpxi-gcc-wrapper-15.2.0",
+              "path": "/nix/store/rxibjsv6kbn68yv4yxm2j7gpjpzqxylm-gcc-wrapper-16.1.0",
               "default": true
             },
             {
               "name": "man",
-              "path": "/nix/store/brg9p7mk8cnpqyn6l095cp87164scybj-gcc-wrapper-15.2.0-man",
+              "path": "/nix/store/9zslvcy97r8gdv6j67fvbvzz85s98dfz-gcc-wrapper-16.1.0-man",
               "default": true
             },
             {
               "name": "info",
-              "path": "/nix/store/hnw7ac1xs560iykqz0bcpvpkwckjvdwh-gcc-wrapper-15.2.0-info"
+              "path": "/nix/store/yrf34jg30y5znsllb2skx7cq2x2faxjk-gcc-wrapper-16.1.0-info"
             }
           ],
-          "store_path": "/nix/store/b6igqq05cjkm04jar9b4p3rkp9abcpxi-gcc-wrapper-15.2.0"
+          "store_path": "/nix/store/rxibjsv6kbn68yv4yxm2j7gpjpzqxylm-gcc-wrapper-16.1.0"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/vsj0kl98ggilv1nq2gvxwrk12w2lgvjy-gcc-wrapper-15.2.0",
+              "path": "/nix/store/435jmzq063lkllbzrncw8c2frp772zal-gcc-wrapper-16.1.0",
               "default": true
             },
             {
               "name": "man",
-              "path": "/nix/store/ix6iqra08cyg0x3lcd671cimz2kk5bdk-gcc-wrapper-15.2.0-man",
+              "path": "/nix/store/7301n7w2g1x5z211gcxz4gmzaaykykis-gcc-wrapper-16.1.0-man",
               "default": true
             },
             {
               "name": "info",
-              "path": "/nix/store/y01as0p9m8ksp0gw07fkcfyc7ys5j515-gcc-wrapper-15.2.0-info"
+              "path": "/nix/store/xln7vgjrqcv00p53c62914r8nw3ar34x-gcc-wrapper-16.1.0-info"
             }
           ],
-          "store_path": "/nix/store/vsj0kl98ggilv1nq2gvxwrk12w2lgvjy-gcc-wrapper-15.2.0"
+          "store_path": "/nix/store/435jmzq063lkllbzrncw8c2frp772zal-gcc-wrapper-16.1.0"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/q5dy2amk2l7rq23gq7hi6kxsb520gd5p-gcc-wrapper-15.2.0",
+              "path": "/nix/store/2swyyj4x870fql28jgbd838xi3qhzj4x-gcc-wrapper-16.1.0",
               "default": true
             },
             {
               "name": "man",
-              "path": "/nix/store/2q2jzxbhdbqn7q4bw6h7ql2vpra4nxmx-gcc-wrapper-15.2.0-man",
+              "path": "/nix/store/chw8n9c9kafifh1rnmcni9hjlnzq6cgl-gcc-wrapper-16.1.0-man",
               "default": true
             },
             {
               "name": "info",
-              "path": "/nix/store/icsmawdpqplpibq89mzxnhv39wyws20b-gcc-wrapper-15.2.0-info"
+              "path": "/nix/store/vpi9cwhpvjr200aqwryl16nbsypv7isi-gcc-wrapper-16.1.0-info"
             }
           ],
-          "store_path": "/nix/store/q5dy2amk2l7rq23gq7hi6kxsb520gd5p-gcc-wrapper-15.2.0"
+          "store_path": "/nix/store/2swyyj4x870fql28jgbd838xi3qhzj4x-gcc-wrapper-16.1.0"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/788mx070y81zjlg5ipcl0cra3afviw9k-gcc-wrapper-15.2.0",
+              "path": "/nix/store/1yyps6cg0vyigp1q6iyy92l2habli99s-gcc-wrapper-16.1.0",
               "default": true
             },
             {
               "name": "man",
-              "path": "/nix/store/r35yg8h1w630r3lmnyglwhv5nvk284mx-gcc-wrapper-15.2.0-man",
+              "path": "/nix/store/xi0rbkik9hai1b4yf853j6gmky7v6lld-gcc-wrapper-16.1.0-man",
               "default": true
             },
             {
               "name": "info",
-              "path": "/nix/store/5b0hplrl0n9g159mcis4jca1fjd4822a-gcc-wrapper-15.2.0-info"
+              "path": "/nix/store/ydqkn5iwm5d50491nal33rn4wm8f76kl-gcc-wrapper-16.1.0-info"
             }
           ],
-          "store_path": "/nix/store/788mx070y81zjlg5ipcl0cra3afviw9k-gcc-wrapper-15.2.0"
+          "store_path": "/nix/store/1yyps6cg0vyigp1q6iyy92l2habli99s-gcc-wrapper-16.1.0"
         }
       }
     },
