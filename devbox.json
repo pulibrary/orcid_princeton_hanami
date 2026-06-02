@@ -8,7 +8,6 @@
     "libyaml@0.2.5",
     "libyaml.dev",
     "pkg-config@latest",
-    "gcc@16.1.0",
     "gnumake@4.4.1",
     "git@2.54.0",
     "bash@latest",
@@ -16,7 +15,8 @@
     "jdk11@11.0.24",
     "jq@1.8.1",
     "chromedriver@latest",
-    "libmsgpack@3.3.0"
+    "libmsgpack@3.3.0",
+    "gcc@15.2.0"
   ],
   "env": {
     "DEVBOX_BIN": "$PWD/.devbox/nix/profile/default/bin",
