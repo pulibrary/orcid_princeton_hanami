@@ -8,7 +8,6 @@
     "libyaml@0.2.5",
     "libyaml.dev",
     "pkg-config@latest",
-    "gcc@16.1.0",
     "gnumake@4.4.1",
     "git@2.54.0",
     "bash@latest",
@@ -16,32 +15,33 @@
     "jdk11@11.0.24",
     "jq@1.8.1",
     "chromedriver@latest",
-    "libmsgpack@3.3.0"
+    "libmsgpack@3.3.0",
+    "gcc@15.2.0"
   ],
   "env": {
-    "DEVBOX_BIN": "$PWD/.devbox/nix/profile/default/bin",
-    "PATH": "$PWD/.devbox/nix/profile/default/bin:$PATH",
+    "DEVBOX_BIN":              "$PWD/.devbox/nix/profile/default/bin",
+    "PATH":                    "$PWD/.devbox/nix/profile/default/bin:$PATH",
     "DEVBOX_COREPACK_ENABLED": "true",
-    "TMPDIR": "/private/tmp/orcid_princeton_hanami",
-    "LD_LIBRARY_PATH": "$PWD/.devbox/nix/profile/default/lib",
-    "FONTCONFIG_PATH": "$PWD/.devbox/nix/profile/default/etc/fonts",
-    "BUNDLE_PATH": ".bundle",
-    "BUNDLE_BIN": ".binstubs",
-    "PATH": ".binstubs:bin:$PATH"
+    "TMPDIR":                  "/private/tmp/orcid_princeton_hanami",
+    "LD_LIBRARY_PATH":         "$PWD/.devbox/nix/profile/default/lib",
+    "FONTCONFIG_PATH":         "$PWD/.devbox/nix/profile/default/etc/fonts",
+    "BUNDLE_PATH":             ".bundle",
+    "BUNDLE_BIN":              ".binstubs",
+    "PATH":                    ".binstubs:bin:$PATH"
   },
   "shell": {
     "init_hook": ["echo 'initializing devbox'"],
     "scripts": {
-      "setup": "devbox run deps",
-      "deps": "bundle install; yarn install",
-      "server": "bin/dev",
-      "console": "bundle exec hanami console",
-      "lint": "bundle exec rubocop",
-      "test": "bundle exec rspec",
+      "setup":         "devbox run deps",
+      "deps":          "bundle install; yarn install",
+      "server":        "bin/dev",
+      "console":       "bundle exec hanami console",
+      "lint":          "bundle exec rubocop",
+      "test":          "bundle exec rspec",
       "test:headless": "if command -v chromedriver >/dev/null 2>&1 && (command -v chromium >/dev/null 2>&1 || command -v chromium-browser >/dev/null 2>&1 || command -v google-chrome >/dev/null 2>&1); then WEBDRIVER_CHROME_DRIVER=$(command -v chromedriver) CHROME_BIN=$(command -v chromium || command -v chromium-browser || command -v google-chrome) bundle exec rspec; else echo 'Chromium/Chrome + chromedriver not found; skipping headless browser tests.' && exit 0; fi",
-      "cap:staging": "bundle exec cap staging deploy",
-      "cap:prod": "bundle exec cap production deploy",
-      "fmt:devbox": "jq '.' devbox.json > devbox.json.tmp && mv devbox.json.tmp devbox.json"
+      "cap:staging":   "bundle exec cap staging deploy",
+      "cap:prod":      "bundle exec cap production deploy",
+      "fmt:devbox":    "jq '.' devbox.json > devbox.json.tmp && mv devbox.json.tmp devbox.json"
     }
   }
 }
