@@ -8,7 +8,7 @@
     "libyaml@0.2.5",
     "libyaml.dev",
     "pkg-config@latest",
-    "gcc@15.2.0",
+    "gcc@16.1.0",
     "gnumake@4.4.1",
     "git@2.54.0",
     "bash@latest",
