@@ -15,6 +15,7 @@ set :deploy_to, '/opt/orcid_princeton'
 
 # Default value for :format is :airbrussh.
 # set :format, :airbrussh
+append :linked_files, '.otel.env'
 
 # You can configure the Airbrussh format using :format_options.
 # These are the defaults.
