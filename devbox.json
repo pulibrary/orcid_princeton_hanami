@@ -2,21 +2,21 @@
   "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.14.0/.schema/devbox.schema.json",
   "packages": [
     "ruby@3.4.9",
-    "nodejs-slim@25.8.1",
+    "nodejs-slim@26.2.0",
     "yarn@1.22.22",
     "postgresql@15.7",
     "libyaml@0.2.5",
     "libyaml.dev",
     "pkg-config@latest",
-    "gcc@15.2.0",
     "gnumake@4.4.1",
-    "git@2.53.0",
+    "git@2.54.0",
     "bash@latest",
     "zsh@latest",
     "jdk11@11.0.24",
     "jq@1.8.1",
     "chromedriver@latest",
-    "libmsgpack@3.3.0"
+    "libmsgpack@3.3.0",
+    "gcc@15.2.0"
   ],
   "env": {
     "DEVBOX_BIN": "$PWD/.devbox/nix/profile/default/bin",

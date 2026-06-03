@@ -292,9 +292,8 @@ GEM
       binding_of_caller (~> 1.0)
     hansi (0.2.1)
     hashdiff (1.2.1)
-    hashie (5.1.0)
-      logger
-    honeybadger (6.6.1)
+    hashie (5.0.0)
+    honeybadger (6.6.2)
       logger
       ostruct
     httparty (0.24.2)
@@ -591,7 +590,7 @@ GEM
       date
       stringio
     public_suffix (7.0.5)
-    puma (7.2.0)
+    puma (7.2.1)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (3.2.6)
@@ -676,7 +675,7 @@ GEM
     rspec-retry (0.6.2)
       rspec-core (> 3.3)
     rspec-support (3.13.7)
-    rubocop (1.86.2)
+    rubocop (1.87.0)
       json (~> 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
