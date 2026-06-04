@@ -1,4 +1,10 @@
+---
 inherit_from: .rubocop_todo.yml
+
+AllCops:
+  NewCops: enable
+  TargetRubyVersion: 3.4
+
 Style/GuardClause:
   Enabled: false
 Style/IfUnlessModifier:
