@@ -10,8 +10,8 @@
 # This cop supports safe autocorrection (--autocorrect).
 Layout/EmptyLinesAfterModuleInclusion:
   Exclude:
-    - 'app/actions/user/show.rb'
-    - 'spec/support/warden.rb'
+    - "app/actions/user/show.rb"
+    - "spec/support/warden.rb"
 
 # Offense count: 2
 # This cop supports safe autocorrection (--autocorrect).
@@ -19,7 +19,7 @@ Layout/EmptyLinesAfterModuleInclusion:
 # SupportedStyles: space, no_space
 Layout/LineContinuationSpacing:
   Exclude:
-    - 'spec/operations/orcid_api_status_spec.rb'
+    - "spec/operations/orcid_api_status_spec.rb"
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
@@ -27,19 +27,19 @@ Layout/LineContinuationSpacing:
 # SupportedStyles: aligned, indented
 Layout/LineEndStringConcatenationIndentation:
   Exclude:
-    - 'config/settings.rb'
+    - "config/settings.rb"
 
 # Offense count: 1
 # This cop supports safe autocorrection (--autocorrect).
 Lint/DuplicateRegexpCharacterClassElement:
   Exclude:
-    - 'app/service/version_footer.rb'
+    - "app/service/version_footer.rb"
 
 # Offense count: 1
 # Configuration parameters: AllowComments, AllowEmptyLambdas.
 Lint/EmptyBlock:
   Exclude:
-    - 'config/app.rb'
+    - "config/app.rb"
 
 # Offense count: 3
 # This cop supports safe autocorrection (--autocorrect).
@@ -47,9 +47,9 @@ Lint/EmptyBlock:
 # SupportedStyles: strict, consistent
 Lint/SymbolConversion:
   Exclude:
-    - 'spec/actions/orcid/create_spec.rb'
-    - 'spec/actions/orcid/failure_spec.rb'
-    - 'spec/actions/session/create_spec.rb'
+    - "spec/actions/orcid/create_spec.rb"
+    - "spec/actions/orcid/failure_spec.rb"
+    - "spec/actions/session/create_spec.rb"
 
 # Offense count: 24
 # Configuration parameters: CountComments, CountAsOne, AllowedMethods, AllowedPatterns.
@@ -65,24 +65,24 @@ Metrics/BlockLength:
 # RedundantBlockArgumentNames: blk, block, proc
 Style/ArgumentsForwarding:
   Exclude:
-    - 'app/view.rb'
+    - "app/view.rb"
 
 # Offense count: 2
 # This cop supports unsafe autocorrection (--autocorrect-all).
 Style/CollectionQuerying:
   Exclude:
-    - 'app/views/user/show.rb'
-    - 'lib/tasks/users.rake'
+    - "app/views/user/show.rb"
+    - "lib/tasks/users.rake"
 
 # Offense count: 6
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: AllowSplatArgument.
 Style/HashConversion:
   Exclude:
-    - 'spec/actions/admin/orcid_report_spec.rb'
-    - 'spec/actions/session/destroy_spec.rb'
-    - 'spec/actions/user/show_spec.rb'
-    - 'spec/actions/user/validate_tokens_spec.rb'
+    - "spec/actions/admin/orcid_report_spec.rb"
+    - "spec/actions/session/destroy_spec.rb"
+    - "spec/actions/user/show_spec.rb"
+    - "spec/actions/user/validate_tokens_spec.rb"
 
 # Offense count: 15
 # This cop supports safe autocorrection (--autocorrect).
@@ -90,16 +90,16 @@ Style/HashConversion:
 # SupportedStyles: same_as_string_literals, single_quotes, double_quotes
 Style/QuotedSymbols:
   Exclude:
-    - 'spec/actions/orcid/create_spec.rb'
-    - 'spec/actions/orcid/failure_spec.rb'
-    - 'spec/actions/session/create_spec.rb'
-    - 'spec/operations/orcid_api_status_spec.rb'
-    - 'spec/requests/health_spec.rb'
-    - 'spec/system/ux_flow_spec.rb'
+    - "spec/actions/orcid/create_spec.rb"
+    - "spec/actions/orcid/failure_spec.rb"
+    - "spec/actions/session/create_spec.rb"
+    - "spec/operations/orcid_api_status_spec.rb"
+    - "spec/requests/health_spec.rb"
+    - "spec/system/ux_flow_spec.rb"
 
 # Offense count: 4
 # This cop supports unsafe autocorrection (--autocorrect-all).
 # Configuration parameters: Methods.
 Style/RedundantArgument:
   Exclude:
-    - 'app/service/version_footer.rb'
+    - "app/service/version_footer.rb"
