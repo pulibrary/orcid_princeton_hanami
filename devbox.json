@@ -33,7 +33,7 @@
     "init_hook": ["echo 'initializing devbox'"],
     "scripts": {
       "setup": "devbox run deps",
-      "deps": "bundle install; yarn install",
+      "deps": "mkdir -p $TMPDIR; bundle install; yarn install",
       "server": "bin/dev",
       "console": "bundle exec hanami console",
       "lint": "bundle exec rubocop",
