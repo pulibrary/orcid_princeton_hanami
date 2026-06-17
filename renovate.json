@@ -16,9 +16,15 @@
   "lockFileMaintenance": {
     "enabled": true
   },
+  "osvVulnerabilityAlerts": true,
   "minimumReleaseAge": "14 days",
+  "postUpdateOptions": [
+    "bundlerConservative",
+    "yarnDedupeHighest"
+  ],
   "packageRules": [
     {
+      "description": "Ensure that only the specified release of the Postgres Docker Image is used.",
       "matchDatasources": [
         "docker"
       ],
@@ -28,10 +34,20 @@
       ]
     },
     {
+      "description": "Ensure that the latest stable releases of Ruby Gems are used.",
       "matchManagers": [
         "bundler"
       ],
       "rangeStrategy": "update-lockfile"
+    },
+    {
+      "description": "Group major Rails framework updates together.",
+      "matchManagers": [
+        "bundler"
+      ],
+      "matchPackagePatterns": ["^rails$", "^action", "^active", "^railties$"],
+      "matchUpdateTypes": ["major"],
+      "groupName": "Ruby on Rails Ecosystem"
     }
   ],
   "prHourlyLimit": 3

@@ -71,23 +71,27 @@ Update the the environment variables either via [Princeton Ansible](https://gith
 ## Hanami Console Examples
 
 Open the console
+
 ```
 bundle exec hanami console
 ```
 
 ### Create a User
+
 ```
 user_repo = app["repos.user_repo"]
 user_repo.create(uid: "sss123", given_name: "Sally", family_name: "Smith")
 ```
 
 ### Read a User
+
 ```
 user_repo = app["repos.user_repo"]
 user = user_repo.find_by_uid("sss123")
 ```
 
 ### Update a User
+
 ```
 user_repo = app["repos.user_repo"]
 user = user_repo.find_by_uid("sss123")
@@ -95,7 +99,9 @@ user_repo.update(user.id, display_name: "Sally Smith")
 ```
 
 ### Delete a User
+
  nothing in the application deletes users, so this is a bit more convoluted.  
+
  1. Access the users relation from the user_repo.  This is the ROM relation which allows queries ect.
  1. Query for the user you want to delete
  1. Create a command to delete the user
@@ -111,6 +117,7 @@ command.call
 ## Local development
 
 ### Setup
+
 1. Check out code and `cd`
 1. Install tool dependencies; If you've worked on other PUL projects they will already be installed.
     1. [Lando](https://docs.lando.dev/getting-started/installation.html)
@@ -120,6 +127,7 @@ command.call
     1. `devbox run setup`
 
 ### Starting / stopping services
+
 We use lando to run services required for both test and development environments.
 
 Start and initialize database services with:
@@ -135,6 +143,7 @@ To stop database services:
 `lando stop`
 
 ### Running tests
+
 1. Fast: `bundle exec rspec spec`
 2. Run in browser: `RUN_IN_BROWSER=true bundle exec rspec spec`
 
@@ -147,11 +156,13 @@ Hanami runs by default at the port 2300, but we have made this application run a
 1. Access application at [http://localhost:3000/](http://localhost:3000/)
 
 ### ORCID Environment variables
+
 You need to have the following variables in your environment to connect with the ORCID sandbox.  Actual values are in lastpass under "ORCID Local API key".
 export ORCID_CLIENT_ID="xxx"
 export ORCID_CLIENT_SECRET="xxx"
 
 ### environment files
+
  With Hanami environment variables for development and test are put in `.env` & `.env.test` or `.env.dev` files.  You can keep secret information in  `.env.dev.local` if you like or set them up as environment variables/
 
 ## Dependency Updates (Renovate)
@@ -161,11 +172,12 @@ We use [Renovate](https://github.com/renovatebot/renovate) to automate dependenc
 ### Configuration Details
 
 The Renovate configuration is located in [renovate.json](./renovate.json) and contains the following rules and behaviors:
-- **Enabled Managers:** `asdf`, `bundler`, `circleci`, `docker-compose`, `dockerfile`, and `npm` (which handles both NPM and Yarn packages).
-- **Stability Guard:** Renovate will wait **14 days** after a dependency is released before proposing an update.
-- **Lockfile Maintenance:** Renovate automatically performs regular lockfile maintenance to keep lockfiles clean and optimized.
-- **Postgres Safety:** Automated updates for Postgres Docker images are explicitly disabled to prevent unexpected breaking database changes in local development environments.
-- **Range Strategy (Ruby):** Configured to perform `update-lockfile` updates on `Gemfile.lock` while keeping the `Gemfile` floating.
+
+* **Enabled Managers:** `asdf`, `bundler`, `circleci`, `docker-compose`, `dockerfile`, and `npm` (which handles both NPM and Yarn packages).
+* **Stability Guard:** Renovate will wait **14 days** after a dependency is released before proposing an update.
+* **Lockfile Maintenance:** Renovate automatically performs regular lockfile maintenance to keep lockfiles clean and optimized.
+* **Postgres Safety:** Automated updates for Postgres Docker images are explicitly disabled to prevent unexpected breaking database changes in local development environments.
+* **Range Strategy (Ruby):** Configured to perform `update-lockfile` updates on `Gemfile.lock` while keeping the `Gemfile` floating.
 
 ### Validating Renovate Configuration
 
@@ -177,11 +189,20 @@ yarn run renovate:validate
 
 This runs the official `renovate-config-validator` utility to check your configuration for syntax issues and invalid options before pushing your branch.
 
+### Testing the Renovate Configuration
+
+This tests the Renovate configuration settings for the GitHub repository. Please note that this requires Node.js 24 releases to successfully run:
+
+```bash
+LOG_LEVEL=debug RENOVATE_TOKEN=$GH_TOKEN yarn run renovate --dry-run=full pulibrary/orcid_princeton_hanami
+```
+
 ## Release and deployment
 
 RDSS uses the same [release and deployment process](https://github.com/pulibrary/rdss-handbook/blob/main/release_process.md) for all projects.
 
 ## Monitoring
+
 You can view the ORCID [Honeybadger Uptime check](https://app.honeybadger.io/projects/114910/sites/e8dbf0b6-00b3-4b71-afb2-5ce88138a9a6). Currently it checks every minute and will report downtime when two checks fail in a row (i.e. we should know within 2 minutes).
 
 To be notified of downtime enable notifications in Honeybadger under: Settings + Alerts & Integrtions + email (Edit). Enable notifications for "Uptime Events" for "ORCID Production". Notice that email notifications settings are *per project*.
