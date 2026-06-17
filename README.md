@@ -154,6 +154,29 @@ export ORCID_CLIENT_SECRET="xxx"
 ### environment files
  With Hanami environment variables for development and test are put in `.env` & `.env.test` or `.env.dev` files.  You can keep secret information in  `.env.dev.local` if you like or set them up as environment variables/
 
+## Dependency Updates (Renovate)
+
+We use [Renovate](https://github.com/renovatebot/renovate) to automate dependency updates across this repository. It is configured to run on a regular schedule and manage package managers like Bundler (`Gemfile`), npm/Yarn (`package.json`), Docker, and ASDF/CircleCI configurations.
+
+### Configuration Details
+
+The Renovate configuration is located in [renovate.json](./renovate.json) and contains the following rules and behaviors:
+- **Enabled Managers:** `asdf`, `bundler`, `circleci`, `docker-compose`, `dockerfile`, and `npm` (which handles both NPM and Yarn packages).
+- **Stability Guard:** Renovate will wait **14 days** after a dependency is released before proposing an update.
+- **Lockfile Maintenance:** Renovate automatically performs regular lockfile maintenance to keep lockfiles clean and optimized.
+- **Postgres Safety:** Automated updates for Postgres Docker images are explicitly disabled to prevent unexpected breaking database changes in local development environments.
+- **Range Strategy (Ruby):** Configured to perform `update-lockfile` updates on `Gemfile.lock` while keeping the `Gemfile` floating.
+
+### Validating Renovate Configuration
+
+You can locally validate any changes made to `renovate.json` using the built-in validator script:
+
+```bash
+yarn run renovate:validate
+```
+
+This runs the official `renovate-config-validator` utility to check your configuration for syntax issues and invalid options before pushing your branch.
+
 ## Release and deployment
 
 RDSS uses the same [release and deployment process](https://github.com/pulibrary/rdss-handbook/blob/main/release_process.md) for all projects.
