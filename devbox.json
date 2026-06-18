@@ -11,7 +11,7 @@
     "gnumake@4.4.1",
     "git@2.54.0",
     "bash@latest",
-    "zsh@latest",
+    "zsh@5.9.1",
     "jdk11@11.0.24",
     "jq@1.8.1",
     "chromedriver@latest",
