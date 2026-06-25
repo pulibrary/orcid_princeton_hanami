@@ -10,3 +10,6 @@ coverage
 .binstubs/
 .bundle/
 .devbox/
+.yardoc/
+
+.DS_Store

@@ -35,6 +35,7 @@ gem 'tilt', '~> 2.0'
 gem 'tilt-jbuilder'
 gem 'warden'
 gem 'whenever'
+gem 'yard'
 
 group :development do
   gem 'capistrano', '~> 3.17', require: false
