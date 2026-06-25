@@ -111,6 +111,17 @@ jobs:
       - store_artifacts:
           path: /home/circleci/orcid_princeton/tmp/capybara
 
+  deploy:
+    docker:
+      - image: cimg/ruby:4.0.5-browsers
+        environment:
+          HANAMI_ENV: test
+    steps:
+      - run:
+          # prettier-ignore
+          name: Deploy to CI
+          command: "curl -X POST \"https://ansible-tower.princeton.edu/api/v2/job_templates/89/launch/\" --header \"Content-Type: application/json\" --header \"Authorization: Bearer $TOWER_TOKEN\" -d '{\"credential_passwords\":{},\"extra_vars\":{\"repo_name\":\"tigerdata-app\", \"runtime_env\":\"ci\"}}'"
+
 workflows:
   version: 2
   build_accept_deploy:
@@ -125,3 +136,10 @@ workflows:
       - eslint:
           requires:
             - build
+      - deploy:
+          requires: # Call the auto-deploy job after the main test job
+            - test
+          filters: # This job is only run on the main branch
+            branches:
+              only:
+                - main
