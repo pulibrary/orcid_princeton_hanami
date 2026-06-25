@@ -706,7 +706,7 @@
     },
     "nodejs-slim@26.2.0": {
       "last_modified": "2026-05-21T08:15:18Z",
-      "plugin_version": "0.0.3",
+      "plugin_version": "0.0.2",
       "resolved": "github:NixOS/nixpkgs/4a29d733e8a7d5b824c3d8c958a946a9867b3eb2#nodejs-slim_26",
       "source": "devbox-search",
       "version": "26.2.0",
