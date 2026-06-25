@@ -11,3 +11,5 @@ coverage
 .bundle/
 .devbox/
 .yardoc/
+
+.DS_Store
