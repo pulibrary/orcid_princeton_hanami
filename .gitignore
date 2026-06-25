@@ -10,3 +10,4 @@ coverage
 .binstubs/
 .bundle/
 .devbox/
+.yardoc/
