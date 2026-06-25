@@ -111,7 +111,7 @@ jobs:
       - store_artifacts:
           path: /home/circleci/orcid_princeton/tmp/capybara
 
-  deploy:
+  deploy_to_staging:
     docker:
       - image: cimg/ruby:4.0.5-browsers
         environment:
@@ -119,8 +119,8 @@ jobs:
     steps:
       - run:
           # prettier-ignore
-          name: Deploy to CI
-          command: "curl -X POST \"https://ansible-tower.princeton.edu/api/v2/job_templates/89/launch/\" --header \"Content-Type: application/json\" --header \"Authorization: Bearer $TOWER_TOKEN\" -d '{\"credential_passwords\":{},\"extra_vars\":{\"repo_name\":\"tigerdata-app\", \"runtime_env\":\"ci\"}}'"
+          name: Deploy to Staging
+          command: "curl -X POST \"https://ansible-tower.princeton.edu/api/v2/job_templates/89/launch/\" --header \"Content-Type: application/json\" --header \"Authorization: Bearer $TOWER_TOKEN\" -d '{\"credential_passwords\":{},\"extra_vars\":{\"repo_name\":\"orcid_princeton_hanami\", \"runtime_env\":\"staging\"}}'"
 
 workflows:
   version: 2
@@ -136,10 +136,11 @@ workflows:
       - eslint:
           requires:
             - build
-      - deploy:
-          requires: # Call the auto-deploy job after the main test job
-            - test
-          filters: # This job is only run on the main branch
-            branches:
-              only:
-                - main
+      - deploy_to_staging:
+          serial-group: staging-deploys
+          # requires: # Call the auto-deploy job after the main test job
+          #   - test
+          # filters: # This job is only run on the main branch
+          #   branches:
+          #     only:
+          #       - main
