@@ -138,5 +138,5 @@ workflows:
             - build
       - deploy_to_staging:
           serial-group: staging-deploys
-          # requires: # Call the auto-deploy job after the main test job
-          #   - test
+          requires: # Call the auto-deploy job after the main test job
+            - test
