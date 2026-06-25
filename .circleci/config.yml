@@ -140,7 +140,3 @@ workflows:
           serial-group: staging-deploys
           # requires: # Call the auto-deploy job after the main test job
           #   - test
-          # filters: # This job is only run on the main branch
-          #   branches:
-          #     only:
-          #       - main
