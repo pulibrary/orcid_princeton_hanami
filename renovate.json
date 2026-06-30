@@ -1,6 +1,38 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:recommended"
-  ]
+    "config:recommended",
+    "group:allNonMajor",
+    "customManagers:dockerfileVersions"
+  ],
+  "enabledManagers": [
+    "asdf",
+    "bundler",
+    "circleci",
+    "docker-compose",
+    "dockerfile",
+    "npm"
+  ],
+  "lockFileMaintenance": {
+    "enabled": true
+  },
+  "minimumReleaseAge": "14 days",
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "docker"
+      ],
+      "enabled": false,
+      "matchPackageNames": [
+        "/postgres/"
+      ]
+    },
+    {
+      "matchManagers": [
+        "bundler"
+      ],
+      "rangeStrategy": "update-lockfile"
+    }
+  ],
+  "prHourlyLimit": 3
 }

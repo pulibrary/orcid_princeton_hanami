@@ -75,6 +75,20 @@ jobs:
       #     # and every file will be checked, regardless of extension.
       #     command: yarn run eslint 'app/javascript/**'
 
+  renovate:
+    working_directory: ~/orcid_princeton
+    docker:
+      - image: cimg/ruby:4.0.5-browsers
+        environment:
+          HANAMI_ENV: test
+    steps:
+      - attach_workspace:
+          at: "~/orcid_princeton"
+      - install_dependencies
+      - run:
+          name: Validate the Renovate configuration
+          command: yarn run renovate:validate
+
   test:
     working_directory: *root
     docker:
@@ -140,3 +154,6 @@ workflows:
           serial-group: staging-deploys
           requires: # Call the auto-deploy job after the main test job
             - test
+      - renovate:
+          requires:
+            - eslint
