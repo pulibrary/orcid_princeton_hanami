@@ -167,16 +167,6 @@ The Renovate configuration is located in [renovate.json](./renovate.json) and co
 - **Postgres Safety:** Automated updates for Postgres Docker images are explicitly disabled to prevent unexpected breaking database changes in local development environments.
 - **Range Strategy (Ruby):** Configured to perform `update-lockfile` updates on `Gemfile.lock` while keeping the `Gemfile` floating.
 
-### Validating Renovate Configuration
-
-You can locally validate any changes made to `renovate.json` using the built-in validator script:
-
-```bash
-yarn run renovate:validate
-```
-
-This runs the official `renovate-config-validator` utility to check your configuration for syntax issues and invalid options before pushing your branch.
-
 ## Release and deployment
 
 RDSS uses the same [release and deployment process](https://github.com/pulibrary/rdss-handbook/blob/main/release_process.md) for all projects.
