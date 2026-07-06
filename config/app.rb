@@ -3,7 +3,7 @@
 require 'hanami'
 require 'omniauth-cas'
 require 'omniauth-orcid'
-require 'omniauth_openid_connect'
+require 'omniauth-entra-id'
 require 'warden'
 
 module OrcidPrinceton
@@ -19,19 +19,11 @@ module OrcidPrinceton
     config.middleware.use OmniAuth::Builder do
       provider :cas, host: Hanami.app.settings.cas_host, url: Hanami.app.settings.cas_url
 
-      if Hanami.app.settings.oidc_issuer && !Hanami.app.settings.oidc_issuer.empty?
-        provider :openid_connect, {
-          name: :openid_connect,
-          scope: %i[openid email profile],
-          response_type: :code,
-          issuer: Hanami.app.settings.oidc_issuer,
-          discovery: true,
-          client_options: {
-            identifier: Hanami.app.settings.oidc_client_id,
-            secret: Hanami.app.settings.oidc_client_secret,
-            redirect_uri: "#{Hanami.app.config.base_url}/auth/openid_connect/callback"
-          }
-        }
+      if Hanami.app.settings.entra_id_client_id && !Hanami.app.settings.entra_id_client_id.empty?
+        provider :entra_id,
+                 Hanami.app.settings.entra_id_client_id,
+                 Hanami.app.settings.entra_id_client_secret,
+                 tenant_id: Hanami.app.settings.entra_id_tenant_id
       end
 
       provider :orcid, Hanami.app.settings.orcid_client_id, Hanami.app.settings.orcid_client_secret,

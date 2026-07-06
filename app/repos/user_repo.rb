@@ -50,8 +50,8 @@ module OrcidPrinceton
         case access_token.provider.to_sym
         when :cas
           from_cas(access_token)
-        when :openid_connect
-          from_oidc(access_token)
+        when :entra_id
+          from_entra_id(access_token)
         end
       end
 
@@ -65,9 +65,10 @@ module OrcidPrinceton
         end
       end
 
-      def from_oidc(access_token)
+      def from_entra_id(access_token)
         return nil if access_token.nil?
 
+        # For Entra ID, we will extract the uid/netID inside the Operation
         result = OrcidPrinceton::Operations::UserFromAttributes.new.call(uid: access_token.uid,
                                                                          access_token: access_token)
         if result.instance_of?(Dry::Monads::Result::Success)
