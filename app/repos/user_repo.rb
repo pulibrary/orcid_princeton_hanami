@@ -54,6 +54,15 @@ module OrcidPrinceton
         end
       end
 
+      def from_entra_id(access_token)
+        return nil if access_token.nil?
+        uid = OrcidPrinceton::Operations::UserFromEntraAttributes.parse_entra_uid(access_token)
+        result = OrcidPrinceton::Operations::UserFromEntraAttributes.new.call(uid: uid, access_token: access_token)
+        if result.instance_of?(Dry::Monads::Result::Success)
+          result.value!
+        end
+      end
+
       def user_with_roles_and_tokens
         users.combine(:roles).combine(:tokens)
       end

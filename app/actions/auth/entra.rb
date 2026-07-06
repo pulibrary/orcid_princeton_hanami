@@ -1,0 +1,37 @@
+# frozen_string_literal: true
+require 'byebug'
+
+module OrcidPrinceton
+  module Actions
+    module Auth
+      class Entra < OrcidPrinceton::Action
+        include Deps['repos.user_repo']
+
+        def handle(request, response)
+          auth_hash = request.env['omniauth.auth']
+          user = user_repo.from_entra_id(auth_hash)
+
+          if user.nil?
+            handle_error(response)
+          else
+            handle_user(user, request, response)
+          end
+        end
+
+        private
+
+        def handle_error(response)
+          response.flash[:notice] = 'You are not authorized'
+          response.redirect_to routes.path(:root)
+        end
+
+        def handle_user(user, request, response)
+          warden_session(request).set_user user.uid
+          requested_path = request.session[:login_redirect_url]
+          response.flash[:notice] = 'You were successfully authenticated'
+          response.redirect_to requested_path || routes.path(:root)
+        end
+      end
+    end
+  end
+end
