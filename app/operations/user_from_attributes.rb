@@ -12,13 +12,23 @@ module OrcidPrinceton
       include Deps['repos.user_repo']
 
       def call(uid:, access_token:)
-        user_attributes = step basic_user_attributes(uid:, access_token:)
-        final_attributes = step add_ldap_attributes(uid:, combined_attributes: user_attributes, access_token:)
+        resolved_uid = resolve_uid(uid, access_token)
+        user_attributes = step basic_user_attributes(uid: resolved_uid, access_token:)
+        final_attributes = step add_ldap_attributes(uid: resolved_uid, combined_attributes: user_attributes,
+                                                    access_token:)
 
         if user_attributes[:id].nil?
           step create(final_attributes)
         else
           step update(final_attributes)
+        end
+      end
+
+      def resolve_uid(uid, access_token)
+        if access_token.provider.to_s == 'entra_id'
+          derive_entra_id_uid(access_token)
+        else
+          uid
         end
       end
 
@@ -69,8 +79,8 @@ module OrcidPrinceton
       end
 
       def attributes_from_token(access_token)
-        if access_token.provider.to_s == 'openid_connect'
-          attributes_from_oidc(access_token)
+        if access_token.provider.to_s == 'entra_id'
+          attributes_from_entra_id(access_token)
         else
           attributes_from_cas(access_token)
         end
@@ -85,25 +95,45 @@ module OrcidPrinceton
           display_name: access_token.extra.displayname || alternate_value }
       end
 
+      def derive_entra_id_uid(access_token)
+        info = access_token.info || {}
+        raw_info = access_token.extra&.raw_info || {}
+
+        raw_info[:onPremisesSamAccountName] || info[:nickname] ||
+          fallback_entra_id_uid(info, raw_info) || access_token.uid
+      end
+
+      def fallback_entra_id_uid(info, raw_info)
+        email = info[:email] || raw_info[:preferred_username] || raw_info[:userPrincipalName]
+        email&.split('@')&.first
+      end
+
       # rubocop:disable Metrics/AbcSize
       # rubocop:disable Metrics/CyclomaticComplexity
       # rubocop:disable Metrics/MethodLength
       # rubocop:disable Metrics/PerceivedComplexity
-      def attributes_from_oidc(access_token)
+      def attributes_from_entra_id(access_token)
         info = access_token.info || {}
         raw_info = access_token.extra&.raw_info || {}
 
         # Capture custom institutional claims if exposed, otherwise fall back to LDAP
         # rubocop:disable Layout/LineLength
-        university_id = raw_info[:university_id] || raw_info[:universityid] || raw_info[:employeeId] || raw_info[:employee_id]
+        unique_names = access_token.extra&.raw_info&.unique_name
+        if unique_names
+          elements = unique_names.split('@princeton.edu')
+          university_id = elements.first
+        else
+          university_id = raw_info[:university_id] || raw_info[:universityid] || raw_info[:employeeId] || raw_info[:employee_id]
+        end
         # rubocop:enable Layout/LineLength
 
-        alternate_val = alternate_value(access_token.uid, university_id)
+        resolved_uid = derive_entra_id_uid(access_token)
+        alternate_val = alternate_value(resolved_uid, university_id)
 
         {
           university_id: university_id,
-          email: info[:email] || raw_info[:email],
-          provider: 'openid_connect',
+          email: info[:email] || raw_info[:preferred_username] || raw_info[:userPrincipalName],
+          provider: 'entra_id',
           given_name: info[:first_name] || info[:given_name] || raw_info[:given_name] || alternate_val,
           family_name: info[:last_name] || info[:family_name] || raw_info[:family_name] || alternate_val,
           display_name: info[:name] || raw_info[:name] || raw_info[:displayName] || alternate_val

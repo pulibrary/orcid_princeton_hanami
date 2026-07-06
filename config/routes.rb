@@ -8,8 +8,8 @@ module OrcidPrinceton
     get '/health.json', to: 'health.status'
     get '/auth/cas/callback', to: 'session.create', as: :auth_callback
     post '/auth/cas/callback', to: 'session.create'
-    get '/auth/openid_connect/callback', to: 'session.create', as: :oidc_callback
-    post '/auth/openid_connect/callback', to: 'session.create'
+    get '/auth/entra_id/callback', to: 'session.create', as: :entra_id_callback
+    post '/auth/entra_id/callback', to: 'session.create'
     get '/admin/orcid_report', to: 'admin.orcid_report', as: :admin_report
     get '/auth/orcid/callback', to: 'orcid.create', as: :orcid_callback
     get '/orcid/failure', to: 'orcid.failure'

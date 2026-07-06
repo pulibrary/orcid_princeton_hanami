@@ -42,20 +42,22 @@ RSpec.describe OrcidPrinceton::Actions::Session::Create do
     end
   end
 
-  context 'with OpenID Connect provider' do
+  context 'with Entra ID provider' do
     let(:auth_hash) do
       OmniAuth::AuthHash.new(
-        provider: 'openid_connect',
-        uid: 'test123_oidc',
+        provider: 'entra_id',
+        uid: 'test123_entra',
         info: OmniAuth::AuthHash.new(
-          email: 'who_oidc@princeton.edu',
+          email: 'who_entra@princeton.edu',
           first_name: 'Who',
-          last_name: 'Oidc',
-          name: 'Oidc, Who'
+          last_name: 'Entra',
+          name: 'Entra, Who',
+          nickname: 'test123_entra'
         ),
         extra: OmniAuth::AuthHash.new(
           raw_info: OmniAuth::AuthHash.new(
-            university_id: '888888888'
+            unique_name: '888888888@princeton.edu',
+            onPremisesSamAccountName: 'test123_entra'
           )
         )
       )
@@ -68,7 +70,7 @@ RSpec.describe OrcidPrinceton::Actions::Session::Create do
       expect(response.flash.next[:notice]).to eq('You were successfully authenticated')
 
       user = user_repo.last
-      expect(user.uid).to eq('test123_oidc')
+      expect(user.uid).to eq('test123_entra')
       expect(user.university_id).to eq('888888888')
     end
   end
