@@ -5,7 +5,9 @@ module OrcidPrinceton
   module Views
     # Base Hanami view helpers for the ORCID application
     module Helpers
-      # Add your view helpers here
+      def login_path
+        "/auth/#{Hanami.app.settings.default_auth_provider}"
+      end
     end
   end
 end

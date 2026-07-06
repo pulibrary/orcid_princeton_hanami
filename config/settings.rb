@@ -41,6 +41,10 @@ module OrcidPrinceton
 
     setting :database_url, default: database_url, constructor: Types::String
     setting :session_secret, default: default_secret, constructor: Types::String
+    setting :default_auth_provider, default: 'cas', constructor: Types::String
+    setting :oidc_issuer, default: '', constructor: Types::String
+    setting :oidc_client_id, default: '', constructor: Types::String
+    setting :oidc_client_secret, default: '', constructor: Types::String
     setting :cas_url, constructor: Types::String
     setting :cas_host, constructor: Types::String
     setting :original_omniauth_failure, default: '', constructor: Types::String

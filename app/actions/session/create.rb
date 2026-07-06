@@ -9,7 +9,7 @@ module OrcidPrinceton
 
         def handle(request, response)
           auth_hash = request.env['omniauth.auth']
-          user = user_repo.from_cas(auth_hash)
+          user = user_repo.from_omniauth(auth_hash)
 
           if user.nil?
             handle_error(response)

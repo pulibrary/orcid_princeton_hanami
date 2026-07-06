@@ -64,4 +64,29 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
     expect(updated_user.given_name).to eq('Who') # from auth hash
     expect(updated_user.family_name).to eq('Areyou') # from auth hash
   end
+
+  it 'Creates a new user from openid_connect attributes', db: true do
+    oidc_auth_hash = OmniAuth::AuthHash.new(
+      provider: 'openid_connect',
+      uid: 'oidc_user',
+      info: OmniAuth::AuthHash.new(
+        email: 'oidc_who@princeton.edu',
+        first_name: 'Who',
+        last_name: 'Oidc',
+        name: 'Oidc, Who'
+      ),
+      extra: OmniAuth::AuthHash.new(
+        raw_info: OmniAuth::AuthHash.new(
+          university_id: '777777777'
+        )
+      )
+    )
+    result = described_class.new.call(uid: 'oidc_user', access_token: oidc_auth_hash)
+    expect(result).to be_a Dry::Monads::Result::Success
+    new_user = user_repo.find_by_uid('oidc_user')
+    expect(new_user.university_id).to eq('777777777')
+    expect(new_user.display_name).to eq('Oidc, Who')
+    expect(new_user.given_name).to eq('Who')
+    expect(new_user.family_name).to eq('Oidc')
+  end
 end
