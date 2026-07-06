@@ -27,7 +27,8 @@ module OrcidPrinceton
 
     def require_authentication(request, response)
       unless warden_session(request)&.user
-        response.redirect_to '/auth/cas'
+        provider = Hanami.app.settings.default_auth_provider
+        response.redirect_to "/auth/#{provider}"
       end
     end
 

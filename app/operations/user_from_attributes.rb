@@ -7,6 +7,7 @@ require 'honeybadger'
 module OrcidPrinceton
   module Operations
     # Converts the cas token into a user
+    # rubocop:disable Metrics/ClassLength
     class UserFromAttributes < OrcidPrinceton::Operation
       include Deps['repos.user_repo']
 
@@ -68,6 +69,14 @@ module OrcidPrinceton
       end
 
       def attributes_from_token(access_token)
+        if access_token.provider.to_s == 'openid_connect'
+          attributes_from_oidc(access_token)
+        else
+          attributes_from_cas(access_token)
+        end
+      end
+
+      def attributes_from_cas(access_token)
         alternate_value = alternate_value(access_token.uid, access_token.extra.universityid)
         { university_id: access_token.extra.universityid,
           email: access_token.extra.mail, provider: access_token.provider.to_s,
@@ -75,6 +84,35 @@ module OrcidPrinceton
           family_name: access_token.extra.sn || alternate_value,
           display_name: access_token.extra.displayname || alternate_value }
       end
+
+      # rubocop:disable Metrics/AbcSize
+      # rubocop:disable Metrics/CyclomaticComplexity
+      # rubocop:disable Metrics/MethodLength
+      # rubocop:disable Metrics/PerceivedComplexity
+      def attributes_from_oidc(access_token)
+        info = access_token.info || {}
+        raw_info = access_token.extra&.raw_info || {}
+
+        # Capture custom institutional claims if exposed, otherwise fall back to LDAP
+        # rubocop:disable Layout/LineLength
+        university_id = raw_info[:university_id] || raw_info[:universityid] || raw_info[:employeeId] || raw_info[:employee_id]
+        # rubocop:enable Layout/LineLength
+
+        alternate_val = alternate_value(access_token.uid, university_id)
+
+        {
+          university_id: university_id,
+          email: info[:email] || raw_info[:email],
+          provider: 'openid_connect',
+          given_name: info[:first_name] || info[:given_name] || raw_info[:given_name] || alternate_val,
+          family_name: info[:last_name] || info[:family_name] || raw_info[:family_name] || alternate_val,
+          display_name: info[:name] || raw_info[:name] || raw_info[:displayName] || alternate_val
+        }
+      end
+      # rubocop:enable Metrics/AbcSize
+      # rubocop:enable Metrics/CyclomaticComplexity
+      # rubocop:enable Metrics/MethodLength
+      # rubocop:enable Metrics/PerceivedComplexity
 
       def alternate_value(uid, university_id)
         # We will take the alternate from ldap
@@ -116,5 +154,6 @@ module OrcidPrinceton
           )
       end
     end
+    # rubocop:enable Metrics/ClassLength
   end
 end

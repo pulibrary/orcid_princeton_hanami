@@ -44,7 +44,28 @@ module OrcidPrinceton
         user_with_roles_and_tokens.where(uid: uid)&.first
       end
 
+      def from_omniauth(access_token)
+        return nil if access_token.nil?
+
+        case access_token.provider.to_sym
+        when :cas
+          from_cas(access_token)
+        when :openid_connect
+          from_oidc(access_token)
+        end
+      end
+
       def from_cas(access_token)
+        return nil if access_token.nil?
+
+        result = OrcidPrinceton::Operations::UserFromAttributes.new.call(uid: access_token.uid,
+                                                                         access_token: access_token)
+        if result.instance_of?(Dry::Monads::Result::Success)
+          result.value!
+        end
+      end
+
+      def from_oidc(access_token)
         return nil if access_token.nil?
 
         result = OrcidPrinceton::Operations::UserFromAttributes.new.call(uid: access_token.uid,

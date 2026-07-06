@@ -51,8 +51,22 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
     expect(new_user.family_name).to eq('Areyou')
   end
 
-  # this test can not be run on circle (tagged :no_ci to not run on circle ci)
-  it 'Updates the user with ldap values when the university id is missing', db: true, no_ci: true do
+  it 'Updates the user with ldap values when the university id is missing', db: true do
+    ldap_entry = double('ldap_entry', universityid: '098136217')
+    allow(ldap_entry).to receive(:[]) do |key|
+      {
+        uid: ['tigerdatatester'],
+        universityid: ['098136217'],
+        mail: ['tigerdatatester@princeton.edu'],
+        givenname: ['TigerData'],
+        sn: ['Tester'],
+        displayname: ['TigerData Tester']
+      }[key]
+    end
+    ldap_connection = instance_double(Net::LDAP)
+    allow(Net::LDAP).to receive(:new).and_return(ldap_connection)
+    allow(ldap_connection).to receive(:search).and_return([ldap_entry])
+
     user = user_repo.create(uid: 'tigerdatatester', provider: 'cas')
     auth_hash.extra.universityid = nil
     auth_hash.extra.displayname = nil
@@ -63,5 +77,30 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
     expect(updated_user.display_name).to eq('TigerData Tester') # from ldap
     expect(updated_user.given_name).to eq('Who') # from auth hash
     expect(updated_user.family_name).to eq('Areyou') # from auth hash
+  end
+
+  it 'Creates a new user from openid_connect attributes', db: true do
+    oidc_auth_hash = OmniAuth::AuthHash.new(
+      provider: 'openid_connect',
+      uid: 'oidc_user',
+      info: OmniAuth::AuthHash.new(
+        email: 'oidc_who@princeton.edu',
+        first_name: 'Who',
+        last_name: 'Oidc',
+        name: 'Oidc, Who'
+      ),
+      extra: OmniAuth::AuthHash.new(
+        raw_info: OmniAuth::AuthHash.new(
+          university_id: '777777777'
+        )
+      )
+    )
+    result = described_class.new.call(uid: 'oidc_user', access_token: oidc_auth_hash)
+    expect(result).to be_a Dry::Monads::Result::Success
+    new_user = user_repo.find_by_uid('oidc_user')
+    expect(new_user.university_id).to eq('777777777')
+    expect(new_user.display_name).to eq('Oidc, Who')
+    expect(new_user.given_name).to eq('Who')
+    expect(new_user.family_name).to eq('Oidc')
   end
 end

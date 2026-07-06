@@ -41,4 +41,35 @@ RSpec.describe OrcidPrinceton::Actions::Session::Create do
       expect(response.flash.next[:notice]).to eq('You are not authorized')
     end
   end
+
+  context 'with OpenID Connect provider' do
+    let(:auth_hash) do
+      OmniAuth::AuthHash.new(
+        provider: 'openid_connect',
+        uid: 'test123_oidc',
+        info: OmniAuth::AuthHash.new(
+          email: 'who_oidc@princeton.edu',
+          first_name: 'Who',
+          last_name: 'Oidc',
+          name: 'Oidc, Who'
+        ),
+        extra: OmniAuth::AuthHash.new(
+          raw_info: OmniAuth::AuthHash.new(
+            university_id: '888888888'
+          )
+        )
+      )
+    end
+
+    it 'creates a new user and redirects' do
+      response = subject.call(env)
+      expect(response).to be_redirect
+      expect(response.location).to eq Hanami.app.router.path(:root)
+      expect(response.flash.next[:notice]).to eq('You were successfully authenticated')
+
+      user = user_repo.last
+      expect(user.uid).to eq('test123_oidc')
+      expect(user.university_id).to eq('888888888')
+    end
+  end
 end
