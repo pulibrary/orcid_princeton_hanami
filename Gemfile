@@ -8,7 +8,7 @@ gem 'hanami-controller', '~> 2.3'
 gem 'hanami-db', '~> 3.0'
 gem 'hanami-router', '~> 3.0'
 gem 'hanami-validations', '~> 2.3'
-gem 'hanami-view', '~> 2.3'
+gem 'hanami-view', '~> 3.0'
 
 gem 'bcrypt_pbkdf'
 gem 'csv'
