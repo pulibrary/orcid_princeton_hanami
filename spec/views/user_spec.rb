@@ -23,13 +23,13 @@ RSpec.describe OrcidPrinceton::Views::User::Show do
   subject(:rendered) { view.call(user: user, current_user: user, code_version: version_hash, context:) }
 
   it 'exposes orcid_url' do
-    expect(rendered[:orcid_url].value).to eq('https://sandbox.orcid.org/')
+    expect(rendered[:orcid_url]).to eq('https://sandbox.orcid.org/')
   end
 
   context 'not the sandbox' do
     it 'exposes orcid_url' do
       allow(settings).to receive(:orcid_sandbox).and_return(false)
-      expect(rendered[:orcid_url].value).to eq('https://orcid.org/')
+      expect(rendered[:orcid_url]).to eq('https://orcid.org/')
     end
   end
 end
