@@ -10,7 +10,7 @@ module OrcidPrinceton
                      valid_view: 'views.user.show' ]
         before :require_authentication # make sure there is a user logged in before serving the user
 
-        format :html, :json
+        config.formats.accept :html, :json
 
         before :set_format_for_json_extension
 
