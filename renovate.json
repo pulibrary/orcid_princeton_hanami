@@ -16,7 +16,7 @@
   "lockFileMaintenance": {
     "enabled": true
   },
-  "minimumReleaseAge": "14 days",
+  "minimumReleaseAge": "2 days",
   "packageRules": [
     {
       "matchDatasources": [
