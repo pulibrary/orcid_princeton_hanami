@@ -5,8 +5,48 @@ require 'omniauth-cas'
 require 'omniauth-orcid'
 require 'omniauth-entra-id'
 require 'warden'
+require_relative 'features'
 
 module OrcidPrinceton
+  # Custom middleware to safely manage Flipflop feature cache with Hanami::Action::Response
+  class FlipflopFeatureCacheMiddleware
+    def initialize(app)
+      @app = app
+    end
+
+    # rubocop:disable Metrics/AbcSize
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Lint/RescueException
+    def call(env)
+      return @app.call(env) if Flipflop::FeatureCache.current.enabled?
+
+      Flipflop::FeatureCache.current.enable!
+      response = @app.call(env)
+
+      if response.respond_to?(:to_a) && !response.is_a?(Array)
+        response_arr = response.to_a
+        response_arr[2] = Rack::BodyProxy.new(response_arr[2]) do
+          Flipflop::FeatureCache.current.disable!
+        end
+        response_arr
+      elsif response.is_a?(Array)
+        response[2] = Rack::BodyProxy.new(response[2]) do
+          Flipflop::FeatureCache.current.disable!
+        end
+        response
+      else
+        Flipflop::FeatureCache.current.disable!
+        response
+      end
+    rescue Exception => e
+      Flipflop::FeatureCache.current.disable!
+      raise e
+    end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
+    # rubocop:enable Lint/RescueException
+  end
+
   # application configuration for each environment
   class App < Hanami::App
     config.actions.sessions = :cookie, {
@@ -15,6 +55,7 @@ module OrcidPrinceton
       expire_after: 60 * 60 * 24 * 365
     }
 
+    config.middleware.use OrcidPrinceton::FlipflopFeatureCacheMiddleware
     config.middleware.use Warden::Manager
     config.middleware.use OmniAuth::Builder do
       provider :cas, host: Hanami.app.settings.cas_host, url: Hanami.app.settings.cas_url

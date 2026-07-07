@@ -74,3 +74,5 @@ group :test do
   gem 'rspec-retry'
   gem 'selenium-webdriver'
 end
+
+gem 'flipflop', '~> 2.8'

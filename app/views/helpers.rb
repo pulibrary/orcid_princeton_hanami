@@ -6,7 +6,11 @@ module OrcidPrinceton
     # Base Hanami view helpers for the ORCID application
     module Helpers
       def login_path
-        "/auth/#{Hanami.app.settings.default_auth_provider}"
+        if Flipflop.entra_id_login?
+          '/auth/entra_id'
+        else
+          "/auth/#{Hanami.app.settings.default_auth_provider}"
+        end
       end
     end
   end
