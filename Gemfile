@@ -54,7 +54,7 @@ group :development, :test do
 end
 
 group :cli, :development do
-  gem 'hanami-reloader', '~> 2.3'
+  gem 'hanami-reloader', '~> 3.0'
 end
 
 group :cli, :development, :test do
