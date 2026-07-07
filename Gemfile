@@ -3,7 +3,7 @@
 source 'https://gem.coop'
 
 gem 'hanami', '~> 2.3'
-gem 'hanami-assets', '~> 2.3'
+gem 'hanami-assets', '~> 3.0'
 gem 'hanami-controller', '~> 2.3'
 gem 'hanami-db', '~> 2.3'
 gem 'hanami-router', '~> 3.0'
