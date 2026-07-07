@@ -27,7 +27,11 @@ module OrcidPrinceton
 
     def require_authentication(request, response)
       unless warden_session(request)&.user
-        provider = Hanami.app.settings.default_auth_provider
+        provider = if Flipflop.entra_id_login?
+                     'entra_id'
+                   else
+                     Hanami.app.settings.default_auth_provider
+                   end
         response.redirect_to "/auth/#{provider}"
       end
     end
