@@ -6,9 +6,9 @@
 ### The uptime check configuration
   The uptime check is configured in the notifications.  
   
-  The "Sending Conditions" determine how often and how soon you will see an alert. The period of frequency set at the system level should be 1 minute (currently it is every 5 minutes).
-  If you want to see the first alert at 5 minutes out you need to set the "Limit notifications by count to" 6 (2 currently) through 99999. The first occurs immediately when the system goes down.
-  If you want to see that the system is still down after an hour you need to set the "Throttling of 'Periodic notifications'" to 6 (3 currently) and send every 60
+  The "Sending Conditions" determine how often and how soon you will see an alert. The period of frequency set at the system level should be 1 minute.
+  If you want to see the first alert at 5 minutes out you need to set the "Limit notifications by count to" 6 through 99999. The first occurs immediately when the system goes down.
+  If you want to see that the system is still down after an hour you need to set the "Throttling of 'Periodic notifications'" to 6 and send every 60
   
   [staging uptime check configuration](https://pulmonitor.princeton.edu/staging/check_mk/index.py?start_url=%2Fstaging%2Fcheck_mk%2Fwato.py%3Fback_mode%3Dtest_notifications%26edit%3D9%26folder%3D%26mode%3Dnotification_rule_quick_setup%26user%3D)
     
