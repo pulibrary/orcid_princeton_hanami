@@ -2,7 +2,7 @@
 
 source 'https://gem.coop'
 
-gem 'hanami', '~> 2.3'
+gem 'hanami', '~> 3.0'
 gem 'hanami-assets', '~> 3.0'
 gem 'hanami-controller', '~> 2.3'
 gem 'hanami-db', '~> 3.0'
