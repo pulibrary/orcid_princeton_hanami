@@ -41,7 +41,7 @@ group :development do
   gem 'capistrano', '~> 3.17', require: false
   gem 'capistrano-bundler', require: false
   gem 'capistrano-passenger', require: false
-  gem 'hanami-webconsole', '~> 2.3'
+  gem 'hanami-webconsole', '~> 3.0'
 end
 
 group :development, :test do

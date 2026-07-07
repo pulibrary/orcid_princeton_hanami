@@ -40,7 +40,7 @@ GEM
       rack (>= 0.9.0)
       rouge (>= 1.0.0)
     bigdecimal (3.3.1)
-    binding_of_caller (1.0.1)
+    binding_of_caller (2.0.0)
       debug_inspector (>= 1.2.0)
     builder (3.3.0)
     byebug (13.0.0)
@@ -274,9 +274,9 @@ GEM
       temple (~> 0.10.0, >= 0.10.2)
       tilt (~> 2.3)
       zeitwerk (~> 2.6)
-    hanami-webconsole (2.3.1)
+    hanami-webconsole (3.0.0)
       better_errors (~> 2.10, >= 2.10.1)
-      binding_of_caller (~> 1.0)
+      binding_of_caller (~> 2.0)
     hashdiff (1.2.1)
     hashie (5.1.0)
       logger
@@ -781,7 +781,7 @@ DEPENDENCIES
   hanami-rspec (~> 2.3)
   hanami-validations (~> 2.3)
   hanami-view (~> 2.3)
-  hanami-webconsole (~> 2.3)
+  hanami-webconsole (~> 3.0)
   honeybadger
   httparty
   net-http
