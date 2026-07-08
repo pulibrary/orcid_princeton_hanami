@@ -197,5 +197,35 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
       end
     end
   end
+
+  # this test has been mocked to run both locally and on circle ci
+  it 'Updates the user with ldap values when the university id is missing', db: true do
+    user = user_repo.create(uid: 'tigerdatatester', provider: 'cas')
+    auth_hash.extra.universityid = nil
+    auth_hash.extra.displayname = nil
+
+    ldap_attr = double('ldap_entry', universityid: ['098136217'])
+    allow(ldap_attr).to receive(:[]) do |key|
+      {
+        uid: ['tigerdatatester'],
+        universityid: ['098136217'],
+        mail: ['who@princeton.edu'],
+        givenname: ['Who'],
+        sn: ['Areyou'],
+        displayname: ['TigerData Tester']
+      }.fetch(key.to_sym, nil)
+    end
+
+    operation = described_class.new
+    allow(operation).to receive(:ldap_info).with('tigerdatatester').and_return(ldap_attr)
+
+    result = operation.call(uid: user.uid, access_token: auth_hash)
+    expect(result).to be_a Dry::Monads::Result::Success
+    updated_user = user_repo.find_by_uid('tigerdatatester')
+    expect(updated_user.university_id).to eq('098136217') # from ldap
+    expect(updated_user.display_name).to eq('TigerData Tester') # from ldap
+    expect(updated_user.given_name).to eq('Who') # from auth hash
+    expect(updated_user.family_name).to eq('Areyou') # from auth hash
+  end
 end
 # rubocop:enable Metrics/BlockLength
