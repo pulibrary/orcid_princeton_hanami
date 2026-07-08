@@ -2,12 +2,11 @@
 
 source 'https://gem.coop'
 
-gem 'hanami', '~> 2.3'
+gem 'hanami', '~> 3.0'
+gem 'hanami-action', '~> 3.0'
 gem 'hanami-assets', '~> 3.0'
-gem 'hanami-controller', '~> 2.3'
 gem 'hanami-db', '~> 3.0'
 gem 'hanami-router', '~> 3.0'
-gem 'hanami-validations', '~> 2.3'
 gem 'hanami-view', '~> 3.0'
 
 gem 'bcrypt_pbkdf'
@@ -15,6 +14,7 @@ gem 'csv'
 gem 'dry-monads', '~> 1.9'
 gem 'dry-operation'
 gem 'dry-types', '~> 1.7'
+gem 'dry-validation'
 gem 'ed25519'
 gem 'honeybadger'
 # TODO: why two different http gems?

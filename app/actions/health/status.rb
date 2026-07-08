@@ -7,7 +7,7 @@ module OrcidPrinceton
       class Status < OrcidPrinceton::Action
         include Deps['operations.orcid_api_status']
 
-        format :html, :json
+        config.formats.accept :html, :json
 
         before :set_format_for_json_extension
 
