@@ -2,6 +2,7 @@
 
 require 'spec_helper'
 
+# rubocop:disable Metrics/BlockLength
 RSpec.describe OrcidPrinceton::Repos::UserRepo, :db do
   subject(:repo) do
     described_class.new
@@ -104,6 +105,61 @@ RSpec.describe OrcidPrinceton::Repos::UserRepo, :db do
     end
   end
 
+  describe '#from_entra' do
+    let(:auth_hash) do
+      OmniAuth::AuthHash.new(provider: 'entra_id', uid: '<some really large random string>', credentials: nil,
+                             info: OmniAuth::AuthHash.new(email: 'who.areyou@princeton.edu', first_name: 'Who',
+                                                          last_name: 'Areyou', name: 'Who Areyou',
+                                                          nickname: "#{user.uid}@princeton.edu"),
+                             extra: OmniAuth::AuthHash.new(
+                               raw_info: OmniAuth::AuthHash.new(app_displayname: 'orcid-dev',
+                                                                email: 'who.areyou@princeton.edu',
+                                                                family_name: 'Areyou',
+                                                                given_name: 'Who',
+                                                                name: 'Who Areyou',
+                                                                preferred_username: "#{user.uid}@princeton.edu",
+                                                                unique_name: "#{user.uid}@princeton.edu",
+                                                                # rest of the keys are present
+                                                                #  They are set to values I do not understand,
+                                                                #  so we don't care about them for this test
+                                                                acct: nil, acr: nil, acrs: nil, aio: nil, amr: nil,
+                                                                appid: nil, appidacr: nil, aud: nil, exp: nil,
+                                                                iat: nil, idtyp: nil, ipaddr: nil, iss: nil, nbf: nil,
+                                                                oid: nil, onprem_sid: nil, platf: nil,
+                                                                puid: nil, rh: nil, roles: nil, scp: nil, sid: nil,
+                                                                sub: nil, tenant_region_scope: nil, tid: nil,
+                                                                upn: nil, uti: nil, ver: nil, wids: nil, xms_acd: nil,
+                                                                xms_act_fct: nil, xms_ftd: nil, xms_idrel: nil,
+                                                                xms_pftexp: nil, xms_st: nil, xms_sub_fct: nil,
+                                                                xms_tcdt: nil, xms_tnt_fct: nil)
+                             ))
+    end
+    let(:user) { Factory[:user] }
+
+    it 'returns the existing user without updates' do
+      updated_user = repo.from_entra_id(auth_hash)
+
+      expect(updated_user.id).to eq(user.id)
+      expect(updated_user.given_name).to eq(user.given_name)
+      expect(updated_user.family_name).to eq(user.family_name)
+      expect(updated_user.display_name).to eq(user.display_name)
+    end
+
+    context 'user is only partially set up' do
+      let(:user) { Factory[:user, given_name: nil] }
+
+      it 'updates a users and sets the update time' do
+        updated_user = repo.from_entra_id(auth_hash)
+
+        expect(updated_user.id).to eq(user.id)
+        expect(updated_user.given_name).to eq('Who')
+        expect(updated_user.family_name).to eq('Areyou')
+        expect(updated_user.created_at).not_to eq(updated_user.updated_at)
+        expect(updated_user.display_name).to eq('Who Areyou')
+      end
+    end
+  end
+
   describe '#make_admin' do
     it 'adds the admin role to the user' do
       rom_user = Factory[:user]
@@ -147,3 +203,4 @@ RSpec.describe OrcidPrinceton::Repos::UserRepo, :db do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength

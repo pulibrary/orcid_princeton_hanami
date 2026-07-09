@@ -3,6 +3,7 @@
 require 'hanami'
 require 'omniauth-cas'
 require 'omniauth-orcid'
+require 'omniauth-entra-id'
 require 'warden'
 
 module OrcidPrinceton
@@ -21,6 +22,9 @@ module OrcidPrinceton
       provider :orcid, Hanami.app.settings.orcid_client_id, Hanami.app.settings.orcid_client_secret,
                member: true, sandbox: Hanami.app.settings.orcid_sandbox,
                callback_path: Hanami.app.router.path(:orcid_callback)
+
+      provider :entra_id, client_id: Hanami.app.settings.entra_client_id,
+                          client_secret: Hanami.app.settings.entra_client_secret
 
       # Devise and this configuration are competing for error handling
       #  This set of code stores off the original devise proc and calls that
