@@ -146,6 +146,12 @@ Hanami runs by default at the port 2300, but we have made this application run a
 1. `bin/dev`
 1. Access application at [http://localhost:3000/](http://localhost:3000/)
 
+#### Allowing for a debugger
+If you would like to utilize a debugger, like byebug, while dev running the server you must start the server without code reloading
+```
+bundle exec hanami server --no-code-reload --port 3000
+```
+
 ### ORCID Environment variables
 You need to have the following variables in your environment to connect with the ORCID sandbox.  Actual values are in lastpass under "ORCID Local API key".
 export ORCID_CLIENT_ID="xxx"
