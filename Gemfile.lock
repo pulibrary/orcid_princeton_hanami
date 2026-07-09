@@ -369,6 +369,9 @@ GEM
       addressable (~> 2.8)
       nokogiri (~> 1.12)
       omniauth (~> 2.1)
+    omniauth-entra-id (3.1.1)
+      jwt (>= 2.9.2)
+      omniauth-oauth2 (~> 1.8)
     omniauth-oauth2 (1.9.0)
       oauth2 (>= 2.0.2, < 3)
       omniauth (~> 2.0)
@@ -786,6 +789,7 @@ DEPENDENCIES
   net-ldap
   nokogiri (>= 1.18.9)
   omniauth-cas
+  omniauth-entra-id
   omniauth-orcid
   opentelemetry-exporter-otlp
   opentelemetry-instrumentation-all

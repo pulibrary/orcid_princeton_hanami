@@ -52,5 +52,13 @@ module OrcidPrinceton
         super
       end
     end
+
+    expose :login_url, layout: true do
+      if Hanami.app.settings.use_entra
+        '/auth/entra_id'
+      else
+        '/auth/cas'
+      end
+    end
   end
 end
