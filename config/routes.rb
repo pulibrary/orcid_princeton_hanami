@@ -16,5 +16,6 @@ module OrcidPrinceton
     get '/users/:id/validate_tokens', to: 'user.validate_tokens', as: :validate_tokens
     get '/session/destroy', to: 'session.destroy', as: :logout
     get '/auth/entra_id/callback', to: 'session.create_entra'
+    get '/auth/failure', to: 'session.failure'
   end
 end

@@ -60,14 +60,20 @@ module OrcidPrinceton
 
     environment(:development) do
       config.base_url = 'http://localhost:3000'
+      config.logger.level = :debug
+      config.logger.stream = root.join('log', 'development.log')
     end
 
     environment(:staging) do
       config.base_url = 'https://orcid-staging.princeton.edu'
+      config.logger.level = :warn
+      config.logger.stream = root.join('log', 'staging.log')
     end
 
     environment(:production) do
       config.base_url = 'https://orcid-prod.princeton.edu'
+      config.logger.level = :warn
+      config.logger.stream = root.join('log', 'production.log')
     end
   end
 end
