@@ -61,6 +61,10 @@ module OrcidPrinceton
         result = OrcidPrinceton::Operations::UserFromEntraAttributes.new.call(uid: uid, access_token: access_token)
         if result.instance_of?(Dry::Monads::Result::Success)
           result.value!
+        else
+          require 'honeybadger'
+          Honeybadger.notify("Entra ID login failed: #{result.failure}", context: { uid: uid })
+          nil
         end
       end
 

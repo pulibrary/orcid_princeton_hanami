@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'honeybadger'
+
 module OrcidPrinceton
   module Actions
     module Session
@@ -9,16 +11,40 @@ module OrcidPrinceton
 
         def handle(request, response)
           auth_hash = request.env['omniauth.auth']
-          user = user_repo.from_entra_id(auth_hash)
+          if auth_hash.nil?
+            notify_missing_hash(response)
+          else
+            authenticate_entra_user(auth_hash, request, response)
+          end
+        end
 
+        private
+
+        def notify_missing_hash(response)
+          Honeybadger.notify('Entra ID login failed: OmniAuth auth hash is missing')
+          handle_error(response)
+        end
+
+        def authenticate_entra_user(auth_hash, request, response)
+          user = user_repo.from_entra_id(auth_hash)
           if user.nil?
             handle_error(response)
           else
             handle_user(user, request, response)
           end
+        rescue StandardError => e
+          notify_entra_exception(e, auth_hash)
+          handle_error(response)
         end
 
-        private
+        def notify_entra_exception(exception, auth_hash)
+          auth_hash_h = begin
+            auth_hash.to_h
+          rescue StandardError
+            nil
+          end
+          Honeybadger.notify(exception, context: { auth_hash: auth_hash_h })
+        end
 
         def handle_error(response)
           response.flash[:notice] = 'You are not authorized'
