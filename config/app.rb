@@ -24,7 +24,8 @@ module OrcidPrinceton
                callback_path: Hanami.app.router.path(:orcid_callback)
 
       provider :entra_id, client_id: Hanami.app.settings.entra_client_id,
-                          client_secret: Hanami.app.settings.entra_client_secret
+                          client_secret: Hanami.app.settings.entra_client_secret,
+                          tenant_id: Hanami.app.settings.entra_tenant_id
 
       # Devise and this configuration are competing for error handling
       #  This set of code stores off the original devise proc and calls that
