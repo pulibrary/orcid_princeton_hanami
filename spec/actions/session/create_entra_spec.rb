@@ -50,11 +50,52 @@ RSpec.describe OrcidPrinceton::Actions::Session::CreateEntra do
   context 'no auth token' do
     let(:env) { { 'omniauth.auth' => nil, 'warden' => warden_proxy } }
 
-    it 'redirects with an error' do
+    it 'redirects with an error and notifies Honeybadger' do
+      allow(Honeybadger).to receive(:notify)
       response = subject.call(env)
       expect(response).to be_redirect
       expect(response.location).to eq Hanami.app.router.path(:root)
       expect(response.flash.next[:notice]).to eq('You are not authorized')
+      expect(Honeybadger).to have_received(:notify).with('Entra ID login failed: OmniAuth auth hash is missing')
+    end
+  end
+
+  context 'when user registration/retrieval fails with a Failure monad' do
+    before do
+      allow(Honeybadger).to receive(:notify)
+      # Cause the operation to fail
+      mock_operation = instance_double(OrcidPrinceton::Operations::UserFromEntraAttributes)
+      allow(mock_operation).to receive(:call)
+        .and_return(Dry::Monads::Result::Failure.new('LDAP lookup failed'))
+      allow(OrcidPrinceton::Operations::UserFromEntraAttributes).to receive(:new).and_return(mock_operation)
+    end
+
+    it 'redirects with an error and notifies Honeybadger of the specific failure' do
+      response = subject.call(env)
+      expect(response).to be_redirect
+      expect(response.location).to eq Hanami.app.router.path(:root)
+      expect(response.flash.next[:notice]).to eq('You are not authorized')
+      expect(Honeybadger).to have_received(:notify).with('Entra ID login failed: LDAP lookup failed',
+                                                         context: { uid: 'test456' })
+    end
+  end
+
+  context 'when an exception occurs' do
+    before do
+      allow(Honeybadger).to receive(:notify)
+      allow(subject.user_repo).to receive(:from_entra_id)
+        .and_raise(StandardError.new('Unexpected DB Connection Failure'))
+    end
+
+    it 'redirects with an error, catches the exception and logs to Honeybadger with context' do
+      response = subject.call(env)
+      expect(response).to be_redirect
+      expect(response.location).to eq Hanami.app.router.path(:root)
+      expect(response.flash.next[:notice]).to eq('You are not authorized')
+      expect(Honeybadger).to have_received(:notify).with(
+        an_instance_of(StandardError),
+        context: hash_including(auth_hash: an_instance_of(Hash))
+      )
     end
   end
 end
