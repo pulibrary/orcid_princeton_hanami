@@ -2,7 +2,12 @@
   "name": "orcid_princeton",
   "private": true,
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "build": "node config/assets.js --path=app --dest=public/assets",
+    "watch": "node config/assets.js --path=app --dest=public/assets --watch",
+    "format": "prettier --write \"app/assets/js/**/*.js\" \"config/**/*.js\"",
+    "format:check": "prettier --check \"app/assets/js/**/*.js\" \"config/**/*.js\""
+  },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "esbuild": "^0.28.0",
