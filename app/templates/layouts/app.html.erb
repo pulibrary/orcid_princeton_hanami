@@ -6,7 +6,7 @@
     <title>ORCID@Princeton</title>
     <%= favicon_tag("favicon-32x32.png") %>
     <% if Hanami.env?(:production) %>
-      <%= render partial: 'shared/analytics' %>
+      <%= render 'shared/analytics' %>
     <% end %>
     <%= stylesheet_tag "app" %>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
@@ -18,7 +18,7 @@
   </head>
   <body>
     <% if Hanami.env?(:production) %>
-      <%= render partial: 'shared/analytics_noscript' %>
+      <%= render 'shared/analytics_noscript' %>
     <% end %>
     <div id="lux">
       <%= render 'shared/header' %>
