@@ -2,6 +2,12 @@ version: 2.1
 commands:
   install_dependencies:
     steps:
+      # Node.js and Yarn ship with cimg/ruby:*-browsers (LTS at image build time).
+      - run:
+          name: Verify preinstalled Node.js and Yarn
+          command: |
+            node -v
+            yarn -v
       - run: gem install bundler -v '2.7.2'
       - run: cp Gemfile.lock Gemfile.lock.bak
       - restore_cache:
