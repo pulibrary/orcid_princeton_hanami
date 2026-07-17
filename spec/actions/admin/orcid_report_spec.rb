@@ -11,7 +11,7 @@ RSpec.describe OrcidPrinceton::Actions::Admin::OrcidReport do
     it 'works' do
       response = subject.call(params)
       expect(response).to be_redirect
-      expect(response.location).to eq "/auth/entra_id"
+      expect(response.location).to eq '/auth/entra_id'
     end
   end
 
@@ -23,7 +23,7 @@ RSpec.describe OrcidPrinceton::Actions::Admin::OrcidReport do
     it 'works' do
       response = subject.call(params)
       expect(response).to be_redirect
-      expect(response.location).to eq "/auth/cas"
+      expect(response.location).to eq '/auth/cas'
     end
   end
 
