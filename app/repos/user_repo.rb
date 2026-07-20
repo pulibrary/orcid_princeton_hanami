@@ -1,9 +1,14 @@
 # frozen_string_literal: true
 
+require 'dry/monads'
+
 module OrcidPrinceton
   module Repos
     # class for accessing the users in the system
     class UserRepo < OrcidPrinceton::DB::Repo
+      # Provide `Success` and `Failure` for pattern matching on operation results
+      include Dry::Monads[:result]
+
       include Deps['relations.users_roles']
 
       def get(id)
@@ -49,24 +54,30 @@ module OrcidPrinceton
 
         result = OrcidPrinceton::Operations::UserFromAttributes.new.call(uid: access_token.uid,
                                                                          access_token: access_token)
-        if result.instance_of?(Dry::Monads::Result::Success)
-          result.value!
+        case result
+        in Success(user)
+          user
+        in Failure
+          nil
         end
       end
 
+      # rubocop:disable Metrics/MethodLength
       def from_entra_id(access_token)
         return nil if access_token.nil?
 
         uid = OrcidPrinceton::Operations::UserFromEntraAttributes.parse_entra_uid(access_token)
         result = OrcidPrinceton::Operations::UserFromEntraAttributes.new.call(uid: uid, access_token: access_token)
-        if result.instance_of?(Dry::Monads::Result::Success)
-          result.value!
-        else
+        case result
+        in Success(user)
+          user
+        in Failure(error)
           require 'honeybadger'
-          Honeybadger.notify("Entra ID login failed: #{result.failure}", context: { uid: uid })
+          Honeybadger.notify("Entra ID login failed: #{error}", context: { uid: uid })
           nil
         end
       end
+      # rubocop:enable Metrics/MethodLength
 
       def user_with_roles_and_tokens
         users.combine(:roles).combine(:tokens)

@@ -2,6 +2,7 @@
 # frozen_string_literal: true
 
 require 'hanami/view'
+require 'dry/monads'
 
 require 'tilt/jbuilder'
 
@@ -10,6 +11,9 @@ Tilt.register Tilt[:jbuilder], :json
 module OrcidPrinceton
   # Base Hanami view for the ORCID application
   class View < Hanami::View
+    # Provide `Success` and `Failure` for pattern matching on operation results
+    include Dry::Monads[:result]
+
     include Deps['operations.orcid_api_status']
 
     expose :current_user, layout: true
@@ -33,8 +37,12 @@ module OrcidPrinceton
     end
 
     expose :orcid_available do
-      result = orcid_api_status.call
-      result.instance_of?(Dry::Monads::Result::Success)
+      case orcid_api_status.call
+      in Success
+        true
+      in Failure
+        false
+      end
     end
 
     expose :banner_title, layout: true do

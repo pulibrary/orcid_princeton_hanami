@@ -31,9 +31,9 @@ module OrcidPrinceton
 
         def retrieve_orcid_id_status
           case orcid_api_status.call
-          in Dry::Monads::Result::Success(_orcid_status)
+          in Success
             { status: 'ok', results: [{ name: 'ORCID', message: '', status: 'OK' }] }
-          in Dry::Monads::Result::Failure(error)
+          in Failure(error)
             { status: 'error', results: [{ name: 'ORCID', message: error, status: 'ERROR' }] }
           end
         end

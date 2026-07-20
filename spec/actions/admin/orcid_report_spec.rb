@@ -53,5 +53,21 @@ RSpec.describe OrcidPrinceton::Actions::Admin::OrcidReport do
       expect(response.body.count).to eq(1)
       expect { CSV.parse(response.body.first) }.not_to raise_error
     end
+
+    context 'when the PeopleSoft report operation fails' do
+      let(:people_soft_report) do
+        instance_double(OrcidPrinceton::Operations::PeopleSoftReport).tap do |report|
+          allow(report).to receive(:call)
+            .and_return(Dry::Monads::Result::Failure.new('could not write report'))
+        end
+      end
+      subject { described_class.new(people_soft_report:) }
+
+      it 'returns an empty body' do
+        params['warden'].set_user user.uid
+        response = subject.call(params)
+        expect(response.body).to eq([''])
+      end
+    end
   end
 end

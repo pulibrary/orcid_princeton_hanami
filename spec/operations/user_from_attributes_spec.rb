@@ -25,7 +25,7 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
   it 'Updates the user with cas values', db: true do
     user = user_repo.create(uid: 'abc123', provider: 'cas')
     result = described_class.new.call(uid: user.uid, access_token: auth_hash)
-    expect(result).to be_a Dry::Monads::Result::Success
+    expect(result).to be_success
     updated_user = user_repo.get(user.id)
     expect(updated_user.university_id).to eq('999999999')
     expect(updated_user.display_name).to eq('Areyou, Who')
@@ -35,7 +35,7 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
 
   it 'Updates the user with cas, and does overwrite existing values', db: true do
     result = described_class.new.call(uid: user.uid, access_token: auth_hash)
-    expect(result).to be_a Dry::Monads::Result::Success
+    expect(result).to be_success
     updated_user = user_repo.get(user.id)
     expect(updated_user.university_id).to eq('999999999')
     expect(updated_user.display_name).to eq('Areyou, Who')
@@ -44,7 +44,7 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
   it 'creates the user with cas', db: true do
     auth_hash[:uid] = 'other_user'
     result = described_class.new.call(uid: 'other_user', access_token: auth_hash)
-    expect(result).to be_a Dry::Monads::Result::Success
+    expect(result).to be_success
     new_user = user_repo.find_by_uid('other_user')
     expect(new_user.university_id).to eq('999999999')
     expect(new_user.display_name).to eq('Areyou, Who')
@@ -74,7 +74,7 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
       auth_hash.extra.universityid = nil
       auth_hash.extra.displayname = nil
       result = described_class.new.call(uid: user.uid, access_token: auth_hash)
-      expect(result).to be_a Dry::Monads::Result::Success
+      expect(result).to be_success
       updated_user = user_repo.find_by_uid('tigerdatatester')
       expect(updated_user.university_id).to eq('098136217') # from ldap
       expect(updated_user.display_name).to eq('TigerData Tester') # from ldap
@@ -82,11 +82,42 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
       expect(updated_user.family_name).to eq('Areyou') # from auth hash
     end
 
+    context 'when exercising ldap_info and default_connection' do
+      let(:ldap_connection) { instance_double(Net::LDAP) }
+
+      before do
+        # Do not stub ldap_info; stub the LDAP client so Net::LDAP code paths run.
+        allow_any_instance_of(described_class).to receive(:ldap_info).and_call_original
+        allow(Net::LDAP).to receive(:new).and_return(ldap_connection)
+        allow(ldap_connection).to receive(:search).and_return([ldap_entry])
+      end
+
+      it 'builds a TLS LDAP connection and searches by uid', db: true do
+        user = user_repo.create(uid: 'tigerdatatester', provider: 'cas')
+        auth_hash.extra.universityid = nil
+        auth_hash.extra.displayname = nil
+
+        result = described_class.new.call(uid: user.uid, access_token: auth_hash)
+        expect(result).to be_success
+        expect(Net::LDAP).to have_received(:new).with(
+          hash_including(
+            host: 'ldap.princeton.edu',
+            base: 'o=Princeton University,c=US',
+            port: 636,
+            encryption: hash_including(method: :simple_tls)
+          )
+        )
+        expect(ldap_connection).to have_received(:search).with(hash_including(:filter))
+        updated_user = user_repo.find_by_uid('tigerdatatester')
+        expect(updated_user.university_id).to eq('098136217')
+      end
+    end
+
     it 'creates a new user with ldap values when they do not exist and university id is missing in token', db: true do
       auth_hash.extra.universityid = nil
       auth_hash.extra.displayname = nil
       result = described_class.new.call(uid: 'tigerdatatester', access_token: auth_hash)
-      expect(result).to be_a Dry::Monads::Result::Success
+      expect(result).to be_success
       new_user = user_repo.find_by_uid('tigerdatatester')
       expect(new_user).not_to be_nil
       expect(new_user.university_id).to eq('098136217') # from ldap
@@ -102,7 +133,7 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
         user = user_repo.create(uid: 'tigerdatatester', provider: 'cas')
         auth_hash.extra.universityid = nil
         result = described_class.new.call(uid: user.uid, access_token: auth_hash)
-        expect(result).to be_a Dry::Monads::Result::Failure
+        expect(result).to be_failure
         expect(result.failure).to eq('Can not find the university id for tigerdatatester')
       end
     end
@@ -124,7 +155,7 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
         user = user_repo.create(uid: 'tigerdatatester', provider: 'cas')
         auth_hash.extra.universityid = nil
         result = described_class.new.call(uid: user.uid, access_token: auth_hash)
-        expect(result).to be_a Dry::Monads::Result::Failure
+        expect(result).to be_failure
         expect(result.failure).to eq('Can not find the university id for tigerdatatester')
       end
     end
@@ -138,7 +169,7 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
     it 'does not overwrite existing database attributes from CAS/token', db: true do
       expect(user.given_name).to eq('ExistingGivenName')
       result = described_class.new.call(uid: user.uid, access_token: auth_hash)
-      expect(result).to be_a Dry::Monads::Result::Success
+      expect(result).to be_success
       updated_user = user_repo.get(user.id)
       expect(updated_user.given_name).to eq('ExistingGivenName')
       expect(updated_user.display_name).to eq('Existing DisplayName')
@@ -155,7 +186,7 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
         auth_hash.extra.displayname = nil
 
         result = described_class.new.call(uid: 'some_uid', access_token: auth_hash)
-        expect(result).to be_a Dry::Monads::Result::Success
+        expect(result).to be_success
         new_user = user_repo.find_by_uid('some_uid')
         expect(new_user.given_name).to eq('some_uid')
         expect(new_user.family_name).to eq('some_uid')
@@ -188,7 +219,7 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
         auth_hash.extra.displayname = nil
 
         result = described_class.new.call(uid: 'tigerdatatester', access_token: auth_hash)
-        expect(result).to be_a Dry::Monads::Result::Success
+        expect(result).to be_success
         new_user = user_repo.find_by_uid('tigerdatatester')
         expect(new_user.university_id).to eq('098136217')
         expect(new_user.given_name).to eq('TigerData')
@@ -220,7 +251,7 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
     allow(operation).to receive(:ldap_info).with('tigerdatatester').and_return(ldap_attr)
 
     result = operation.call(uid: user.uid, access_token: auth_hash)
-    expect(result).to be_a Dry::Monads::Result::Success
+    expect(result).to be_success
     updated_user = user_repo.find_by_uid('tigerdatatester')
     expect(updated_user.university_id).to eq('098136217') # from ldap
     expect(updated_user.display_name).to eq('TigerData Tester') # from ldap

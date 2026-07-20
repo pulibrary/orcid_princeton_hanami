@@ -39,6 +39,20 @@ RSpec.describe OrcidPrinceton::Views::Home::Show do
     expect(rendered[:stale_version]).to eq('')
   end
 
+  context 'when the ORCID API status check fails' do
+    let(:orcid_api_status) do
+      instance_double(OrcidPrinceton::Operations::OrcidAPIStatus).tap do |status|
+        allow(status).to receive(:call)
+          .and_return(Dry::Monads::Result::Failure.new('The ORCID API has an invalid status'))
+      end
+    end
+    let(:view) { described_class.new(orcid_api_status:) }
+
+    it 'exposes orcid_available as false' do
+      expect(rendered[:orcid_available]).to be(false)
+    end
+  end
+
   context 'the version is stale and is not released' do
     let(:version_hash) do
       { stale: true, sha: 'sha', branch: 'v0.8.0', version: '10 December 2021', tagged_release: false }
