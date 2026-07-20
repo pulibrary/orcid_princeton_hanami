@@ -56,6 +56,10 @@ module OrcidPrinceton
     config.actions.content_security_policy[:script_src] += ' https://plausible.io'
     config.actions.content_security_policy[:connect_src] += ' https://plausible.io'
 
+    # needed to allow for umami gtm include
+    config.actions.content_security_policy[:script_src] += ' https://www.googletagmanager.com'
+    config.actions.content_security_policy[:script_src] += ' https://analytics.lib.princeton.edu'
+
     environment(:test) do
     end
 
