@@ -27,7 +27,11 @@ module OrcidPrinceton
 
     def require_authentication(request, response)
       unless warden_session(request)&.user
-        response.redirect_to '/auth/cas'
+        if Hanami.app.settings.use_entra
+          response.redirect_to '/auth/entra_id'
+        else
+          response.redirect_to '/auth/cas'
+        end
       end
     end
 
