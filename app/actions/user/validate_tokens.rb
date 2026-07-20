@@ -17,9 +17,11 @@ module OrcidPrinceton
         def handle(request, response)
           user_id = request.params[:id]
           if response[:current_user].id == user_id
-            result = validate_user_tokens.call(user_id)
-            if result in Dry::Monads::Result::Failure(error)
+            case validate_user_tokens.call(user_id)
+            in Failure(error)
               response.flash[:notice] = error
+            in Success
+              nil
             end
             response.redirect_to routes.path(:user, id: response[:current_user].id)
           else

@@ -2,7 +2,7 @@ version: 2.1
 commands:
   install_dependencies:
     steps:
-      - run: gem install bundler -v '2.3.22'
+      - run: gem install bundler -v '2.7.2'
       - run: cp Gemfile.lock Gemfile.lock.bak
       - restore_cache:
           key: &gem_key orcid_princeton-hanami-cimg-{{ checksum "Gemfile.lock.bak" }}

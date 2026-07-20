@@ -10,23 +10,24 @@ namespace :people_soft do
     raise 'Must provide a filename' if filename.nil?
 
     report = OrcidPrinceton::Operations::PeopleSoftReport.new
-    result = report.call(filename)
-    if result.instance_of?(Dry::Monads::Result::Success)
-      puts "ORCID report was created at #{filename}"
-    else
-      puts "ERROR:  Could not generate ORCID Report: #{result}"
+    case report.call(filename)
+    in Dry::Monads::Result::Success(path)
+      puts "ORCID report was created at #{path}"
+    in Dry::Monads::Result::Failure(error)
+      puts "ERROR:  Could not generate ORCID Report: #{error}"
     end
   end
 
   desc 'Saves the CSV report in the correct location for the environment'
   task cron_report: :environment do
     report = OrcidPrinceton::Operations::PeopleSoftReport.new
-    result = report.call(Hanami.app.settings.peoplesoft_output_location)
-    if result.instance_of?(Dry::Monads::Result::Success)
-      puts "ORCID report was created at #{Hanami.app.settings.peoplesoft_output_location}"
-    else
-      puts "ERROR:  Could not generate ORCID Report: #{result}"
-      Honeybadger.notify("ERROR:  Could not generate ORCID Report: #{result}")
+    output_location = Hanami.app.settings.peoplesoft_output_location
+    case report.call(output_location)
+    in Dry::Monads::Result::Success(path)
+      puts "ORCID report was created at #{path}"
+    in Dry::Monads::Result::Failure(error)
+      puts "ERROR:  Could not generate ORCID Report: #{error}"
+      Honeybadger.notify("ERROR:  Could not generate ORCID Report: #{error}")
     end
   end
 end

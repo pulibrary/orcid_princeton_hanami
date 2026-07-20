@@ -28,6 +28,8 @@ module OrcidPrinceton
       end
 
       # Create a token from an omniauth hash.
+      # Omniauth credentials may include a refresh_token; we do not persist it yet
+      # (no column / rotation flow). Track if long-lived re-auth without user consent is needed.
       # @param credentials [OmniAuth::AuthHash] The credentials hash from the omniauth response.
       # @param user [User] The user to associate the token with.
       # @return [Token] The token that was created.
@@ -38,7 +40,7 @@ module OrcidPrinceton
           user_id: user.id,
           token_type: 'ORC',
           orcid: user.orcid
-          # TODO: ADD REFRESH TOKEN
+          # @TODO: ADD REFRESH TOKEN
           # refresh_token: credentials.refresh_token
         )
       end

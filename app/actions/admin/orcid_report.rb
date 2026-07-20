@@ -17,10 +17,13 @@ module OrcidPrinceton
           user_filename = "ORCID_portal_report_#{date}.csv"
           file = Tempfile.new(SecureRandom.uuid)
           tmp_filename = file.path
-          if people_soft_report.call(tmp_filename).is_a? Dry::Monads::Result::Success
+          case people_soft_report.call(tmp_filename)
+          in Success
             response.format = :csv
             response.headers['Content-Disposition'] = "inline; filename=\"#{user_filename}\""
             response.body = File.read(tmp_filename)
+          in Failure
+            response.body = ''
           end
           file.unlink
         end

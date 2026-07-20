@@ -43,7 +43,6 @@ module OrcidPrinceton
     setting :session_secret, default: default_secret, constructor: Types::String
     setting :cas_url, constructor: Types::String
     setting :cas_host, constructor: Types::String
-    setting :original_omniauth_failure, default: '', constructor: Types::String
     setting :banner_title, default: '', constructor: Types::String
     setting :banner_body, default: '', constructor: Types::String
     setting :orcid_client_id, default: '', constructor: Types::String
