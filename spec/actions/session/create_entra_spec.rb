@@ -97,5 +97,26 @@ RSpec.describe OrcidPrinceton::Actions::Session::CreateEntra do
         context: hash_including(auth_hash: an_instance_of(Hash))
       )
     end
+
+    context 'and the auth hash cannot be converted to a Hash for Honeybadger context' do
+      let(:auth_hash) do
+        Object.new.tap do |obj|
+          def obj.to_h
+            raise StandardError, 'cannot convert auth hash'
+          end
+        end
+      end
+
+      it 'notifies Honeybadger with a nil auth_hash context' do
+        response = subject.call(env)
+        expect(response).to be_redirect
+        expect(response.location).to eq Hanami.app.router.path(:root)
+        expect(response.flash.next[:notice]).to eq('You are not authorized')
+        expect(Honeybadger).to have_received(:notify).with(
+          an_instance_of(StandardError),
+          context: { auth_hash: nil }
+        )
+      end
+    end
   end
 end

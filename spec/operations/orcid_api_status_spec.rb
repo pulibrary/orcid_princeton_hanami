@@ -6,7 +6,7 @@ RSpec.describe OrcidPrinceton::Operations::OrcidAPIStatus do
   it 'checks the status' do
     status = described_class.new
     result = status.call
-    expect(result).to be_a Dry::Monads::Result::Success
+    expect(result).to be_success
   end
 
   context 'when the api is showing a failed component' do
@@ -22,7 +22,7 @@ RSpec.describe OrcidPrinceton::Operations::OrcidAPIStatus do
     it 'raises an error when the status is checked' do
       status = described_class.new
       result = status.call
-      expect(result).to be_a Dry::Monads::Result::Failure
+      expect(result).to be_failure
       expect(result.failure).to eq('The ORCID API has an invalid status https://api.orcid.org/v3.0/apiStatus')
     end
   end
@@ -36,7 +36,7 @@ RSpec.describe OrcidPrinceton::Operations::OrcidAPIStatus do
     it 'raises an error when the status is checked' do
       status = described_class.new
       result = status.call
-      expect(result).to be_a Dry::Monads::Result::Failure
+      expect(result).to be_failure
       expect(result.failure).to eq('The ORCID API returned HTTP error code: 502')
     end
   end
@@ -56,7 +56,7 @@ RSpec.describe OrcidPrinceton::Operations::OrcidAPIStatus do
     it 'does not raise an error when the status is checked' do
       status = described_class.new
       result = status.call
-      expect(result).to be_a Dry::Monads::Result::Success
+      expect(result).to be_success
     end
   end
 end

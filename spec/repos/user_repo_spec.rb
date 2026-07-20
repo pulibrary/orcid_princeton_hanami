@@ -90,6 +90,19 @@ RSpec.describe OrcidPrinceton::Repos::UserRepo, :db do
       expect(updated_user.display_name).to eq(user.display_name)
     end
 
+    it 'returns nil when the attribute operation fails' do
+      mock_operation = instance_double(OrcidPrinceton::Operations::UserFromAttributes)
+      allow(mock_operation).to receive(:call)
+        .and_return(Dry::Monads::Result::Failure.new('LDAP lookup failed'))
+      allow(OrcidPrinceton::Operations::UserFromAttributes).to receive(:new).and_return(mock_operation)
+
+      expect(repo.from_cas(auth_hash)).to be_nil
+    end
+
+    it 'returns nil when the access token is missing' do
+      expect(repo.from_cas(nil)).to be_nil
+    end
+
     context 'user is only partially set up' do
       let(:user) { Factory[:user, given_name: nil] }
 

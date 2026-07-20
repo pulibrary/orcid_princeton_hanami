@@ -27,13 +27,14 @@
     "FONTCONFIG_PATH": "$PWD/.devbox/nix/profile/default/etc/fonts",
     "BUNDLE_PATH": ".bundle",
     "BUNDLE_BIN": ".binstubs",
-    "PATH": ".binstubs:bin:$PATH"
+    "PATH": ".binstubs:bin:$PATH",
+    "BUNDLER_VERSION": "2.7.2"
   },
   "shell": {
     "init_hook": ["echo 'initializing devbox'"],
     "scripts": {
       "setup": "devbox run deps",
-      "deps": "mkdir -p $TMPDIR; bundle install; yarn install",
+      "deps": "mkdir -p $TMPDIR; gem install bundler -v 2.7.2 --no-document; bundle install; yarn install",
       "server": "bin/dev",
       "console": "bundle exec hanami console",
       "lint": "bundle exec rubocop",

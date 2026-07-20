@@ -8,7 +8,7 @@ RSpec.describe OrcidPrinceton::Operations::ValidateUserTokens do
   it 'raises an error for a bad user' do
     validate_tokens = described_class.new
     result = validate_tokens.call(2002)
-    expect(result).to be_a Dry::Monads::Result::Failure
+    expect(result).to be_failure
     expect(result.failure).to eq('The user does not exists')
   end
 
@@ -20,7 +20,7 @@ RSpec.describe OrcidPrinceton::Operations::ValidateUserTokens do
                                                                                               headers: {})
       validate_tokens = described_class.new
       result = validate_tokens.call(user.id)
-      expect(result).to be_a Dry::Monads::Result::Success
+      expect(result).to be_success
       updated_user = user_repo.get(user.id)
       expect(updated_user.tokens_expired?).to be_falsey
     end
@@ -34,7 +34,7 @@ RSpec.describe OrcidPrinceton::Operations::ValidateUserTokens do
                                                                                               headers: {})
       validate_tokens = described_class.new
       result = validate_tokens.call(user.id)
-      expect(result).to be_a Dry::Monads::Result::Success
+      expect(result).to be_success
       updated_user = user_repo.get(user.id)
       expect(updated_user.tokens_expired?).to be_truthy
     end
@@ -51,7 +51,7 @@ RSpec.describe OrcidPrinceton::Operations::ValidateUserTokens do
 
       validate_tokens = described_class.new
       result = validate_tokens.call(user.id)
-      expect(result).to be_a Dry::Monads::Result::Failure
+      expect(result).to be_failure
     end
   end
 end

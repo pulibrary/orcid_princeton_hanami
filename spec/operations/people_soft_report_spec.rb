@@ -25,7 +25,7 @@ RSpec.describe OrcidPrinceton::Operations::PeopleSoftReport, type: :operation do
     user_invalid = Factory[:user_with_expired_token, university_id: '223344']
     report = described_class.new
     result = report.call(file_name)
-    expect(result).to be_a Dry::Monads::Result::Success
+    expect(result).to be_success
     expect(File.exist?(file_name)).to be true
     lines = File.readlines(file_name)
     expect(lines.first).to eq "University ID,Net ID,Full Name,Identifier Type,ORCID iD,Date Effective,Effective Until\n"
@@ -37,7 +37,7 @@ RSpec.describe OrcidPrinceton::Operations::PeopleSoftReport, type: :operation do
   it 'it saves the report to a file with the correct header' do
     report = described_class.new
     result = report.call(file_name, valid_data)
-    expect(result).to be_a Dry::Monads::Result::Success
+    expect(result).to be_success
     expect(File.exist?(file_name)).to be true
     lines = File.readlines(file_name)
     expect(lines.first).to eq "University ID,Net ID,Full Name,Identifier Type,ORCID iD,Date Effective,Effective Until\n"
@@ -49,6 +49,6 @@ RSpec.describe OrcidPrinceton::Operations::PeopleSoftReport, type: :operation do
   it 'it responds with a failure if we try to save the file to a directory that does not exists' do
     report = described_class.new
     result = report.call('/bad_location/bad_file', valid_data)
-    expect(result).to be_a Dry::Monads::Result::Failure
+    expect(result).to be_failure
   end
 end

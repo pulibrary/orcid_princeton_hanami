@@ -23,6 +23,7 @@ module OrcidPrinceton
       end
 
       def validate_tokens(user)
+        # NOTE: Why is this required?
         Time.now
         user.valid_tokens.each do |token|
           decoded_token = token_repo.get(token.id).token
