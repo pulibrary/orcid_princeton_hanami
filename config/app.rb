@@ -58,7 +58,9 @@ module OrcidPrinceton
 
     # needed to allow for umami gtm include
     config.actions.content_security_policy[:script_src] += ' https://www.googletagmanager.com'
+    config.actions.content_security_policy[:connect_src] += ' https://www.googletagmanager.com'
     config.actions.content_security_policy[:script_src] += ' https://analytics.lib.princeton.edu'
+    config.actions.content_security_policy[:connect_src] += ' https://analytics.lib.princeton.edu'
 
     environment(:test) do
     end
