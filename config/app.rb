@@ -50,17 +50,17 @@ module OrcidPrinceton
     config.actions.content_security_policy[:script_src] += " 'unsafe-inline'"
 
     # needed to allow for bootstrap javascript include
-    config.actions.content_security_policy[:script_src] += " https://cdn.jsdelivr.net"
+    config.actions.content_security_policy[:script_src] += ' https://cdn.jsdelivr.net'
 
     # needed to allow for plausible javascript include
-    config.actions.content_security_policy[:script_src] += " https://plausible.io"
-    config.actions.content_security_policy[:connect_src] += " https://plausible.io"
+    config.actions.content_security_policy[:script_src] += ' https://plausible.io'
+    config.actions.content_security_policy[:connect_src] += ' https://plausible.io'
 
     # needed to allow for umami gtm include
-    config.actions.content_security_policy[:script_src] += " https://www.googletagmanager.com"
-    config.actions.content_security_policy[:connect_src] += " https://www.googletagmanager.com"
-    config.actions.content_security_policy[:script_src] += " https://analytics.lib.princeton.edu"
-    config.actions.content_security_policy[:connect_src] += " https://analytics.lib.princeton.edu"
+    config.actions.content_security_policy[:script_src] += ' https://www.googletagmanager.com'
+    config.actions.content_security_policy[:connect_src] += ' https://www.googletagmanager.com'
+    config.actions.content_security_policy[:script_src] += ' https://analytics.lib.princeton.edu'
+    config.actions.content_security_policy[:connect_src] += ' https://analytics.lib.princeton.edu'
 
     environment(:test) do
     end
