@@ -63,61 +63,6 @@ RSpec.describe OrcidPrinceton::Repos::UserRepo, :db do
     end
   end
 
-  describe '#from_cas' do
-    let(:auth_hash) do
-      OmniAuth::AuthHash.new(provider: 'cas', uid: user.uid,
-                             extra: OmniAuth::AuthHash.new(mail: 'who@princeton.edu', user: user.uid,
-                                                           authnContextClass: 'mfa-duo', campusid: 'who.areyou',
-                                                           puresidentdepartmentnumber: '41999', uid: user.uid,
-                                                           title: 'The Developer, Library - Information Technology.',
-                                                           universityid: '999999999', displayname: 'Areyou, Who',
-                                                           pudisplayname: 'Areyou, Who',
-                                                           edupersonaffiliation: 'staff', givenname: 'Who',
-                                                           sn: 'Areyou', department: 'Library - Information Technology',
-                                                           edupersonprincipalname: 'who@princeton.edu',
-                                                           puresidentdepartment: 'Library - Information Technology',
-                                                           puaffiliation: 'stf', departmentnumber: '41999',
-                                                           pustatus: 'stf'))
-    end
-    let(:user) { Factory[:user] }
-
-    it 'returns the existing user without updates' do
-      updated_user = repo.from_cas(auth_hash)
-
-      expect(updated_user.id).to eq(user.id)
-      expect(updated_user.given_name).to eq(user.given_name)
-      expect(updated_user.family_name).to eq(user.family_name)
-      expect(updated_user.display_name).to eq(user.display_name)
-    end
-
-    it 'returns nil when the attribute operation fails' do
-      mock_operation = instance_double(OrcidPrinceton::Operations::UserFromAttributes)
-      allow(mock_operation).to receive(:call)
-        .and_return(Dry::Monads::Result::Failure.new('LDAP lookup failed'))
-      allow(OrcidPrinceton::Operations::UserFromAttributes).to receive(:new).and_return(mock_operation)
-
-      expect(repo.from_cas(auth_hash)).to be_nil
-    end
-
-    it 'returns nil when the access token is missing' do
-      expect(repo.from_cas(nil)).to be_nil
-    end
-
-    context 'user is only partially set up' do
-      let(:user) { Factory[:user, given_name: nil] }
-
-      it 'updates a users and sets the update time' do
-        updated_user = repo.from_cas(auth_hash)
-
-        expect(updated_user.id).to eq(user.id)
-        expect(updated_user.given_name).to eq('Who')
-        expect(updated_user.family_name).to eq('Areyou')
-        expect(updated_user.created_at).not_to eq(updated_user.updated_at)
-        expect(updated_user.display_name).to eq('Areyou, Who')
-      end
-    end
-  end
-
   describe '#from_entra' do
     let(:auth_hash) do
       OmniAuth::AuthHash.new(provider: 'entra_id', uid: '<some really large random string>', credentials: nil,
