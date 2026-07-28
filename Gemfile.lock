@@ -364,10 +364,6 @@ GEM
       logger
       rack (>= 2.2.3)
       rack-protection
-    omniauth-cas (3.0.2)
-      addressable (~> 2.8)
-      nokogiri (~> 1.12)
-      omniauth (~> 2.1)
     omniauth-entra-id (3.1.1)
       jwt (>= 2.9.2)
       omniauth-oauth2 (~> 1.8)
@@ -783,7 +779,6 @@ DEPENDENCIES
   net-http
   net-ldap
   nokogiri (>= 1.18.9)
-  omniauth-cas
   omniauth-entra-id
   omniauth-orcid
   opentelemetry-exporter-otlp

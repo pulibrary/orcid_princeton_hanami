@@ -3,28 +3,10 @@
 RSpec.describe OrcidPrinceton::Actions::Admin::OrcidReport do
   let(:params) { {} }
 
-  context 'entra login is enabled' do
-    before do
-      allow(Hanami.app.settings).to receive(:use_entra).and_return(true)
-    end
-
-    it 'works' do
-      response = subject.call(params)
-      expect(response).to be_redirect
-      expect(response.location).to eq '/auth/entra_id'
-    end
-  end
-
-  context 'entra login is disabled' do
-    before do
-      allow(Hanami.app.settings).to receive(:use_entra).and_return(false)
-    end
-
-    it 'works' do
-      response = subject.call(params)
-      expect(response).to be_redirect
-      expect(response.location).to eq '/auth/cas'
-    end
+  it 'redirects to login' do
+    response = subject.call(params)
+    expect(response).to be_redirect
+    expect(response.location).to eq '/auth/entra_id'
   end
 
   context 'a user is logged in' do

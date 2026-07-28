@@ -41,8 +41,6 @@ module OrcidPrinceton
 
     setting :database_url, default: database_url, constructor: Types::String
     setting :session_secret, default: default_secret, constructor: Types::String
-    setting :cas_url, constructor: Types::String
-    setting :cas_host, constructor: Types::String
     setting :original_omniauth_failure, default: '', constructor: Types::String
     setting :banner_title, default: '', constructor: Types::String
     setting :banner_body, default: '', constructor: Types::String
@@ -56,7 +54,6 @@ module OrcidPrinceton
     setting :peoplesoft_output_location, default: '/mnt/peoplesoft/sr_orcid/prod/ORCID_portal_report.csv',
                                          constructor: Types::String
 
-    setting :use_entra, default: false, constructor: Types::Params::Bool
     setting :entra_client_id, default: '', constructor: Types::String
     setting :entra_client_secret, default: '', constructor: Types::String
     setting :entra_tenant_id, default: '', constructor: Types::String

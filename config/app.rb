@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'hanami'
-require 'omniauth-cas'
 require 'omniauth-orcid'
 require 'omniauth-entra-id'
 require 'warden'
@@ -17,8 +16,6 @@ module OrcidPrinceton
 
     config.middleware.use Warden::Manager
     config.middleware.use OmniAuth::Builder do
-      provider :cas, host: Hanami.app.settings.cas_host, url: Hanami.app.settings.cas_url
-
       provider :orcid, Hanami.app.settings.orcid_client_id, Hanami.app.settings.orcid_client_secret,
                member: true, sandbox: Hanami.app.settings.orcid_sandbox,
                callback_path: Hanami.app.router.path(:orcid_callback)
