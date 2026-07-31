@@ -58,6 +58,8 @@ module OrcidPrinceton
     config.actions.content_security_policy[:connect_src] += ' https://www.googletagmanager.com'
     config.actions.content_security_policy[:script_src] += ' https://analytics.lib.princeton.edu'
     config.actions.content_security_policy[:connect_src] += ' https://analytics.lib.princeton.edu'
+    config.actions.content_security_policy[:script_src] += ' https://analytics-staging.lib.princeton.edu'
+    config.actions.content_security_policy[:connect_src] += ' https://analytics-staging.lib.princeton.edu'
 
     environment(:test) do
     end
