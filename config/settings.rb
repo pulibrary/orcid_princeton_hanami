@@ -59,6 +59,6 @@ module OrcidPrinceton
     setting :entra_tenant_id, default: '', constructor: Types::String
 
     setting :admin_netids,
-            default: %w[abartelm bs3097 cac9 cl4928 hc8719 jh6441 jrg5 kl37 neggink rl3667], constructor: Types::Array
+            default: %w[abartelm bs3097 cac9 cl4928 jh6441 jrg5 kl37 neggink pp9425 rl3667], constructor: Types::Array
   end
 end
