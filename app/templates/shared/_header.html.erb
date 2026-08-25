@@ -4,6 +4,7 @@
             <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
                 <lux-menu-bar type="main-menu" :menu-items="[
                 {name: 'Home', component: 'Home', href: '/'},
+                {name: 'Help', component: 'External Site', href: 'https://libguides.princeton.edu/orcid-sciencv', target: '_blank'},
                     {name: '<%= current_user.uid %>', component: 'Account', href: '/account/', children: [
                     {name: 'Profile', component: 'Feedback', href: '<%= routes.path(:user, id: current_user.id) %>'},
                       {name: 'ORCID Report', component: 'Feedback', href: '<%= routes.path(:admin_report) %>'},
@@ -16,6 +17,7 @@
             <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
                 <lux-menu-bar type="main-menu" :menu-items="[
                 {name: 'Home', component: 'Home', href: '/'},
+                {name: 'Help', component: 'External Site', href: 'https://libguides.princeton.edu/orcid-sciencv', target: '_blank'},
                     {name: '<%= current_user.uid %>', component: 'Account', href: '/account/', children: [
                       {name: 'Profile', component: 'Feedback', href: '<%= routes.path(:user, id: current_user.id) %>'},
                       {name: 'Logout', component: 'Logout', href: '<%= routes.path(:logout) %>'}
@@ -25,7 +27,8 @@
             </lux-library-header>
         <% else %>
             <lux-library-header app-name="ORCID@Princeton" abbr-name="ORCID@Princeton" theme="dark">
-                <lux-menu-bar type="main-menu" :menu-items="[ {name: 'Login', component: 'Login', href: '<%= login_url %>'} ]"></lux-menu-bar>
+                <lux-menu-bar type="main-menu" :menu-items="[ {name: 'Help', component: 'External Site', href: 'https://libguides.princeton.edu/orcid-sciencv', target: '_blank'}, 
+                  {name: 'Login', component: 'Login', href: '<%= login_url %>'} ]"></lux-menu-bar>
             </lux-library-header>
         <% end %>
     </div>
