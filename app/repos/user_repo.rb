@@ -49,7 +49,7 @@ module OrcidPrinceton
         user_with_roles_and_tokens.where(uid: uid)&.first
       end
 
-      # rubocop:disable Metrics/MethodLength
+      # rubocop:disable-next Metrics/MethodLength
       def from_entra_id(access_token)
         return nil if access_token.nil?
 
@@ -64,7 +64,6 @@ module OrcidPrinceton
           nil
         end
       end
-      # rubocop:enable Metrics/MethodLength
 
       def user_with_roles_and_tokens
         users.combine(:roles).combine(:tokens)
