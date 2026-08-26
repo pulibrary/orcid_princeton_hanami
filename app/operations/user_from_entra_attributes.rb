@@ -17,7 +17,7 @@ module OrcidPrinceton
 
       private
 
-      # rubocop:disable Metrics/AbcSize
+      # rubocop:disable-next Metrics/AbcSize
       def attributes_from_token(access_token)
         uid = self.class.parse_entra_uid(access_token)
         alternate_value = alternate_value(access_token.info.email, uid)
@@ -27,7 +27,6 @@ module OrcidPrinceton
           family_name: access_token.extra.raw_info.family_name || alternate_value,
           display_name: access_token.extra.raw_info.name || alternate_value }
       end
-      # rubocop:enable Metrics/AbcSize
     end
   end
 end

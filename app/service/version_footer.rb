@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# rubocop:disable Style/ClassVars
+# rubocop:disable-next Style/ClassVars
 module OrcidPrinceton
   module Service
     # Retrieves version information from Capistrano's files. The general approach is
@@ -120,4 +120,3 @@ module OrcidPrinceton
     end
   end
 end
-# rubocop:enable Style/ClassVars

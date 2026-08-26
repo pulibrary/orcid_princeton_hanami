@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-# rubocop:disable Metrics/BlockLength
+# rubocop:disable-next Metrics/BlockLength
 RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
   let(:user_repo) { OrcidPrinceton::Repos::UserRepo.new }
   let(:auth_hash) do
@@ -146,9 +146,8 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
       end
 
       before do
-        # rubocop:disable Layout/LineLength
+        # rubocop:disable-next Layout/LineLength
         allow_any_instance_of(described_class).to receive(:ldap_info).with('tigerdatatester').and_return(invalid_ldap_entry)
-        # rubocop:enable Layout/LineLength
       end
 
       it 'returns a Failure monad', db: true do
@@ -259,4 +258,3 @@ RSpec.describe OrcidPrinceton::Operations::UserFromAttributes do
     expect(updated_user.family_name).to eq('Areyou') # from auth hash
   end
 end
-# rubocop:enable Metrics/BlockLength

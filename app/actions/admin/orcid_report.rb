@@ -12,7 +12,7 @@ module OrcidPrinceton
         before :require_authentication # make sure there is a user logged in before serving the report
         before :require_admin # make sure the logged in user is an administrator
 
-        # rubocop:disable Metrics/MethodLength
+        # rubocop:disable-next Metrics/MethodLength
         def handle(_request, response)
           date = Time.now.strftime('%Y-%m-%d')
           user_filename = "ORCID_portal_report_#{date}.csv"
@@ -28,7 +28,6 @@ module OrcidPrinceton
           end
           file.unlink
         end
-        # rubocop:enable Metrics/MethodLength
       end
     end
   end

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-# rubocop:disable Metrics/BlockLength
+# rubocop:disable-next Metrics/BlockLength
 RSpec.describe OrcidPrinceton::Repos::UserRepo, :db do
   subject(:repo) do
     described_class.new
@@ -161,4 +161,3 @@ RSpec.describe OrcidPrinceton::Repos::UserRepo, :db do
     end
   end
 end
-# rubocop:enable Metrics/BlockLength

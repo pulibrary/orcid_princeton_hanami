@@ -14,7 +14,7 @@ module OrcidPrinceton
           required(:id).value(:integer)
         end
 
-        # rubocop:disable Metrics/MethodLength
+        # rubocop:disable-next Metrics/MethodLength
         def handle(request, response)
           user_id = request.params[:id]
           if response[:current_user].id == user_id
@@ -29,7 +29,6 @@ module OrcidPrinceton
             response.render(alternative_view)
           end
         end
-        # rubocop:enable Metrics/MethodLength
       end
     end
   end
