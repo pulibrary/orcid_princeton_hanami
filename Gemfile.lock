@@ -683,6 +683,8 @@ GEM
       rexml (~> 3.2, >= 3.2.5)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
+    semantic_logger (5.1.0)
+      concurrent-ruby (~> 1.0)
     sequel (5.107.0)
       bigdecimal
     shellany (0.0.1)
@@ -793,6 +795,7 @@ DEPENDENCIES
   rspec-retry
   rubocop
   selenium-webdriver
+  semantic_logger
   tilt (~> 2.0)
   tilt-jbuilder
   warden
