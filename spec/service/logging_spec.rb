@@ -121,6 +121,15 @@ RSpec.describe OrcidPrinceton::Logging do
         .to eq('password' => '[FILTERED]', '_csrf' => '[FILTERED]', 'orcid' => '0000')
     end
 
+    # A form that submits several records at once arrives as a list, so the
+    # credentials inside it are one level deeper than a plain field.
+    it 'hides credentials nested inside a list of submitted records' do
+      logger.info('POST /users', params: { 'users' => [{ 'password' => 'secret', 'orcid' => '0000' }] })
+
+      expect(entries.last['payload']['params']['users'])
+        .to eq([{ 'password' => '[FILTERED]', 'orcid' => '0000' }])
+    end
+
     it 'passes unknown calls through to Semantic Logger' do
       expect(logger).to respond_to(:level)
       expect(logger.level).to eq(:info)
