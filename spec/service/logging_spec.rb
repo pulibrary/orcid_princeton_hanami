@@ -68,21 +68,27 @@ RSpec.describe OrcidPrinceton::Logging do
   end
 
   describe OrcidPrinceton::Logging::HanamiLogger do
-    subject(:logger) { described_class.new(SemanticLogger['test']) }
+    subject(:logger) { OrcidPrinceton::Logging.build(env: :staging, root: root, level: :info) }
 
     # Hanami inspects the logger and silently downgrades to serializing its
-    # request details into one long string unless both of these hold true.
+    # request details into one long string unless this holds true.
     it 'accepts the keyword details Hanami passes to it' do
       expect(logger.method(:info).parameters).to include(%i[keyrest details])
     end
 
-    it 'supports the tagging Hanami uses to mark request logs' do
-      expect(logger).to respond_to(:tagged)
+    it 'marks entries with the tags Hanami uses to identify request logs' do
+      logger.tagged(:rack) { logger.info('GET /users') }
+
+      expect(entries.last['tags']).to eq(['rack'])
+    end
+
+    it 'returns the value of the tagged block' do
+      expect(logger.tagged(:rack) { 'the result' }).to eq('the result')
     end
 
     it 'passes unknown calls through to Semantic Logger' do
       expect(logger).to respond_to(:level)
-      expect(logger.level).to eq(SemanticLogger['test'].level)
+      expect(logger.level).to eq(:info)
     end
   end
 end
