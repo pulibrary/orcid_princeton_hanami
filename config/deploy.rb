@@ -17,6 +17,11 @@ set :deploy_to, '/opt/orcid_princeton'
 # set :format, :airbrussh
 append :linked_files, '.otel.env'
 
+set :ssh_options, {
+  keys: %w[~/.ssh/id_ed25519],
+  forward_agent: true,
+  auth_methods: %w[publickey]
+}
 # You can configure the Airbrussh format using :format_options.
 # These are the defaults.
 # set :format_options, command_output: true, log_file: "log/capistrano.log", color: :auto, truncate: :auto

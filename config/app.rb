@@ -5,6 +5,8 @@ require 'omniauth-orcid'
 require 'omniauth-entra-id'
 require 'warden'
 
+require_relative 'initializers/semantic_logger'
+
 module OrcidPrinceton
   # application configuration for each environment
   class App < Hanami::App
@@ -62,24 +64,22 @@ module OrcidPrinceton
     config.actions.content_security_policy[:connect_src] += ' https://analytics-staging.lib.princeton.edu'
 
     environment(:test) do
+      config.logger = Logging.build(env: :test, root: root)
     end
 
     environment(:development) do
       config.base_url = 'http://localhost:3000'
-      config.logger.level = :debug
-      config.logger.stream = root.join('log', 'development.log')
+      config.logger = Logging.build(env: :development, root: root)
     end
 
     environment(:staging) do
       config.base_url = 'https://orcid-staging.princeton.edu'
-      config.logger.level = :warn
-      config.logger.stream = root.join('log', 'staging.log')
+      config.logger = Logging.build(env: :staging, root: root)
     end
 
     environment(:production) do
       config.base_url = 'https://orcid-prod.princeton.edu'
-      config.logger.level = :warn
-      config.logger.stream = root.join('log', 'production.log')
+      config.logger = Logging.build(env: :production, root: root)
     end
   end
 end
