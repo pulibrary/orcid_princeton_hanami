@@ -11,6 +11,9 @@ RSpec.describe OrcidPrinceton::Logging do
   after do
     OrcidPrinceton::Logging.reset!
     FileUtils.remove_entry(root)
+    # These examples detach the log files the whole suite shares, so give the
+    # rest of the suite its logging back.
+    OrcidPrinceton::Logging.build(env: :test, root: Pathname(Dir.pwd))
   end
 
   def entries
@@ -65,6 +68,31 @@ RSpec.describe OrcidPrinceton::Logging do
 
       expect(entries.map { |entry| entry['message'] }).to eq(['loud enough'])
     end
+
+    it 'keeps a readable log for environments without a log collector' do
+      described_class.build(env: :development, root: root)
+
+      expect(root.join('log', 'development.log')).to exist
+      expect(root.join('log', 'development.json')).not_to exist
+    end
+  end
+
+  describe '.default_level' do
+    it 'is chatty where people are watching the log' do
+      expect(described_class.default_level(:development)).to eq(:debug)
+      expect(described_class.default_level(:test)).to eq(:debug)
+    end
+
+    it 'is quieter where the log is shipped somewhere' do
+      expect(described_class.default_level(:staging)).to eq(:info)
+      expect(described_class.default_level(:production)).to eq(:info)
+    end
+
+    it 'can be turned up without a deploy' do
+      allow(ENV).to receive(:fetch).with('HANAMI_LOG_LEVEL', nil).and_return('debug')
+
+      expect(described_class.default_level(:production)).to eq(:debug)
+    end
   end
 
   describe OrcidPrinceton::Logging::HanamiLogger do
@@ -84,6 +112,13 @@ RSpec.describe OrcidPrinceton::Logging do
 
     it 'returns the value of the tagged block' do
       expect(logger.tagged(:rack) { 'the result' }).to eq('the result')
+    end
+
+    it 'hides the credentials people submit with a request' do
+      logger.info('GET /users', params: { 'password' => 'secret', '_csrf' => 'token', 'orcid' => '0000' })
+
+      expect(entries.last['payload']['params'])
+        .to eq('password' => '[FILTERED]', '_csrf' => '[FILTERED]', 'orcid' => '0000')
     end
 
     it 'passes unknown calls through to Semantic Logger' do

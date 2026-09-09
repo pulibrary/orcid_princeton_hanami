@@ -15,15 +15,27 @@ module OrcidPrinceton
     TEXT_EXTENSION = 'log'
     JSON_EXTENSION = 'json'
 
+    # Only deployed environments have a collector shipping structured events to
+    # our observability stack, so they are the only ones paying for a JSON copy.
+    ENVIRONMENTS_NEEDING_SIGNOZ = %w[production staging].freeze
+
+    # Where we want the running commentary of a chatty log rather than the
+    # summary a deployed environment needs.
+    VERBOSE_ENVIRONMENTS = %w[development test].freeze
+
+    LEVEL_VARIABLE = 'HANAMI_LOG_LEVEL'
+
     class << self
       # Builds the logger to hand to Hanami's `config.logger=`.
-      def build(env:, root:, level: :info, service_name: 'orcid')
-        SemanticLogger.default_level = level
+      def build(env:, root:, level: default_level(env), service_name: 'orcid')
+        SemanticLogger.default_level = level.to_sym
         SemanticLogger.application = service_name
         SemanticLogger.environment = env.to_s
 
-        add_appender(path: path(root: root, env: env, extension: TEXT_EXTENSION), formatter: :default)
-        add_appender(path: path(root: root, env: env, extension: JSON_EXTENSION), formatter: :json)
+        add_appender(path: path(root: root, env: env, extension: TEXT_EXTENSION), formatter: :color)
+        if ships_to_signoz?(env)
+          add_appender(path: path(root: root, env: env, extension: JSON_EXTENSION), formatter: :json)
+        end
 
         HanamiLogger.new(SemanticLogger[service_name])
       end
@@ -31,6 +43,19 @@ module OrcidPrinceton
       # Path of a log file for an environment, e.g. log/staging.json.
       def path(root:, env:, extension:)
         root.join('log', "#{env}.#{extension}")
+      end
+
+      def ships_to_signoz?(env)
+        ENVIRONMENTS_NEEDING_SIGNOZ.include?(env.to_s)
+      end
+
+      # Matches the levels Hanami itself picks, and stays overridable the same
+      # way, so switching loggers does not change how an environment is tuned.
+      def default_level(env)
+        override = ENV.fetch(LEVEL_VARIABLE, nil)
+        return override.to_sym if override && !override.empty?
+
+        VERBOSE_ENVIRONMENTS.include?(env.to_s) ? :debug : :info
       end
 
       # Detaches the log files so a fresh set can be attached. Intended for tests.
@@ -68,6 +93,12 @@ module OrcidPrinceton
     class HanamiLogger
       LEVELS = %i[debug info warn error fatal].freeze
 
+      # The attributes Hanami's own logger hides. Request logs include the
+      # submitted parameters, so replacing that logger without honouring these
+      # would start writing secrets to disk.
+      FILTERED_ATTRIBUTES = %w[_csrf password password_confirmation].freeze
+      FILTERED = '[FILTERED]'
+
       attr_reader :logger
 
       def initialize(logger)
@@ -76,7 +107,8 @@ module OrcidPrinceton
 
       LEVELS.each do |level|
         define_method(level) do |message = nil, **details, &block|
-          logger.public_send(level, message, details.empty? ? nil : details, &block)
+          payload = filter(details)
+          logger.public_send(level, message, payload.empty? ? nil : payload, &block)
         end
       end
 
@@ -92,6 +124,23 @@ module OrcidPrinceton
         return super unless logger.respond_to?(name)
 
         logger.public_send(name, ...)
+      end
+
+      private
+
+      def filter(value)
+        case value
+        when Hash
+          value.to_h { |key, nested| [key, filtered?(key) ? FILTERED : filter(nested)] }
+        when Array
+          value.map { |item| filter(item) }
+        else
+          value
+        end
+      end
+
+      def filtered?(key)
+        FILTERED_ATTRIBUTES.include?(key.to_s)
       end
     end
   end
