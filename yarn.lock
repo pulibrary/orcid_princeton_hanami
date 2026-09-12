@@ -417,9 +417,9 @@ lru-cache@^11.0.0:
   integrity sha512-4pfM1Ff0x50o0tQwb5ucw/RzNyD0/YJME6IVcStalZuMWxdt3sR3huStTtxz4PUmvZfRguvDejasvQ2kifR11g==
 
 lux-design-system@^7.0.0:
-  version "7.13.0"
-  resolved "https://registry.yarnpkg.com/lux-design-system/-/lux-design-system-7.13.0.tgz#f343f01d5c250842a82b1d972e370c22f2bb7c7e"
-  integrity sha512-gMdB/UvCk8IB6DOrzbynM1X4z+Xo/7H1LIAwlYrdVSwsjnt2vP3qXq8yHEvfyQTuZy6kcRGVpfY08l0agJ0/8A==
+  version "7.14.0"
+  resolved "https://registry.yarnpkg.com/lux-design-system/-/lux-design-system-7.14.0.tgz#43b9731cb037a04532ad1601f6973c659fadc62a"
+  integrity sha512-rUW6hiWB7MkqKtgHrHO4gMOrJXXcl8+uBqKKXCL/8PyWuwvCB9aF/LfFD0cv6PoWWetjkYhhabv8HQ8scfALhA==
   dependencies:
     core-js "^3.8.3"
     register-service-worker "^1.7.2"
@@ -455,9 +455,9 @@ minizlib@^3.1.0:
     minipass "^7.1.2"
 
 nanoid@^3.3.18:
-  version "3.3.18"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.18.tgz#f66a2de1199ffde0fcf21c8a5f13106b1c081913"
-  integrity sha512-DTg4MJbGMWkfi6VZFdNt2/caMbQy4Ou+Op/hJQvGEWcnVfoA1QA+xzRKAzw9jD6+GVOOeYr/mIcuDSdug6F6+w==
+  version "3.3.19"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.19.tgz#336d4aa4bcd4fb24d2cddede7ffeae40bec03f0a"
+  integrity sha512-Y2tUNy4ouw6tq5oDSKeQYGOyhkUBhNOcGV/02KC+6kd9eDGqdZd++mjMiIDilrBYvjEnCYvVtsuHCuP+okSfug==
 
 path-scurry@^2.0.2:
   version "2.0.2"
