@@ -16,7 +16,8 @@
     "jq@1.8.1",
     "chromedriver@latest",
     "libmsgpack@3.3.0",
-    "gcc@15.2.0"
+    "gcc@15.2.0",
+    "corepack@latest"
   ],
   "env": {
     "DEVBOX_BIN": "$PWD/.devbox/nix/profile/default/bin",

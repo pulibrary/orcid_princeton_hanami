@@ -143,6 +143,44 @@
         }
       }
     },
+    "corepack@latest": {
+      "last_modified": "2026-08-29T00:50:12Z",
+      "resolved": "github:NixOS/nixpkgs/e8be7818e19ada32105a8af937a6a473b38167ca#corepack",
+      "source": "devbox-search",
+      "version": "0.36.0",
+      "systems": {
+        "aarch64-darwin": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/in629grvxkp2jp2wg1zh8kdy99d3kj6p-corepack-0.36.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/in629grvxkp2jp2wg1zh8kdy99d3kj6p-corepack-0.36.0"
+        },
+        "aarch64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/vc5806djvzy5lsqwl81lj7hm7qbwnfsx-corepack-0.36.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/vc5806djvzy5lsqwl81lj7hm7qbwnfsx-corepack-0.36.0"
+        },
+        "x86_64-linux": {
+          "outputs": [
+            {
+              "name": "out",
+              "path": "/nix/store/38dz8c239sr5nrbqz3z4fkc8rnl6vigy-corepack-0.36.0",
+              "default": true
+            }
+          ],
+          "store_path": "/nix/store/38dz8c239sr5nrbqz3z4fkc8rnl6vigy-corepack-0.36.0"
+        }
+      }
+    },
     "gcc@15.2.0": {
       "last_modified": "2026-07-08T21:13:06Z",
       "resolved": "github:NixOS/nixpkgs/389ed85304b281ca7f306cf8a1eb4378651ca44e#gcc",
@@ -705,7 +743,7 @@
     },
     "nodejs-slim@26.2.0": {
       "last_modified": "2026-05-21T08:15:18Z",
-      "plugin_version": "0.0.4",
+      "plugin_version": "0.0.5",
       "resolved": "github:NixOS/nixpkgs/4a29d733e8a7d5b824c3d8c958a946a9867b3eb2#nodejs-slim_26",
       "source": "devbox-search",
       "version": "26.2.0",
