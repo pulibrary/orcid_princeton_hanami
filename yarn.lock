@@ -626,8 +626,8 @@ __metadata:
   linkType: hard
 
 "lux-design-system@npm:^7.0.0":
-  version: 7.14.0
-  resolution: "lux-design-system@npm:7.14.0"
+  version: 7.14.1
+  resolution: "lux-design-system@npm:7.14.1"
   dependencies:
     core-js: "npm:^3.8.3"
     register-service-worker: "npm:^1.7.2"
@@ -635,7 +635,7 @@ __metadata:
     v-calendar: "npm:^3.1.2"
     vue-draggable-plus: "npm:^0.3.5"
     vue3-cookies: "npm:^1.0.6"
-  checksum: 10c0/f0c2627d23850e503317a03152df3916198c92f3e3e1a12f3c0bb9e0dc72e8299c88f195e0547c11c6493e965dfc78a8e3878530202683f487de21ab8e1ef1e6
+  checksum: 10c0/1e5069f960695e07658736b849556277dd7eab2885c9bebc65695a88c53555ea430b635cd3ac79e5e3273f0e5bfd01a6f80404196177440988f306583fddb329
   languageName: node
   linkType: hard
 
