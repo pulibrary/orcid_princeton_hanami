@@ -376,6 +376,7 @@ GEM
     omniauth-orcid (2.1.1)
       omniauth-oauth2 (~> 1.3)
       ruby_dig (~> 0.0.2)
+    openssl (4.0.2)
     opentelemetry-api (1.11.1)
       logger
     opentelemetry-common (0.25.2)
@@ -799,9 +800,11 @@ DEPENDENCIES
   httparty
   net-http
   net-ldap
+  net-ssh
   nokogiri (>= 1.18.9)
   omniauth-entra-id
   omniauth-orcid
+  openssl (>= 4.0.2)
   opentelemetry-exporter-otlp
   opentelemetry-instrumentation-all
   opentelemetry-sdk
@@ -823,4 +826,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-  4.0.21
+  4.0.22
