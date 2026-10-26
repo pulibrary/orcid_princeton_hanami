@@ -14,15 +14,15 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
-    "lux-design-system": "^7.0.0",
-    "vue": "^3.5.17",
+    "lux-design-system": "^7.15.0",
+    "vue": "^3.5.44",
     "vue3-runtime-template": "^1.0.2"
   },
   "devDependencies": {
-    "esbuild": "^0.28.0",
-    "esbuild-plugin-vue3": "^0.5.0",
+    "esbuild": "^0.28.2",
+    "esbuild-plugin-vue3": "^0.5.1",
     "hanami-assets": "^3.0.0",
-    "prettier": "^3.6.0"
+    "prettier": "^3.9.10"
   },
   "packageManager": "yarn@4.18.1"
 }

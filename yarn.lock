@@ -436,7 +436,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild-plugin-vue3@npm:^0.5.0":
+"esbuild-plugin-vue3@npm:^0.5.1":
   version: 0.5.1
   resolution: "esbuild-plugin-vue3@npm:0.5.1"
   dependencies:
@@ -460,7 +460,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.28.0":
+"esbuild@npm:^0.28.2":
   version: 0.28.2
   resolution: "esbuild@npm:0.28.2"
   dependencies:
@@ -625,9 +625,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lux-design-system@npm:^7.0.0":
-  version: 7.14.1
-  resolution: "lux-design-system@npm:7.14.1"
+"lux-design-system@npm:^7.15.0":
+  version: 7.15.0
+  resolution: "lux-design-system@npm:7.15.0"
   dependencies:
     core-js: "npm:^3.8.3"
     register-service-worker: "npm:^1.7.2"
@@ -635,7 +635,7 @@ __metadata:
     v-calendar: "npm:^3.1.2"
     vue-draggable-plus: "npm:^0.3.5"
     vue3-cookies: "npm:^1.0.6"
-  checksum: 10c0/1e5069f960695e07658736b849556277dd7eab2885c9bebc65695a88c53555ea430b635cd3ac79e5e3273f0e5bfd01a6f80404196177440988f306583fddb329
+  checksum: 10c0/80b08e0b36aecbf94f0b1a52ec0c64297d4f70957b9951b290b88a01fb904f244afdf3abd924d8e9f8d22ee9e8ea253dda21d3c2dc483591a5140ea794e77ca7
   languageName: node
   linkType: hard
 
@@ -687,12 +687,12 @@ __metadata:
   resolution: "orcid_princeton@workspace:."
   dependencies:
     "@popperjs/core": "npm:^2.11.8"
-    esbuild: "npm:^0.28.0"
-    esbuild-plugin-vue3: "npm:^0.5.0"
+    esbuild: "npm:^0.28.2"
+    esbuild-plugin-vue3: "npm:^0.5.1"
     hanami-assets: "npm:^3.0.0"
-    lux-design-system: "npm:^7.0.0"
-    prettier: "npm:^3.6.0"
-    vue: "npm:^3.5.17"
+    lux-design-system: "npm:^7.15.0"
+    prettier: "npm:^3.9.10"
+    vue: "npm:^3.5.44"
     vue3-runtime-template: "npm:^1.0.2"
   languageName: unknown
   linkType: soft
@@ -725,7 +725,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"prettier@npm:^3.6.0":
+"prettier@npm:^3.9.10":
   version: 3.9.10
   resolution: "prettier@npm:3.9.10"
   bin:
@@ -851,7 +851,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue@npm:^3.0.0, vue@npm:^3.5.17":
+"vue@npm:^3.0.0, vue@npm:^3.5.44":
   version: 3.5.44
   resolution: "vue@npm:3.5.44"
   dependencies:
