@@ -27,7 +27,7 @@
     "openssl@latest",
     "pkg-config@latest",
     "postgresql@15.7",
-    "ruby@4.0.4",
+    "ruby@4.0.9",
     "yarn-berry@latest",
     "zsh@latest"
   ],
