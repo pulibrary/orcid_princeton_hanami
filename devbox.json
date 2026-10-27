@@ -1,36 +1,42 @@
 {
-  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.14.0/.schema/devbox.schema.json",
+  "$schema": "https://raw.githubusercontent.com/jetify-com/devbox/0.16.0/.schema/devbox.schema.json",
+
+  "packages": {
+    "ruby": "4.0.9",
+    "nodejs": "24",
+    "yarn-berry_4": "4.13.0",
+    "postgresql": "15.7",
+    "libyaml": "0.2.5",
+    "pkg-config": "latest",
+    "gcc": "latest",
+    "gnumake": "latest",
+    "autoconf": "latest",
+    "jdk11": "latest",
+    "jq": "latest",
+    "git": "latest",
+    "chromedriver": "latest",
+    "libxml2": "latest",
+    "xmlsec": "latest",
+    "libyaml.dev": "",
+    "selenium-manager": "latest",
+    "openssl.dev": "",
+    "openssl": {
+      "version": "latest",
+      "outputs": ["out", "dev"]
+    },
+    "stdenv": "latest"
+  },
   "env": {
     "DEVBOX_BIN": "$PWD/.devbox/nix/profile/default/bin",
-    "PATH": "$PWD/.devbox/nix/profile/default/bin:$PATH",
+    "PATH": "$PWD/.devbox/nix/profile/default/bin:.binstubs:bin:$PATH",
     "DEVBOX_COREPACK_ENABLED": "true",
     "TMPDIR": "/private/tmp/orcid_princeton_hanami",
     "LD_LIBRARY_PATH": "$PWD/.devbox/nix/profile/default/lib",
     "FONTCONFIG_PATH": "$PWD/.devbox/nix/profile/default/etc/fonts",
     "BUNDLE_PATH": ".bundle",
     "BUNDLE_BIN": ".binstubs",
-    "PATH": ".binstubs:bin:$PATH",
     "BUNDLER_VERSION": "4.0.21"
   },
-  "packages": [
-    "bash@latest",
-    "chromedriver@latest",
-    "gcc@15.2.0",
-    "git@latest",
-    "gnumake@latest",
-    "jdk11@11.0.24",
-    "jq@1.8.1",
-    "libmsgpack@3.3.0",
-    "libyaml@latest",
-    "libyaml.dev",
-    "nodejs_24@latest",
-    "openssl@latest",
-    "pkg-config@latest",
-    "postgresql@15.7",
-    "ruby@4.0.4",
-    "yarn-berry@latest",
-    "zsh@latest"
-  ],
   "shell": {
     "init_hook": ["echo 'initializing devbox'"],
     "scripts": {
