@@ -277,7 +277,7 @@ GEM
     hashdiff (1.2.1)
     hashie (5.2.0)
       logger
-    honeybadger (6.10.0)
+    honeybadger (6.10.1)
       logger
       ostruct
     httparty (0.24.3)
@@ -592,7 +592,7 @@ GEM
     puma (8.0.2)
       nio4r (~> 2.0)
     racc (1.8.1)
-    rack (3.2.7)
+    rack (3.2.8)
     rack-protection (4.2.1)
       base64 (>= 0.1.0)
       logger (>= 1.6.0)
@@ -681,7 +681,7 @@ GEM
     rspec-retry (0.6.2)
       rspec-core (> 3.3)
     rspec-support (3.13.7)
-    rubocop (1.92.1)
+    rubocop (1.92.2)
       json (>= 2.3)
       language_server-protocol (~> 3.17.0.2)
       lint_roller (~> 1.1.0)
@@ -699,13 +699,14 @@ GEM
     ruby_dig (0.0.2)
     rubyzip (3.7.0)
     securerandom (0.4.1)
-    selenium-webdriver (4.51.0)
+    selenium-webdriver (4.52.0)
       base64 (~> 0.2)
       logger (~> 1.4)
       rubyzip (>= 1.2.2, < 4.0)
       websocket (~> 1.0)
-    semantic_logger (5.1.0)
+    semantic_logger (5.2.0)
       concurrent-ruby (~> 1.0)
+      logger (~> 1.5)
     sequel (5.109.0)
       bigdecimal
     shellany (0.0.1)
