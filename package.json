@@ -15,6 +15,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "lux-design-system": "^7.15.2",
+    "minimatch": "^11.0.4",
     "vue": "^3.5.44",
     "vue3-runtime-template": "^1.0.2"
   },
