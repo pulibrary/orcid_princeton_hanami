@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-source 'https://gem.coop'
+source 'https://rubygems.org'
 
 gem 'hanami', '~> 3.0'
 gem 'hanami-action', '~> 3.0'

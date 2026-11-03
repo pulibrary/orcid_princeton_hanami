@@ -625,9 +625,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lux-design-system@npm:^7.15.0":
-  version: 7.15.1
-  resolution: "lux-design-system@npm:7.15.1"
+"lux-design-system@npm:^7.15.2":
+  version: 7.15.2
+  resolution: "lux-design-system@npm:7.15.2"
   dependencies:
     core-js: "npm:^3.8.3"
     register-service-worker: "npm:^1.7.2"
@@ -635,7 +635,7 @@ __metadata:
     v-calendar: "npm:^3.1.2"
     vue-draggable-plus: "npm:^0.3.5"
     vue3-cookies: "npm:^1.0.6"
-  checksum: 10c0/87d0daa64e203f236efb8f4afbe101742ee577734199e20ee9be37013966a4a49516b2c62eb3796c219fdd76f651655466e518ab55237fe87278777318d4046b
+  checksum: 10c0/3a3a1293f49aa2f1a0c802ec55701ba1c9ea4ffa84c60a6aa105bd421c8e9128dd56bb2a0d10dcd539c4c5c0668276a51cdb1bc5c0a6011ccce60299a7dbf1b6
   languageName: node
   linkType: hard
 
@@ -690,7 +690,7 @@ __metadata:
     esbuild: "npm:^0.28.2"
     esbuild-plugin-vue3: "npm:^0.5.1"
     hanami-assets: "npm:^3.0.0"
-    lux-design-system: "npm:^7.15.0"
+    lux-design-system: "npm:^7.15.2"
     prettier: "npm:^3.9.10"
     vue: "npm:^3.5.44"
     vue3-runtime-template: "npm:^1.0.2"
