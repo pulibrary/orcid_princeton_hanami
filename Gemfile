@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 
 gem 'hanami', '~> 3.0'
 gem 'hanami-action', '~> 3.0'
-gem 'hanami-assets', '~> 3.0'
+gem 'hanami-assets', git: 'https://github.com/hanami/hanami-assets.git', branch: 'main'
 gem 'hanami-db', '~> 3.0'
 gem 'hanami-router', '~> 3.0'
 gem 'hanami-view', '~> 3.0'

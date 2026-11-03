@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/hanami/hanami-assets.git
+  revision: b92c9488895cbd1fd9d2fbdfa2445a449d2e1324
+  branch: main
+  specs:
+    hanami-assets (3.0.0)
+      zeitwerk (~> 2.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -229,8 +237,6 @@ GEM
       dry-core (~> 1.0)
       hanami-utils (~> 3.0.0.rc)
       rack (>= 2.2.16)
-      zeitwerk (~> 2.6)
-    hanami-assets (3.0.0)
       zeitwerk (~> 2.6)
     hanami-cli (3.0.0)
       bundler (>= 2.1)
@@ -792,7 +798,7 @@ DEPENDENCIES
   ffaker
   hanami (~> 3.0)
   hanami-action (~> 3.0)
-  hanami-assets (~> 3.0)
+  hanami-assets!
   hanami-db (~> 3.0)
   hanami-reloader (~> 3.0)
   hanami-router (~> 3.0)
